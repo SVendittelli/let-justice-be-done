@@ -26,5 +26,5 @@ export default function Message() {
     };
   }, []);
 
-  return <div className="text-3xl">{message}</div>;
+  return <p className="text-2xl sm:text-3xl">{message}</p>;
 }
