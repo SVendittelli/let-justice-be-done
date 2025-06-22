@@ -7,8 +7,12 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
   title: "Let Justice Be Done",
-  description: "An online tool for running TTRPGs.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  description: "Let Justice Be Done",
+  icons: [
+    { rel: "icon", url: "/favicon.ico", sizes: "32x32" },
+    { rel: "icon", url: "/icon.svg", type: "image/svg+xml" },
+    { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
+  ],
 };
 
 const geist = Geist({
