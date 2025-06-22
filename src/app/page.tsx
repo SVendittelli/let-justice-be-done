@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Message from "./_components/message";
 
 export default async function Home() {
   return (
@@ -15,6 +16,7 @@ export default async function Home() {
             Vincent
           </h1>
           <p className="text-3xl">A talented artist with a dark past.</p>
+          <Message />
         </div>
       </div>
     </main>
