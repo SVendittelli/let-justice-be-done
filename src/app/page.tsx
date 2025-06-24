@@ -9,7 +9,7 @@ export default async function Home() {
       className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gradient-to-b from-[#a4112e] to-[#5a142c] text-[#f5b26c]"
       role="main"
     >
-      <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+      <h1 className="text-center text-5xl font-extrabold tracking-tight sm:text-[5rem]">
         Let Justice Be Done
       </h1>
       {session?.user ? (
