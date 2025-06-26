@@ -33,8 +33,8 @@ export default async function Home() {
       </div>
       <footer>
         <div className="flex h-64 content-around items-stretch px-4 sm:h-72">
-          <div className="w-[128px] bg-[#f5b26c] mask-[url(https://i.ibb.co/PZSRnx7b/splatter.png)] mask-contain mask-bottom-right mask-no-repeat sm:w-[150px]"></div>
-          <div className="w-[1px] grow-2 bg-[#f5b26c] mask-[url(https://i.ibb.co/Cp409xTc/sleuth-trans.png)] mask-contain mask-bottom-right mask-no-repeat"></div>
+          <div className="w-[128px] bg-[#f5b26c] mask-[url(https://i.ibb.co/KpMyHyC7/splatter-min.png)] mask-contain mask-bottom-right mask-no-repeat sm:w-[150px]"></div>
+          <div className="w-[1px] grow-2 bg-[#f5b26c] mask-[url(https://i.ibb.co/zVh58FY8/sleuth-min.png)] mask-contain mask-bottom-right mask-no-repeat"></div>
         </div>
         <div className="flex justify-center gap-4 p-4">
           <Link href="https://github.com/SVendittelli/let-justice-be-done">
