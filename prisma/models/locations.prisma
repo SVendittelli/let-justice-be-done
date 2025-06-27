@@ -1,0 +1,6 @@
+model Location {
+  id    String               @id @default(cuid(2))
+  name  String
+  clues Clue[]
+  npcs  NonPlayerCharacter[]
+}

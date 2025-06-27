@@ -1,0 +1,16 @@
+model PlayerCharacter {
+  id          String   @id @default(cuid(2))
+  name        String
+  pronouns    String
+  description String
+  traits      String[]
+  notes       String
+}
+
+model NonPlayerCharacter {
+  id        String     @id @default(cuid(2))
+  name      String
+  moniker   String
+  clues     Clue[]
+  locations Location[]
+}
