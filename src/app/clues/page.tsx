@@ -1,14 +1,19 @@
-import { api } from "~/trpc/server";
-import Clue from "./_components/Clue";
+import { api, HydrateClient } from "~/trpc/server";
+import Clues from "./_components/Clues";
+import { auth } from "~/server/auth";
+import { redirect } from "next/navigation";
 
-export default async function Clues() {
-  const clues = await api.clues.getAll();
+export default async function CluesPage() {
+  const session = await auth();
+  if (!session?.user?.enabled) {
+    redirect("/");
+  }
+
+  void api.clues.getAll.prefetch();
 
   return (
-    <div>
-      {clues.map((clue) => (
-        <Clue key={clue.id} clue={clue} />
-      ))}
-    </div>
+    <HydrateClient>
+      <Clues />
+    </HydrateClient>
   );
 }

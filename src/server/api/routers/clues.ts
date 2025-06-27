@@ -1,8 +1,12 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import {
+  adminProcedure,
+  createTRPCRouter,
+  protectedProcedure,
+} from "~/server/api/trpc";
 
 export const cluesRouter = createTRPCRouter({
-  create: protectedProcedure
+  create: adminProcedure
     .input(z.object({ title: z.string().min(1), text: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.clue.create({
@@ -11,10 +15,16 @@ export const cluesRouter = createTRPCRouter({
     }),
 
   getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.clue.findMany();
+    const isAdmin = ctx.session.user.role === "ADMIN";
+    return ctx.db.clue.findMany({
+      where: { ...(!isAdmin && { revealed: true }) },
+    });
   }),
 
   getById: protectedProcedure.input(z.string()).query(({ ctx, input }) => {
-    return ctx.db.clue.findUnique({ where: { id: input } });
+    const isAdmin = ctx.session.user.role === "ADMIN";
+    return ctx.db.clue.findUnique({
+      where: { id: input, ...(!isAdmin && { revealed: true }) },
+    });
   }),
 });

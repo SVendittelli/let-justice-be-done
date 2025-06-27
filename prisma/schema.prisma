@@ -54,6 +54,7 @@ model User {
   emailVerified DateTime?
   image         String?
   role          Role      @default(USER)
+  enabled       Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
 }
