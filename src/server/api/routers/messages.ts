@@ -1,11 +1,7 @@
 import { z } from "zod";
 import Pusher from "pusher";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { env } from "~/env";
 
 const {
@@ -16,7 +12,7 @@ const {
 } = env;
 const pusher = new Pusher({ appId, cluster, key, secret });
 
-export const messageRouter = createTRPCRouter({
+export const messagesRouter = createTRPCRouter({
   create: protectedProcedure
     .input(z.object({ message: z.string().min(1) }))
     .mutation(async ({ input }) => {

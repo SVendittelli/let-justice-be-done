@@ -18,7 +18,7 @@ export default function Message() {
   const [message, setMessage] = useState("");
   const [input, setInput] = useState("");
 
-  const sendMessage = api.message.create.useMutation();
+  const sendMessage = api.messages.create.useMutation();
 
   useEffect(() => {
     const channel = pusher.subscribe(YOUR_CHANNEL_NAME);
