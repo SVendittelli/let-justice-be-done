@@ -25,10 +25,10 @@ export default async function Credits() {
 
   return (
     <main
-      className="prose flex h-full min-w-full flex-col items-center justify-between pt-12"
+      className="flex h-full min-w-full flex-col items-center justify-between pt-12"
       role="main"
     >
-      <header className="align-center mb-2 flex self-stretch px-4">
+      <header className="align-center prose mb-2 flex self-stretch px-4 !prose-invert">
         <Link href="/">
           <Image
             src="/icon.svg"
@@ -38,10 +38,10 @@ export default async function Credits() {
             className="not-prose rounded-full border-2 border-solid border-gold"
           />
         </Link>
-        <h1 className="mb-0 grow text-center text-gold">Credits</h1>
+        <h1 className="mb-0 grow text-center">Credits</h1>
         <div className="w-[50px]"></div>
       </header>
-      <div className="m-4 max-w-[70ch] rounded-lg bg-gold px-4 text-red marker:text-inherit">
+      <div className="m-4 prose max-w-[70ch] rounded-lg bg-gold p-4">
         <p>
           Built by me,{" "}
           <Link href="https://vendittelli.co.uk/">Sam Vendittelli</Link>{" "}
@@ -49,7 +49,7 @@ export default async function Credits() {
           <Link href="https://www.alisonquinn.co.uk/">Alison Quinn</Link>{" "}
           (testing).
         </p>
-        <h2 className="text-red">Images</h2>
+        <h2>Images</h2>
         <ul>
           {ccAttributions.map((attribution) => (
             <li key={attribution.source}>
@@ -64,11 +64,11 @@ export default async function Credits() {
         </ul>
       </div>
       <footer>
-        <div className="not-prose flex justify-center gap-4 p-4 text-gold">
+        <div className="prose flex justify-center gap-4 p-4 !prose-invert">
           <Link href="https://github.com/SVendittelli/let-justice-be-done">
             GitHub
           </Link>
-          <p>©{new Date().getFullYear()}</p>
+          <span>©{new Date().getFullYear()}</span>
           <Link href="/">Home</Link>
         </div>
       </footer>

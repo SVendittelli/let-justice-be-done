@@ -20,3 +20,15 @@
   --color-gold: #f5b26c;
   --color-gold-bright: #ffb100;
 }
+
+/* Typography plugin */
+@utility prose {
+  --tw-prose-body: var(--color-red);
+  --tw-prose-headings: var(--color-red-dark);
+  --tw-prose-links: var(--color-red-dark);
+  --tw-prose-bullets: var(--color-red);
+
+  --tw-prose-invert-body: var(--color-gold);
+  --tw-prose-invert-headings: var(--color-gold);
+  --tw-prose-invert-links: var(--color-gold);
+}
