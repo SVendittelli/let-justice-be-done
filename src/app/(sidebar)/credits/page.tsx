@@ -25,7 +25,7 @@ export default async function Credits() {
 
   return (
     <main
-      className="prose flex min-h-screen min-w-full flex-col items-center justify-between rounded-xl border-6 border-[#f5b26c] bg-gradient-to-b from-[#a4112e] to-[#5a142c] pt-12 sm:border-8"
+      className="prose flex h-full min-w-full flex-col items-center justify-between pt-12"
       role="main"
     >
       <header className="align-center mb-2 flex self-stretch px-4">

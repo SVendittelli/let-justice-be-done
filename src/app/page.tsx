@@ -6,7 +6,7 @@ export default async function Home() {
 
   return (
     <main
-      className="flex min-h-screen flex-col justify-between rounded-xl border-6 bg-gradient-to-b from-[#a4112e] to-[#5a142c] pt-12 text-[#f5b26c] sm:border-8 sm:pt-32"
+      className="text-gold flex h-full flex-col justify-between pt-12 sm:pt-32"
       role="main"
     >
       <h1 className="text-center text-5xl font-extrabold tracking-tight sm:text-7xl">

@@ -2,7 +2,21 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
+  /* Fonts */
   --font-sans:
     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Theme colors */
+  --color-*: initial;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-red-light: #cd0029;
+  --color-red-medium: #a4112e;
+  --color-red: #811339;
+  --color-red-dark: #5a142c;
+
+  --color-gold: #f5b26c;
+  --color-gold-bright: #ffb100;
 }

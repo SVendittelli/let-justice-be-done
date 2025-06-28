@@ -37,9 +37,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable}`}>
       <body className="min-w-screen bg-[#f5b26c]">
-        <TRPCReactProvider>{children}</TRPCReactProvider>
-        <Analytics />
-        <SpeedInsights />
+        <div className="h-screen rounded-xl border-6 border-[#f5b26c] bg-gradient-to-b from-[#a4112e] to-[#5a142c] sm:border-8">
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <Analytics />
+          <SpeedInsights />
+        </div>
       </body>
     </html>
   );

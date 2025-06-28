@@ -20,7 +20,7 @@ export default async function Page() {
         />
       </Link>
       <main
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#a4112e] to-[#5a142c] text-[#f5b26c]"
+        className="flex flex-col items-center justify-center text-[#f5b26c]"
         role="main"
       >
         <div className="container flex flex-col-reverse gap-6 px-4 py-16 sm:flex-row sm:gap-12">
