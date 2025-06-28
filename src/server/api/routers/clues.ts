@@ -17,6 +17,7 @@ export const cluesRouter = createTRPCRouter({
   getAll: protectedProcedure.query(({ ctx }) => {
     const isAdmin = ctx.session.user.role === "ADMIN";
     return ctx.db.clue.findMany({
+      orderBy: [{ title: "asc" }],
       where: { ...(!isAdmin && { revealed: true }) },
     });
   }),
