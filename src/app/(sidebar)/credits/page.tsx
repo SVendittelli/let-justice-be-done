@@ -1,3 +1,4 @@
+import { Card, CardContent } from "~/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -41,28 +42,33 @@ export default async function Credits() {
         <h1 className="mb-0 grow text-center">Credits</h1>
         <div className="w-[50px]"></div>
       </header>
-      <div className="m-4 prose max-w-[70ch] rounded-lg bg-gold p-4">
-        <p>
-          Built by me,{" "}
-          <Link href="https://vendittelli.co.uk/">Sam Vendittelli</Link>{" "}
-          (design, code) with the help of{" "}
-          <Link href="https://www.alisonquinn.co.uk/">Alison Quinn</Link>{" "}
-          (testing).
-        </p>
-        <h2>Images</h2>
-        <ul>
-          {ccAttributions.map((attribution) => (
-            <li key={attribution.source}>
-              <Link href={attribution.source}>
-                &quot;{attribution.title}&quot;
-              </Link>{" "}
-              by <Link href={attribution.authorLink}>{attribution.author}</Link>{" "}
-              is licenced under{" "}
-              <Link href={attribution.licenceLink}>{attribution.licence}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Card className="m-4">
+        <CardContent className="prose max-w-[70ch]">
+          <p>
+            Built by me,{" "}
+            <Link href="https://vendittelli.co.uk/">Sam Vendittelli</Link>{" "}
+            (design, code) with the help of{" "}
+            <Link href="https://www.alisonquinn.co.uk/">Alison Quinn</Link>{" "}
+            (testing).
+          </p>
+          <h2>Images</h2>
+          <ul>
+            {ccAttributions.map((attribution) => (
+              <li key={attribution.source}>
+                <Link href={attribution.source}>
+                  &quot;{attribution.title}&quot;
+                </Link>{" "}
+                by{" "}
+                <Link href={attribution.authorLink}>{attribution.author}</Link>{" "}
+                is licenced under{" "}
+                <Link href={attribution.licenceLink}>
+                  {attribution.licence}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </Card>
       <footer>
         <div className="prose flex justify-center gap-4 p-4 !prose-invert">
           <Link href="https://github.com/SVendittelli/let-justice-be-done">

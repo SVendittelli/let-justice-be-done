@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 @plugin "@tailwindcss/typography";
 
 @theme {
@@ -31,4 +34,16 @@
   --tw-prose-invert-body: var(--color-gold);
   --tw-prose-invert-headings: var(--color-gold);
   --tw-prose-invert-links: var(--color-gold);
+}
+
+/* shadcn */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.5rem;
 }
