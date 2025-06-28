@@ -1,12 +1,10 @@
 import "~/styles/globals.css";
-
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { env } from "~/env";
+import { TRPCReactProvider } from "~/trpc/react";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
-
-import { TRPCReactProvider } from "~/trpc/react";
-import { env } from "~/env";
 
 export const metadata: Metadata = {
   title: "Let Justice Be Done",
@@ -36,8 +34,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body className="min-w-screen bg-[#f5b26c]">
-        <div className="h-screen rounded-xl border-6 border-[#f5b26c] bg-gradient-to-b from-[#a4112e] to-[#5a142c] sm:border-8">
+      <body className="min-w-screen bg-gold">
+        <div className="h-screen rounded-xl border-6 border-gold bg-gradient-to-b from-red-medium to-red-dark sm:border-8">
           <TRPCReactProvider>{children}</TRPCReactProvider>
           <Analytics />
           <SpeedInsights />

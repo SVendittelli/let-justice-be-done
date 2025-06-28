@@ -35,13 +35,13 @@ export default async function Credits() {
             alt="Logo"
             width={50}
             height={50}
-            className="not-prose rounded-full border-2 border-solid border-[#f5b26c]"
+            className="not-prose rounded-full border-2 border-solid border-gold"
           />
         </Link>
-        <h1 className="mb-0 grow text-center text-[#f5b26c]">Credits</h1>
+        <h1 className="mb-0 grow text-center text-gold">Credits</h1>
         <div className="w-[50px]"></div>
       </header>
-      <div className="m-4 max-w-[70ch] rounded-lg bg-[#f5b26c] px-4 text-[#811339] marker:text-inherit">
+      <div className="m-4 max-w-[70ch] rounded-lg bg-gold px-4 text-red marker:text-inherit">
         <p>
           Built by me,{" "}
           <Link href="https://vendittelli.co.uk/">Sam Vendittelli</Link>{" "}
@@ -49,7 +49,7 @@ export default async function Credits() {
           <Link href="https://www.alisonquinn.co.uk/">Alison Quinn</Link>{" "}
           (testing).
         </p>
-        <h2 className="text-[#811339]">Images</h2>
+        <h2 className="text-red">Images</h2>
         <ul>
           {ccAttributions.map((attribution) => (
             <li key={attribution.source}>
@@ -64,7 +64,7 @@ export default async function Credits() {
         </ul>
       </div>
       <footer>
-        <div className="not-prose flex justify-center gap-4 p-4 text-[#f5b26c]">
+        <div className="not-prose flex justify-center gap-4 p-4 text-gold">
           <Link href="https://github.com/SVendittelli/let-justice-be-done">
             GitHub
           </Link>

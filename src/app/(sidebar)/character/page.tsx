@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Message from "./_components/message";
-import { HydrateClient } from "~/trpc/server";
 import { auth } from "~/server/auth";
+import { HydrateClient } from "~/trpc/server";
 import { SessionProvider } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import Message from "./_components/message";
 
 export default async function Page() {
   const session = await auth();
@@ -16,11 +16,11 @@ export default async function Page() {
           alt="Logo"
           width={50}
           height={50}
-          className="absolute top-5 left-5 rounded-full border-2 border-solid border-[#f5b26c]"
+          className="absolute top-5 left-5 rounded-full border-2 border-solid border-gold"
         />
       </Link>
       <main
-        className="flex flex-col items-center justify-center text-[#f5b26c]"
+        className="flex flex-col items-center justify-center text-gold"
         role="main"
       >
         <div className="container flex flex-col-reverse gap-6 px-4 py-16 sm:flex-row sm:gap-12">

@@ -1,4 +1,11 @@
 /** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
-export default {
-  plugins: ["prettier-plugin-tailwindcss"],
+const config = {
+  plugins: [
+    "prettier-plugin-prisma",
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
+  ],
+  tailwindStylesheet: "src/styles/globals.css",
 };
+
+export default config;

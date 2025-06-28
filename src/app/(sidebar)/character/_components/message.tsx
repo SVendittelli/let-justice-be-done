@@ -1,10 +1,10 @@
 "use client";
 
+import { env } from "~/env";
+import { api } from "~/trpc/react";
 import { useSession } from "next-auth/react";
 import Pusher from "pusher-js";
 import { useEffect, useState } from "react";
-import { env } from "~/env";
-import { api } from "~/trpc/react";
 
 const YOUR_CHANNEL_NAME = "TEST";
 const YOUR_EVENT_NAME = "TEST_EVENT";
