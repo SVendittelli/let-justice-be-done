@@ -9,7 +9,7 @@ export default function Clues() {
   if (!clues.data) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {clues.data.map((clue) => (
         <Clue key={clue.id} clue={clue} />
       ))}
