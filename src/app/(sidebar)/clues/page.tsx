@@ -15,7 +15,7 @@ export default async function CluesPage() {
 
   return (
     <HydrateClient>
-      <main className="flex flex-col gap-4 p-4" role="main">
+      <main className="flex min-h-screen flex-col gap-4 p-6" role="main">
         {session.user.role === "ADMIN" && (
           <Card>
             <CardContent>

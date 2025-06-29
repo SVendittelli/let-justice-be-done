@@ -26,10 +26,10 @@ export default async function Credits() {
 
   return (
     <main
-      className="flex h-full min-w-full flex-col items-center justify-between pt-12"
+      className="flex min-h-screen min-w-full flex-col items-center justify-between pt-12"
       role="main"
     >
-      <header className="align-center prose mb-2 flex self-stretch px-4 !prose-invert">
+      <header className="align-center prose mb-2 flex min-w-full self-stretch px-4 !prose-invert">
         <Link href="/">
           <Image
             src="/icon.svg"
