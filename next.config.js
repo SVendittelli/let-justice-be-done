@@ -8,8 +8,9 @@ import "./src/env.js";
 const config = {
   images: {
     remotePatterns: [
-      new URL("https://placehold.co/**"),
       new URL("https://i.ibb.co/**"),
+      new URL("https://placehold.co/**"),
+      new URL("https://i.pravatar.cc/**"),
     ],
   },
 };

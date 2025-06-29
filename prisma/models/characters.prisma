@@ -9,10 +9,16 @@ model PlayerCharacter {
   userId      String   @unique
 }
 
+enum NPCType {
+  AUTHORITY
+  SUSPECT
+}
+
 model NonPlayerCharacter {
   id          String       @id @default(cuid(2))
   name        String
   moniker     String
+  type        NPCType
   clues       Clue[]
   crimeScenes CrimeScene[]
 }

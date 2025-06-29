@@ -1,4 +1,5 @@
 import {
+  randAvatar,
   randFullName,
   randJobTitle,
   randNumber,
@@ -20,6 +21,8 @@ async function main() {
     create: {
       name: "Admin",
       email: "sam.vendittelli@hotmail.com",
+      emailVerified: randPastDate(),
+      image: randAvatar(),
       role: "ADMIN",
       enabled: true,
     },
@@ -72,10 +75,11 @@ async function createNpcs() {
   }
 
   const npcs: Prisma.NonPlayerCharacterCreateManyInput[] = Array.from({
-    length: 6,
-  }).map(() => ({
+    length: 7,
+  }).map((_, i) => ({
     name: randFullName(),
     moniker: randJobTitle(),
+    type: i === 0 ? "AUTHORITY" : "SUSPECT",
   }));
 
   await db.nonPlayerCharacter.createMany({ data: npcs });
@@ -86,7 +90,9 @@ async function createCrimeScenes() {
     return;
   }
 
-  const npcs = await db.nonPlayerCharacter.findMany();
+  const npcs = await db.nonPlayerCharacter.findMany({
+    where: { type: "SUSPECT" },
+  });
   const crimeScenes: Prisma.CrimeSceneCreateManyInput[] = npcs.map((npc) => ({
     name: `${npc.name}'s Room`,
   }));
@@ -107,7 +113,9 @@ async function createClues() {
   );
 
   const createdClues = await db.clue.createManyAndReturn({ data: clues });
-  const npcs = await db.nonPlayerCharacter.findMany();
+  const npcs = await db.nonPlayerCharacter.findMany({
+    where: { type: "SUSPECT" },
+  });
   const crimeScenes = await db.crimeScene.findMany();
 
   await Promise.all(
