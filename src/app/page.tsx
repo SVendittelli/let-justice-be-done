@@ -6,7 +6,7 @@ export default async function Home() {
 
   return (
     <main
-      className="flex min-h-screen flex-col justify-between pt-12 text-gold sm:pt-32"
+      className="flex min-h-screen flex-col justify-between px-4 pt-12 pb-4 text-gold sm:pt-32"
       role="main"
     >
       <h1 className="text-center text-5xl font-extrabold tracking-tight sm:text-7xl">
@@ -21,6 +21,12 @@ export default async function Home() {
               className="rounded-full border-2 bg-red-medium px-10 py-3 font-semibold no-underline transition hover:bg-red-light"
             >
               Character
+            </Link>
+            <Link
+              href="/clues"
+              className="rounded-full border-2 bg-red-medium px-10 py-3 font-semibold no-underline transition hover:bg-red-light"
+            >
+              Clues
             </Link>
           </>
         ) : null}
