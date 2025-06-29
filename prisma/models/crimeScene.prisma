@@ -1,4 +1,4 @@
-model Location {
+model CrimeScene {
   id    String               @id @default(cuid(2))
   name  String
   clues Clue[]
