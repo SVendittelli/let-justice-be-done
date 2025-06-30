@@ -1,13 +1,13 @@
 "use client";
 
-import { api } from "~/trpc/react";
-import Clue from "./Clue";
 import { Card, CardContent } from "~/components/ui/card";
+import { api } from "~/trpc/react";
 import { useState } from "react";
-import { Switch } from "~/components/ui/switch";
-import { Label } from "~/components/ui/label";
+import Clue from "./Clue";
+import ClueForm from "./ClueForm";
 
 type Props = { editable: boolean };
+
 export default function Clues({ editable = false }: Props) {
   const [showDelete, setShowDelete] = useState(false);
 
@@ -21,38 +21,28 @@ export default function Clues({ editable = false }: Props) {
     );
   }
 
-  if (clues.data.length === 0) {
-    return (
-      <Card>
-        <CardContent>None yet, you&apox;ll have to investigate!</CardContent>
-      </Card>
-    );
-  }
-
   return (
     <>
-      {editable && (
-        <Card>
-          <CardContent className="flex items-center gap-2">
-            <Switch
-              id="showDelete"
-              checked={showDelete}
-              onClick={() => setShowDelete(!showDelete)}
+      <ClueForm
+        deleteEnabled={showDelete}
+        onDeleteEnabledChange={setShowDelete}
+      />
+      {clues.data.length !== 0 ? (
+        <div className="flex flex-wrap justify-center gap-4">
+          {clues.data.map((clue) => (
+            <Clue
+              key={clue.id}
+              clue={clue}
+              editable={editable}
+              deletable={showDelete}
             />
-            <Label htmlFor="showDelete">Show Delete</Label>
-          </CardContent>
+          ))}
+        </div>
+      ) : (
+        <Card>
+          <CardContent>None yet, you&apos;ll have to investigate!</CardContent>
         </Card>
       )}
-      <div className="flex flex-wrap justify-center gap-4">
-        {clues.data.map((clue) => (
-          <Clue
-            key={clue.id}
-            clue={clue}
-            editable={editable}
-            deletable={showDelete}
-          />
-        ))}
-      </div>
     </>
   );
 }

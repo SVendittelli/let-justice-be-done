@@ -1,8 +1,6 @@
-import { Card, CardContent } from "~/components/ui/card";
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 import { redirect } from "next/navigation";
-import ClueForm from "./_components/ClueForm";
 import Clues from "./_components/Clues";
 
 export default async function CluesPage() {
@@ -16,13 +14,6 @@ export default async function CluesPage() {
   return (
     <HydrateClient>
       <main className="flex min-h-screen flex-col gap-4 p-6" role="main">
-        {session.user.role === "ADMIN" && (
-          <Card>
-            <CardContent>
-              <ClueForm />
-            </CardContent>
-          </Card>
-        )}
         <Clues editable={session.user.role === "ADMIN"} />
       </main>
     </HydrateClient>
