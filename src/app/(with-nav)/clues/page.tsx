@@ -13,7 +13,7 @@ export default async function CluesPage() {
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col gap-4 p-6" role="main">
+      <main className="flex min-h-page flex-col gap-4 p-6" role="main">
         <Clues editable={session.user.role === "ADMIN"} />
       </main>
     </HydrateClient>

@@ -22,6 +22,9 @@
 
   --color-gold: #f5b26c;
   --color-gold-bright: #ffb100;
+
+  /* Custom */
+  --spacing-page: calc(100vh - var(--spacing) * 6 - 36px);
 }
 
 /* Typography plugin */

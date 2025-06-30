@@ -10,7 +10,7 @@ export default async function Page() {
   return (
     <HydrateClient>
       <main
-        className="flex min-h-screen flex-col items-center justify-center p-6 text-gold"
+        className="min-h-page flex flex-col items-center justify-center p-6 text-gold"
         role="main"
       >
         <div className="flex flex-col-reverse gap-6 sm:flex-row sm:gap-12">
