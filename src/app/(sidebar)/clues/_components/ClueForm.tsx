@@ -15,6 +15,7 @@ import { Input } from "~/components/ui/input";
 import { Switch } from "~/components/ui/switch";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { api } from "~/trpc/react";
 
 const clueSchema = z.object({
   title: z.string().min(1),
@@ -24,6 +25,11 @@ const clueSchema = z.object({
 type Clue = z.infer<typeof clueSchema>;
 
 export default function ClueForm() {
+  const utils = api.useUtils();
+  const createClue = api.clues.create.useMutation({
+    onSuccess: () => utils.clues.invalidate(),
+  });
+
   const form = useForm<Clue>({
     resolver: zodResolver(clueSchema),
     defaultValues: {
@@ -33,8 +39,8 @@ export default function ClueForm() {
     },
   });
 
-  function onSubmit(values: Clue) {
-    console.log(values);
+  function onSubmit(clue: Clue) {
+    createClue.mutate(clue);
   }
 
   return (

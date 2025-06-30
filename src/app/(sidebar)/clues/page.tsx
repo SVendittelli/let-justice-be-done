@@ -23,7 +23,7 @@ export default async function CluesPage() {
             </CardContent>
           </Card>
         )}
-        <Clues />
+        <Clues editable={session.user.role === "ADMIN"} />
       </main>
     </HydrateClient>
   );

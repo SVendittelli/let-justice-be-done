@@ -1,3 +1,6 @@
+"use client";
+
+import { Button } from "~/components/ui/button";
 import {
   Card,
   CardAction,
@@ -5,19 +8,49 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { Switch } from "~/components/ui/switch";
-import type { RouterOutputs } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 
-type Props = { clue: RouterOutputs["clues"]["getById"] };
+type Clue = RouterOutputs["clues"]["getAll"][0];
+type Props = { clue: Clue; editable: boolean; deletable: boolean };
 
-export default function Clue({ clue }: Props) {
+export default function Clue({
+  clue,
+  editable = false,
+  deletable = false,
+}: Props) {
+  const utils = api.useUtils();
+  const invalidate = (input: Clue) =>
+    Promise.all([
+      utils.clues.getAll.invalidate(),
+      utils.clues.getById.invalidate(input.id),
+    ]);
+
+  const updateClue = api.clues.update.useMutation({ onSuccess: invalidate });
+  const deleteClue = api.clues.delete.useMutation({ onSuccess: invalidate });
+
+  const onUpdate = () =>
+    updateClue.mutate({ ...clue, revealed: !clue.revealed });
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>{clue?.title}</CardTitle>
-        <CardAction>
-          <Switch checked={clue?.revealed} />
-        </CardAction>
+        {editable && (
+          <CardAction className="flex gap-2">
+            {deletable && (
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => deleteClue.mutate(clue.id)}
+              >
+                Delete
+              </Button>
+            )}
+            <Button size="sm" onClick={() => onUpdate()}>
+              {clue.revealed ? "Hide" : "Show"}
+            </Button>
+          </CardAction>
+        )}
       </CardHeader>
       <CardContent>{clue?.text}</CardContent>
     </Card>
