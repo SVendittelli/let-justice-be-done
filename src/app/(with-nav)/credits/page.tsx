@@ -1,5 +1,4 @@
 import { Card, CardContent } from "~/components/ui/card";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function Credits() {
@@ -25,22 +24,9 @@ export default async function Credits() {
   ];
 
   return (
-    <main
-      className="flex min-h-screen min-w-full flex-col items-center justify-between pt-12"
-      role="main"
-    >
-      <header className="align-center prose mb-2 flex min-w-full self-stretch px-4 !prose-invert">
-        <Link href="/">
-          <Image
-            src="/icon.svg"
-            alt="Logo"
-            width={50}
-            height={50}
-            className="not-prose rounded-full border-2 border-solid border-gold"
-          />
-        </Link>
-        <h1 className="mb-0 grow text-center">Credits</h1>
-        <div className="w-[50px]"></div>
+    <div className="flex min-h-page min-w-full flex-col items-center p-4">
+      <header className="align-center prose flex min-w-full !prose-invert">
+        <h1 className="grow text-center">Credits</h1>
       </header>
       <Card className="m-4">
         <CardContent className="prose max-w-[70ch]">
@@ -69,15 +55,6 @@ export default async function Credits() {
           </ul>
         </CardContent>
       </Card>
-      <footer>
-        <div className="prose flex justify-center gap-4 p-4 !prose-invert">
-          <Link href="https://github.com/SVendittelli/let-justice-be-done">
-            GitHub
-          </Link>
-          <span>©{new Date().getFullYear()}</span>
-          <Link href="/">Home</Link>
-        </div>
-      </footer>
-    </main>
+    </div>
   );
 }

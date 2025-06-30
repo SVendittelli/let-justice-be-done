@@ -6,7 +6,9 @@ export default function Layout({
   return (
     <div className="flex min-h-screen flex-col items-center pt-6">
       <NavMenu />
-      <main className="grow">{children}</main>
+      <main className="grow" role="main">
+        {children}
+      </main>
     </div>
   );
 }

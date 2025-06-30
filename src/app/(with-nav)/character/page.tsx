@@ -9,10 +9,7 @@ export default async function Page() {
 
   return (
     <HydrateClient>
-      <main
-        className="min-h-page flex flex-col items-center justify-center p-6 text-gold"
-        role="main"
-      >
+      <div className="flex min-h-page flex-col items-center justify-center p-6 text-gold">
         <div className="flex flex-col-reverse gap-6 sm:flex-row sm:gap-12">
           <div>
             <Image
@@ -32,7 +29,7 @@ export default async function Page() {
             <SessionProvider>{session?.user && <Message />}</SessionProvider>
           </div>
         </div>
-      </main>
+      </div>
     </HydrateClient>
   );
 }
