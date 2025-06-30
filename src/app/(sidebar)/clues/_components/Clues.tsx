@@ -13,7 +13,21 @@ export default function Clues({ editable = false }: Props) {
 
   const clues = api.clues.getAll.useQuery();
 
-  if (!clues.data) return <div>Loading...</div>;
+  if (!clues.data) {
+    return (
+      <Card>
+        <CardContent>Loading...</CardContent>
+      </Card>
+    );
+  }
+
+  if (clues.data.length === 0) {
+    return (
+      <Card>
+        <CardContent>None yet, you&apox;ll have to investigate!</CardContent>
+      </Card>
+    );
+  }
 
   return (
     <>
@@ -29,7 +43,7 @@ export default function Clues({ editable = false }: Props) {
           </CardContent>
         </Card>
       )}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
         {clues.data.map((clue) => (
           <Clue
             key={clue.id}

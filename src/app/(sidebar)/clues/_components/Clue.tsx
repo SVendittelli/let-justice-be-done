@@ -32,7 +32,7 @@ export default function Clue({
     updateClue.mutate({ ...clue, revealed: !clue.revealed });
 
   return (
-    <Card>
+    <Card className="w-full min-w-sm sm:w-sm">
       <CardHeader>
         <CardTitle>{clue?.title}</CardTitle>
         {editable && (
