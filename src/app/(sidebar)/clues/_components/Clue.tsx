@@ -8,7 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { Toggle } from "~/components/ui/toggle";
 import { api, type RouterOutputs } from "~/trpc/react";
+import { Eye, EyeOff } from "lucide-react";
 
 type Clue = RouterOutputs["clues"]["getAll"][0];
 type Props = { clue: Clue; editable: boolean; deletable: boolean };
@@ -28,8 +30,8 @@ export default function Clue({
   const updateClue = api.clues.update.useMutation({ onSuccess: invalidate });
   const deleteClue = api.clues.delete.useMutation({ onSuccess: invalidate });
 
-  const onUpdate = () =>
-    updateClue.mutate({ ...clue, revealed: !clue.revealed });
+  const onUpdate = (revealed: boolean) =>
+    updateClue.mutate({ ...clue, revealed });
 
   return (
     <Card className="w-full min-w-sm sm:w-sm">
@@ -46,9 +48,19 @@ export default function Clue({
                 Delete
               </Button>
             )}
-            <Button size="sm" onClick={() => onUpdate()}>
-              {clue.revealed ? "Hide" : "Show"}
-            </Button>
+            <Toggle
+              variant="outline"
+              size="sm"
+              defaultPressed={clue.revealed}
+              onPressedChange={onUpdate}
+              aria-label="Toggle visibility"
+            >
+              {clue.revealed ? (
+                <Eye className="size-4" />
+              ) : (
+                <EyeOff className="size-4" />
+              )}
+            </Toggle>
           </CardAction>
         )}
       </CardHeader>
