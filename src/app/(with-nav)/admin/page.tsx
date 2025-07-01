@@ -1,8 +1,8 @@
 import { ROUTES } from "~/app/billboard/routes";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import BillboardSwitch from "./_components/BillboardSwitch";
 import { auth } from "~/server/auth";
 import { redirect } from "next/navigation";
+import BillboardSwitch from "./_components/BillboardSwitch";
 
 export default async function Page() {
   const session = await auth();

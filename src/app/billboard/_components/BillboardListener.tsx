@@ -1,15 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Pusher from "pusher-js";
-import { useEffect } from "react";
-import { env } from "~/env";
 import { sanitizeUrl } from "@braintree/sanitize-url";
+import { env } from "~/env";
 import {
   BILLBOARD_CHANNEL,
   BILLBOARD_DISPLAY,
   BILLBOARD_REFRESH,
 } from "~/lib/pusher";
+import { useRouter } from "next/navigation";
+import Pusher from "pusher-js";
+import { useEffect } from "react";
 
 const { NEXT_PUBLIC_PUSHER_KEY: key, NEXT_PUBLIC_PUSHER_CLUSTER: cluster } =
   env;

@@ -30,6 +30,17 @@ export default async function Credits() {
       </header>
       <Card className="m-4">
         <CardContent className="prose max-w-[70ch]">
+          <h2>Game</h2>
+          <p>
+            Designed and written by{" "}
+            <Link href="https://linktr.ee/mynar_lenahan">Mynar Lenahan</Link>,
+            available on{" "}
+            <Link href="https://mynarlenahan.itch.io/let-justice-be-done">
+              itch.io
+            </Link>
+            .
+          </p>
+          <h2>Website</h2>
           <p>
             Built by me,{" "}
             <Link href="https://vendittelli.co.uk/">Sam Vendittelli</Link>{" "}
