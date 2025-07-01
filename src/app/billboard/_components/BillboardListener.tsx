@@ -5,9 +5,12 @@ import Pusher from "pusher-js";
 import { useEffect } from "react";
 import { env } from "~/env";
 import { sanitizeUrl } from "@braintree/sanitize-url";
+import {
+  BILLBOARD_CHANNEL,
+  BILLBOARD_DISPLAY,
+  BILLBOARD_REFRESH,
+} from "~/lib/pusher";
 
-const CHANNEL_NAME = "billboard";
-const EVENT_NAME = "display";
 const { NEXT_PUBLIC_PUSHER_KEY: key, NEXT_PUBLIC_PUSHER_CLUSTER: cluster } =
   env;
 const pusher = new Pusher(key, { cluster });
@@ -16,9 +19,9 @@ export default function BillboardListener() {
   const router = useRouter();
 
   useEffect(() => {
-    const channel = pusher.subscribe(CHANNEL_NAME);
+    const channel = pusher.subscribe(BILLBOARD_CHANNEL);
 
-    channel.bind(EVENT_NAME, (data: string) => {
+    channel.bind(BILLBOARD_DISPLAY, (data: string) => {
       const path = sanitizeUrl(data);
       if (!path.startsWith("/billboard")) {
         console.error("Tried to navigate to invalid path", data, path);
@@ -27,8 +30,12 @@ export default function BillboardListener() {
       router.push(path);
     });
 
+    channel.bind(BILLBOARD_REFRESH, () => {
+      router.refresh();
+    });
+
     return () => {
-      pusher.unsubscribe(CHANNEL_NAME);
+      pusher.unsubscribe(BILLBOARD_CHANNEL);
     };
   }, [router]);
 

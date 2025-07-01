@@ -1,12 +1,7 @@
-import { auth } from "~/server/auth";
 import { HydrateClient } from "~/trpc/server";
-import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
-import Message from "./_components/message";
 
 export default async function Page() {
-  const session = await auth();
-
   return (
     <HydrateClient>
       <div className="flex min-h-page flex-col items-center justify-center p-6 text-gold">
@@ -26,7 +21,6 @@ export default async function Page() {
             <p className="text-2xl sm:text-3xl">
               A talented artist with a dark past.
             </p>
-            <SessionProvider>{session?.user && <Message />}</SessionProvider>
           </div>
         </div>
       </div>

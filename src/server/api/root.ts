@@ -1,4 +1,4 @@
-import { messagesRouter } from "~/server/api/routers/messages";
+import { billboardRouter } from "~/server/api/routers/billboard";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { cluesRouter } from "./routers/clues";
 
@@ -8,7 +8,7 @@ import { cluesRouter } from "./routers/clues";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  messages: messagesRouter,
+  billboard: billboardRouter,
   clues: cluesRouter,
 });
 
