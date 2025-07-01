@@ -11,7 +11,7 @@ export default function Page() {
   }, [setUrl]);
 
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex h-dvh items-center justify-center">
       {url && (
         <QRCode
           value={url}
