@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { auth } from "~/server/auth";
 import { redirect } from "next/navigation";
 import BillboardSwitch from "./_components/BillboardSwitch";
+import ToastTrigger from "./_components/ToastTrigger";
 
 export default async function Page() {
   const session = await auth();
@@ -23,6 +24,14 @@ export default async function Page() {
               <BillboardSwitch key={route.path} route={route} />
             ))}
           </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Toasts</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ToastTrigger />
         </CardContent>
       </Card>
     </div>

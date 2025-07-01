@@ -1,6 +1,7 @@
 import { billboardRouter } from "~/server/api/routers/billboard";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { cluesRouter } from "./routers/clues";
+import { toastRouter } from "./routers/toast";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { cluesRouter } from "./routers/clues";
 export const appRouter = createTRPCRouter({
   billboard: billboardRouter,
   clues: cluesRouter,
+  toast: toastRouter,
 });
 
 // export type definition of API
