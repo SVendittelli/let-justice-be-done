@@ -5,4 +5,5 @@ model Clue {
   npcs        NonPlayerCharacter[]
   crimeScenes CrimeScene[]
   revealed    Boolean              @default(false)
+  revealedAt  DateTime?
 }

@@ -33,8 +33,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} min-h-screen`}>
-      <body className="min-h-screen min-w-screen bg-gold prose-a:no-underline">
+    <html lang="en" className={`${geist.variable}`}>
+      <body className="bg-gold prose-a:no-underline">
         <div className="min-h-screen rounded-xl bg-gradient-to-b from-red-medium to-red-dark inset-ring-6 inset-ring-gold sm:inset-ring-8">
           <TRPCReactProvider>{children}</TRPCReactProvider>
           <Analytics />

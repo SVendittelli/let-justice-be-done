@@ -20,6 +20,7 @@ export const cluesRouter = createTRPCRouter({
           title: input.title,
           text: input.text,
           revealed: input.revealed,
+          revealedAt: input.revealed ? new Date() : null,
         },
       });
     }),
@@ -27,7 +28,7 @@ export const cluesRouter = createTRPCRouter({
   getAll: protectedProcedure.query(({ ctx }) => {
     const isAdmin = ctx.session.user.role === "ADMIN";
     return ctx.db.clue.findMany({
-      orderBy: [{ title: "asc" }],
+      orderBy: { revealedAt: { sort: "desc", nulls: "last" } },
       where: { ...(!isAdmin && { revealed: true }) },
     });
   }),
@@ -57,6 +58,7 @@ export const cluesRouter = createTRPCRouter({
           title: input.title,
           text: input.text,
           revealed: input.revealed,
+          revealedAt: input.revealed ? new Date() : null,
         },
       });
     }),

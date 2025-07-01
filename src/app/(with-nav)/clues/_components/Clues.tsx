@@ -13,23 +13,15 @@ export default function Clues({ editable = false }: Props) {
 
   const clues = api.clues.getAll.useQuery();
 
-  if (!clues.data) {
-    return (
-      <Card>
-        <CardContent>Loading...</CardContent>
-      </Card>
-    );
-  }
-
   return (
     <>
       <ClueForm
         deleteEnabled={showDelete}
         onDeleteEnabledChange={setShowDelete}
       />
-      {clues.data.length !== 0 ? (
+      {clues?.data?.length !== 0 ? (
         <div className="flex flex-wrap justify-center gap-4">
-          {clues.data.map((clue) => (
+          {clues?.data?.map((clue) => (
             <Clue
               key={clue.id}
               clue={clue}
