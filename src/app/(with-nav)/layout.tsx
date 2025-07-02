@@ -6,7 +6,7 @@ export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="flex min-h-dvh flex-col items-center pt-6">
+    <div className="flex min-h-dvh flex-col items-center gap-4 p-6">
       <NavMenu />
       <main className="grow" role="main">
         {children}

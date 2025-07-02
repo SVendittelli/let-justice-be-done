@@ -23,7 +23,7 @@ export default function PlayerCharacters() {
   const myCharacter = pc.data;
 
   return (
-    <div className="flex min-h-page flex-wrap justify-center gap-4 p-6">
+    <div className="flex min-h-page flex-wrap justify-center gap-4">
       <PlayerCharacter character={myCharacter} />
       {pcs?.data
         ?.filter(({ id }) => id !== myCharacter.id)

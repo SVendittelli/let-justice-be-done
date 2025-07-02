@@ -12,6 +12,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { api } from "~/trpc/react";
+import { LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
@@ -24,6 +25,7 @@ const formSchema = z.object({
 type CharacterForm = z.infer<typeof formSchema>;
 
 export default function CharacterForm() {
+  const utils = api.useUtils();
   const create = api.pcs.create.useMutation();
 
   const form = useForm<CharacterForm>({
@@ -37,14 +39,18 @@ export default function CharacterForm() {
   });
 
   const submit = (data: CharacterForm) => {
-    create.mutate(data);
+    create.mutate(data, {
+      onSuccess: () => {
+        utils.pcs.invalidate().catch(console.error);
+      },
+    });
   };
 
   return (
     <Card>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(submit)}>
+          <form onSubmit={form.handleSubmit(submit)} className="space-y-4">
             <FormField
               control={form.control}
               name="traits.0"
@@ -128,7 +134,12 @@ export default function CharacterForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={create.isPending}
+            >
+              {create.isPending && <LoaderCircle className="animate-spin" />}
               Create Character
             </Button>
           </form>
