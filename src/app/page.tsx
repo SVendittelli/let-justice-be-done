@@ -33,7 +33,7 @@ export default async function Home() {
         </HomePageLink>
       </div>
       <footer>
-        <div className="flex h-64 content-around items-stretch px-4 sm:h-72">
+        <div className="flex h-64 content-around items-stretch px-4">
           <div className="w-[128px] bg-gold mask-[url(https://i.ibb.co/KpMyHyC7/splatter-min.png)] mask-contain mask-bottom-right mask-no-repeat sm:w-[150px]"></div>
           <div className="w-[1px] grow-2 bg-gold mask-[url(https://i.ibb.co/zVh58FY8/sleuth-min.png)] mask-contain mask-bottom-right mask-no-repeat"></div>
         </div>
