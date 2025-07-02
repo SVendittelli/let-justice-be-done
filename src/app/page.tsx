@@ -1,5 +1,8 @@
 import { auth } from "~/server/auth";
 import Link from "next/link";
+import { Card, CardContent } from "~/components/ui/card";
+import HomePageLinks from "./_components/HomePageLinks";
+import HomePageLink from "./_components/HomePageLink";
 
 export default async function Home() {
   const session = await auth();
@@ -14,28 +17,16 @@ export default async function Home() {
         <span className="inline-block">Be Done</span>
       </h1>
       <div className="flex flex-col items-center gap-6 sm:text-xl">
-        {session?.user ? (
-          <>
-            <Link
-              href="/character"
-              className="rounded-full border-2 bg-red-medium px-10 py-3 font-semibold no-underline transition hover:bg-red-light"
-            >
-              Character
-            </Link>
-            <Link
-              href="/clues"
-              className="rounded-full border-2 bg-red-medium px-10 py-3 font-semibold no-underline transition hover:bg-red-light"
-            >
-              Clues
-            </Link>
-          </>
-        ) : null}
-        <Link
-          href={session ? "/api/auth/signout" : "/api/auth/signin"}
-          className="rounded-full border-2 bg-red-medium px-10 py-3 font-semibold no-underline transition hover:bg-red-light"
-        >
+        {session?.user?.enabled ? (
+          <HomePageLinks />
+        ) : (
+          <Card>
+            <CardContent>Please wait for the game to start.</CardContent>
+          </Card>
+        )}
+        <HomePageLink href={session ? "/api/auth/signout" : "/api/auth/signin"}>
           {session ? "Sign out" : "Sign in"}
-        </Link>
+        </HomePageLink>
       </div>
       <footer>
         <div className="flex h-64 content-around items-stretch px-4 sm:h-72">
