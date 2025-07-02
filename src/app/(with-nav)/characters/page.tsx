@@ -14,7 +14,9 @@ export default async function Page() {
 
   return (
     <HydrateClient>
-      <PlayerCharacters isAdmin={session.user.role === "ADMIN"} />
+      <div className="flex flex-wrap justify-center gap-4">
+        <PlayerCharacters isAdmin={session.user.role === "ADMIN"} />
+      </div>
     </HydrateClient>
   );
 }

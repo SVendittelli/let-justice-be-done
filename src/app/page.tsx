@@ -19,32 +19,28 @@ export default async function Home() {
 
   return (
     <main
-      className="flex h-dvh flex-col justify-between px-4 pt-12 pb-4 text-gold"
+      className="grid min-h-dvh grid-cols-[repeat(3,_auto)] grid-rows-[136px_minmax(360px,_min-content)_auto_min-content] gap-y-4 px-6 pt-6 text-gold"
       role="main"
     >
-      <h1 className="text-center text-5xl font-extrabold tracking-tight sm:text-7xl">
+      <h1 className="col-span-3 col-start-1 row-1 self-center text-center text-5xl font-extrabold tracking-tight sm:text-7xl">
         <span className="inline-block">Let Justice</span>{" "}
         <span className="inline-block">Be Done</span>
       </h1>
-      <div className="flex flex-col items-center gap-4 sm:text-xl">
+      <div className="col-span-3 col-start-1 row-2 flex flex-col items-center gap-4 place-self-center sm:col-2 sm:row-span-2 sm:row-start-2">
         {links}
         <HomePageLink href={session ? "/api/auth/signout" : "/api/auth/signin"}>
           {session ? "Sign out" : "Sign in"}
         </HomePageLink>
       </div>
-      <footer>
-        <div className="flex h-64 content-around items-stretch px-4">
-          <div className="w-[128px] bg-gold mask-[url(https://i.ibb.co/KpMyHyC7/splatter-min.png)] mask-contain mask-bottom-right mask-no-repeat sm:w-[150px]"></div>
-          <div className="w-[1px] grow-2 bg-gold mask-[url(https://i.ibb.co/zVh58FY8/sleuth-min.png)] mask-contain mask-bottom-right mask-no-repeat"></div>
-        </div>
-        <div className="flex justify-center gap-4 p-4">
-          <Link href="https://github.com/SVendittelli/let-justice-be-done">
-            GitHub
-          </Link>
-          <p>©{new Date().getFullYear()}</p>
-          <Link href="/credits">Credits</Link>
-        </div>
-      </footer>
+      <div className="col-1 row-3 w-[128px] justify-self-start bg-gold mask-[url(https://i.ibb.co/KpMyHyC7/splatter-min.png)] mask-contain mask-bottom-right mask-no-repeat sm:row-span-2 sm:row-start-2 sm:w-[160px]"></div>
+      <div className="col-3 row-3 w-[128px] justify-self-end bg-gold mask-[url(https://i.ibb.co/zVh58FY8/sleuth-min.png)] mask-contain mask-bottom-right mask-no-repeat sm:row-span-2 sm:row-start-2 sm:w-[160px]"></div>
+      <div className="col-span-3 col-start-1 row-4 flex justify-center gap-4 self-end p-4">
+        <Link href="https://github.com/SVendittelli/let-justice-be-done">
+          GitHub
+        </Link>
+        <p>©{new Date().getFullYear()}</p>
+        <Link href="/credits">Credits</Link>
+      </div>
     </main>
   );
 }

@@ -12,8 +12,8 @@ export default async function Page() {
   }
 
   return (
-    <div className="min-h-page p-6">
-      <Card>
+    <div className="flex flex-col gap-4">
+      <Card className="w-full sm:w-sm">
         <CardHeader>
           <CardTitle>Billboard</CardTitle>
         </CardHeader>
@@ -26,7 +26,7 @@ export default async function Page() {
           </div>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="w-full sm:w-sm">
         <CardHeader>
           <CardTitle>Toasts</CardTitle>
         </CardHeader>

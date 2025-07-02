@@ -24,7 +24,7 @@ export default async function Credits() {
   ];
 
   return (
-    <div className="flex min-h-page min-w-full flex-col items-center p-4">
+    <div className="flex flex-col items-center">
       <header className="align-center prose flex min-w-full !prose-invert">
         <h1 className="grow text-center">Credits</h1>
       </header>
