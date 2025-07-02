@@ -1,9 +1,9 @@
 import { billboardRouter } from "~/server/api/routers/billboard";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { cluesRouter } from "./routers/clues";
+import { pcsRouter } from "./routers/pcs";
 import { toastRouter } from "./routers/toast";
 import { usersRouter } from "./routers/users";
-import { pcsRouter } from "./routers/pcs";
 
 /**
  * This is the primary router for your server.

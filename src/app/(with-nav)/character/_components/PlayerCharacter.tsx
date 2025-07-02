@@ -1,26 +1,32 @@
-import Image from "next/image";
+import { Badge } from "~/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import type { RouterOutputs } from "~/trpc/react";
 
-export default function PlayerCharacter() {
+type Character = RouterOutputs["pcs"]["getAll"][0];
+type Props = { character: Character };
+
+export default function PlayerCharacter({ character }: Props) {
   return (
-    <div className="flex min-h-page flex-col items-center justify-center p-6 text-gold">
-      <div className="flex flex-col-reverse gap-6 sm:flex-row sm:gap-12">
-        <div>
-          <Image
-            src="https://placehold.co/400x500/png"
-            alt="Character Portrait"
-            height="500"
-            width="400"
-          />
-        </div>
-        <div className="flex flex-grow flex-col gap-6 sm:gap-12">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Vincent
-          </h1>
-          <p className="text-2xl sm:text-3xl">
-            A talented artist with a dark past.
-          </p>
-        </div>
-      </div>
-    </div>
+    <Card className="w-full sm:w-sm">
+      <CardHeader>
+        <CardTitle>
+          {character.name} ({character.pronouns})
+        </CardTitle>
+        <CardDescription className="flex gap-2">
+          {character.traits.map((trait) => (
+            <Badge key={trait} variant="outline">
+              {trait}
+            </Badge>
+          ))}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>{character.description}</CardContent>
+    </Card>
   );
 }

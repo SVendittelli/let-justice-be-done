@@ -2,16 +2,23 @@
 
 import { Card, CardContent } from "~/components/ui/card";
 import { api } from "~/trpc/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Clue from "./Clue";
 import ClueForm from "./ClueForm";
 
 type Props = { editable: boolean };
 
 export default function Clues({ editable = false }: Props) {
+  const [isMounted, setIsMounted] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
   const clues = api.clues.getAll.useQuery();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, [setIsMounted]);
+
+  if (!isMounted) return null;
 
   return (
     <>

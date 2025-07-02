@@ -1,8 +1,8 @@
+import { Card, CardContent } from "~/components/ui/card";
 import { auth } from "~/server/auth";
 import Link from "next/link";
-import { Card, CardContent } from "~/components/ui/card";
-import HomePageLinks from "./_components/HomePageLinks";
 import HomePageLink from "./_components/HomePageLink";
+import HomePageLinks from "./_components/HomePageLinks";
 
 export default async function Home() {
   const session = await auth();

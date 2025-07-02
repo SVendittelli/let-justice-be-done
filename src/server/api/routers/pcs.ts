@@ -34,7 +34,7 @@ export const pcsRouter = createTRPCRouter({
   }),
 
   getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.playerCharacter.findMany({});
+    return ctx.db.playerCharacter.findMany({ orderBy: { name: "asc" } });
   }),
 
   getById: protectedProcedure
