@@ -7,23 +7,27 @@ import HomePageLinks from "./_components/HomePageLinks";
 export default async function Home() {
   const session = await auth();
 
+  const links = session?.user ? (
+    session.user.enabled ? (
+      <HomePageLinks isAdmin={session.user.role === "ADMIN"} />
+    ) : (
+      <Card>
+        <CardContent>Please wait for the game to start.</CardContent>
+      </Card>
+    )
+  ) : null;
+
   return (
     <main
-      className="flex min-h-dvh flex-col justify-between px-4 pt-12 pb-4 text-gold sm:pt-32"
+      className="flex h-dvh flex-col justify-between px-4 pt-12 pb-4 text-gold"
       role="main"
     >
       <h1 className="text-center text-5xl font-extrabold tracking-tight sm:text-7xl">
         <span className="inline-block">Let Justice</span>{" "}
         <span className="inline-block">Be Done</span>
       </h1>
-      <div className="flex flex-col items-center gap-6 sm:text-xl">
-        {session?.user?.enabled ? (
-          <HomePageLinks />
-        ) : (
-          <Card>
-            <CardContent>Please wait for the game to start.</CardContent>
-          </Card>
-        )}
+      <div className="flex flex-col items-center gap-4 sm:text-xl">
+        {links}
         <HomePageLink href={session ? "/api/auth/signout" : "/api/auth/signin"}>
           {session ? "Sign out" : "Sign in"}
         </HomePageLink>

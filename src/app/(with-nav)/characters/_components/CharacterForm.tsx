@@ -11,10 +11,10 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { api } from "~/trpc/react";
 import { LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import TraitSelect from "./TraitSelect";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -22,15 +22,22 @@ const formSchema = z.object({
   description: z.string().min(1),
   traits: z.tuple([z.string().min(1), z.string().min(1)]),
 });
-type CharacterForm = z.infer<typeof formSchema>;
+export type CharacterChange = z.infer<typeof formSchema>;
 
-export default function CharacterForm() {
-  const utils = api.useUtils();
-  const create = api.pcs.create.useMutation();
+type Props = {
+  defaultValues?: CharacterChange;
+  onSubmit: (data: CharacterChange) => void;
+  saving: boolean;
+};
 
-  const form = useForm<CharacterForm>({
+export default function CharacterForm({
+  defaultValues,
+  onSubmit,
+  saving,
+}: Props) {
+  const form = useForm<CharacterChange>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: defaultValues ?? {
       name: "",
       pronouns: "",
       description: "",
@@ -38,28 +45,18 @@ export default function CharacterForm() {
     },
   });
 
-  const submit = (data: CharacterForm) => {
-    create.mutate(data, {
-      onSuccess: () => {
-        utils.pcs.invalidate().catch(console.error);
-      },
-    });
-  };
-
   return (
-    <Card>
+    <Card className="w-full sm:w-sm">
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(submit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
               name="traits.0"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Trait 1</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Author" {...field} />
-                  </FormControl>
+                  <TraitSelect form={form} field={field} />
                   <FormDescription>
                     The first trait your character is famous for.
                   </FormDescription>
@@ -73,9 +70,7 @@ export default function CharacterForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Trait 2</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Old" {...field} />
-                  </FormControl>
+                  <TraitSelect form={form} field={field} />
                   <FormDescription>
                     The second trait your character is famous for.
                   </FormDescription>
@@ -134,13 +129,9 @@ export default function CharacterForm() {
                 </FormItem>
               )}
             />
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={create.isPending}
-            >
-              {create.isPending && <LoaderCircle className="animate-spin" />}
-              Create Character
+            <Button type="submit" className="w-full" disabled={saving}>
+              {saving && <LoaderCircle className="animate-spin" />}
+              {defaultValues ? "Update" : "Create"} Character
             </Button>
           </form>
         </Form>

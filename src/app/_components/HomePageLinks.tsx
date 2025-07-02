@@ -3,13 +3,15 @@
 import { api } from "~/trpc/react";
 import HomePageLink from "./HomePageLink";
 
-export default function HomePageLinks() {
+type Props = { isAdmin: boolean };
+
+export default function HomePageLinks({ isAdmin }: Props) {
   const pc = api.pcs.getCurrent.useQuery();
 
   let links: { href: string; label: string }[] = [];
-  if (pc.data) {
+  if (pc.data || isAdmin) {
     links = [
-      { href: "/character", label: "Character" },
+      { href: "/characters", label: "PCs" },
       { href: "/clues", label: "Clues" },
       { href: "/crime-scenes", label: "Crime Scenes" },
       { href: "/npcs", label: "NPCs" },

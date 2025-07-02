@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function NavMenu() {
   const menuItems: { label: string; href: string }[] = [
     { label: "Home", href: "/" },
-    { href: "/character", label: "Character" },
+    { href: "/characters", label: "PCs" },
     { href: "/clues", label: "Clues" },
     { href: "/crime-scenes", label: "Crime Scenes" },
     { href: "/npcs", label: "NPCs" },
