@@ -8,14 +8,19 @@ type Props = { isAdmin: boolean };
 export default function HomePageLinks({ isAdmin }: Props) {
   const pc = api.pcs.getCurrent.useQuery();
 
-  let links: { href: string; label: string }[] = [];
+  let links: { href: string; label: string }[] = isAdmin
+    ? [
+        { href: "/admin", label: "Admin Panel" },
+        { href: "/billboard", label: "Billboard" },
+      ]
+    : [];
   if (pc.data || isAdmin) {
-    links = [
+    links = links.concat([
       { href: "/characters", label: "PCs" },
       { href: "/clues", label: "Clues" },
       { href: "/crime-scenes", label: "Crime Scenes" },
       { href: "/npcs", label: "NPCs" },
-    ];
+    ]);
   } else {
     links = [{ href: "/character", label: "Create Character" }];
   }
