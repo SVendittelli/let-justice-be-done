@@ -33,10 +33,15 @@
   --tw-prose-headings: var(--color-red-dark);
   --tw-prose-links: var(--color-red-dark);
   --tw-prose-bullets: var(--color-red);
+  --tw-prose-quotes: var(--color-red);
+  --tw-prose-quote-borders: var(--color-red-dark);
 
   --tw-prose-invert-body: var(--color-gold);
   --tw-prose-invert-headings: var(--color-gold);
   --tw-prose-invert-links: var(--color-gold);
+  --tw-prose-invert-bullets: var(--color-gold);
+  --tw-prose-invert-quotes: var(--color-gold);
+  --tw-prose-invert-quote-borders: var(--color-gold-bright);
 }
 
 /* shadcn */
