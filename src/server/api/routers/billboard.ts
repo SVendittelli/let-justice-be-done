@@ -18,9 +18,9 @@ const pusher = new Pusher({ appId, cluster, key, secret });
 
 export const billboardRouter = createTRPCRouter({
   display: adminProcedure
-    .input(z.object({ path: z.string().min(1) }))
+    .input(z.object({ label: z.string().min(1), path: z.string().min(1) }))
     .mutation(async ({ input }) => {
-      return pusher.trigger(BILLBOARD_CHANNEL, BILLBOARD_DISPLAY, input.path);
+      return pusher.trigger(BILLBOARD_CHANNEL, BILLBOARD_DISPLAY, input);
     }),
 
   refresh: adminProcedure.mutation(async () =>

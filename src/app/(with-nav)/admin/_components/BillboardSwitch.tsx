@@ -11,6 +11,8 @@ export default function BillboardSwitch({ route }: Props) {
   const path = `/billboard${separator}${route.path}`;
 
   return (
-    <Button onClick={() => display.mutate({ path })}>{route.label}</Button>
+    <Button onClick={() => display.mutate({ ...route, path })}>
+      {route.label}
+    </Button>
   );
 }

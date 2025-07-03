@@ -1,9 +1,9 @@
-import { ROUTES } from "~/app/billboard/routes";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { auth } from "~/server/auth";
 import { redirect } from "next/navigation";
-import BillboardSwitch from "./_components/BillboardSwitch";
 import ToastTrigger from "./_components/ToastTrigger";
+import ClueSelector from "./_components/ClueSelector";
+import BillboardSelector from "./_components/BillboardSelector";
 
 export default async function Page() {
   const session = await auth();
@@ -12,28 +12,35 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <Card className="w-full sm:w-sm">
-        <CardHeader>
-          <CardTitle>Billboard</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-2">
-            <span>Current: UNKNOWN</span>
-            {ROUTES.map((route) => (
-              <BillboardSwitch key={route.path} route={route} />
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-      <Card className="w-full sm:w-sm">
-        <CardHeader>
-          <CardTitle>Toasts</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ToastTrigger />
-        </CardContent>
-      </Card>
+    <div className="grid grid-cols-12 gap-4">
+      <div className="col-span-full flex flex-col gap-4 sm:col-span-3">
+        <Card className="">
+          <CardHeader>
+            <CardTitle>Billboard</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <BillboardSelector />
+          </CardContent>
+        </Card>
+        <Card className="">
+          <CardHeader>
+            <CardTitle>Toasts</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ToastTrigger />
+          </CardContent>
+        </Card>
+      </div>
+      <div className="col-span-full sm:col-span-9">
+        <Card className="">
+          <CardHeader>
+            <CardTitle>Clues</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ClueSelector />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

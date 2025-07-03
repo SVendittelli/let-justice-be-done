@@ -21,11 +21,7 @@ export default function Clue({
   deletable = false,
 }: Props) {
   const utils = api.useUtils();
-  const invalidate = (input: Clue) =>
-    Promise.all([
-      utils.clues.getAll.invalidate(),
-      utils.clues.getById.invalidate(input.id),
-    ]);
+  const invalidate = () => utils.clues.getAll.invalidate();
 
   const updateClue = api.clues.update.useMutation({ onSuccess: invalidate });
   const deleteClue = api.clues.delete.useMutation({ onSuccess: invalidate });

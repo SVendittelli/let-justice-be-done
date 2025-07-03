@@ -10,6 +10,7 @@ import {
 import { useRouter } from "next/navigation";
 import Pusher from "pusher-js";
 import { useEffect } from "react";
+import type { BillboardRoute } from "../routes";
 
 const { NEXT_PUBLIC_PUSHER_KEY: key, NEXT_PUBLIC_PUSHER_CLUSTER: cluster } =
   env;
@@ -21,10 +22,10 @@ export default function BillboardListener() {
   useEffect(() => {
     const channel = pusher.subscribe(BILLBOARD_CHANNEL);
 
-    channel.bind(BILLBOARD_DISPLAY, (data: string) => {
-      const path = sanitizeUrl(data);
+    channel.bind(BILLBOARD_DISPLAY, (data: BillboardRoute) => {
+      const path = sanitizeUrl(data.path);
       if (!path.startsWith("/billboard")) {
-        console.error("Tried to navigate to invalid path", data, path);
+        console.error("Tried to navigate to invalid path", data.path, path);
         return;
       }
       router.push(path);
