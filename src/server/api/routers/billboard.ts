@@ -3,10 +3,10 @@ import {
   BILLBOARD_CHANNEL,
   BILLBOARD_DISPLAY,
   BILLBOARD_REFRESH,
+  billboardSchema,
 } from "~/lib/pusher";
 import { adminProcedure, createTRPCRouter } from "~/server/api/trpc";
 import Pusher from "pusher";
-import { z } from "zod";
 
 const {
   NEXT_PUBLIC_PUSHER_CLUSTER: cluster,
@@ -18,12 +18,14 @@ const pusher = new Pusher({ appId, cluster, key, secret });
 
 export const billboardRouter = createTRPCRouter({
   display: adminProcedure
-    .input(z.object({ label: z.string().min(1), path: z.string().min(1) }))
+    .input(billboardSchema.display)
     .mutation(async ({ input }) => {
       return pusher.trigger(BILLBOARD_CHANNEL, BILLBOARD_DISPLAY, input);
     }),
 
-  refresh: adminProcedure.mutation(async () =>
-    pusher.trigger(BILLBOARD_CHANNEL, BILLBOARD_REFRESH, ""),
-  ),
+  refresh: adminProcedure
+    .input(billboardSchema.refresh)
+    .mutation(async () =>
+      pusher.trigger(BILLBOARD_CHANNEL, BILLBOARD_REFRESH, ""),
+    ),
 });

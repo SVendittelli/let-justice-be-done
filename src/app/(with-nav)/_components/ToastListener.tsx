@@ -1,12 +1,18 @@
 "use client";
 
 import { env } from "~/env";
-import { TOAST_CHANNEL, TOAST_MESSAGE, TOAST_REVEAL } from "~/lib/pusher";
+import {
+  TOAST_CHANNEL,
+  TOAST_MESSAGE,
+  TOAST_REVEAL,
+  type ToastSchema,
+} from "~/lib/pusher";
 import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
 import Pusher from "pusher-js";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import type z from "zod";
 
 const { NEXT_PUBLIC_PUSHER_KEY: key, NEXT_PUBLIC_PUSHER_CLUSTER: cluster } =
   env;
@@ -19,7 +25,7 @@ export default function ToastListener() {
   useEffect(() => {
     const channel = pusher.subscribe(TOAST_CHANNEL);
 
-    channel.bind(TOAST_MESSAGE, (message: string) => {
+    channel.bind(TOAST_MESSAGE, (message: z.infer<ToastSchema["message"]>) => {
       toast(message);
     });
 
