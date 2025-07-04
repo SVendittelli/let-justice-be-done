@@ -1,11 +1,11 @@
 "use client";
 
 import { ROUTES, type BillboardRoute } from "~/app/billboard/routes";
-import BillboardSwitch from "./BillboardSwitch";
 import { env } from "~/env";
 import { BILLBOARD_CHANNEL, BILLBOARD_DISPLAY } from "~/lib/pusher";
 import Pusher from "pusher-js";
 import { useEffect, useState } from "react";
+import BillboardSwitch from "./BillboardSwitch";
 
 const { NEXT_PUBLIC_PUSHER_KEY: key, NEXT_PUBLIC_PUSHER_CLUSTER: cluster } =
   env;

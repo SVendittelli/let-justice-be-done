@@ -1,9 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { auth } from "~/server/auth";
 import { redirect } from "next/navigation";
-import ToastTrigger from "./_components/ToastTrigger";
-import ClueSelector from "./_components/ClueSelector";
 import BillboardSelector from "./_components/BillboardSelector";
+import ClueSelector from "./_components/ClueSelector";
+import ToastTrigger from "./_components/ToastTrigger";
+import UserManager from "./_components/UserManager";
 
 export default async function Page() {
   const session = await auth();
@@ -14,7 +15,7 @@ export default async function Page() {
   return (
     <div className="grid grid-cols-12 gap-4">
       <div className="col-span-full flex flex-col gap-4 sm:col-span-3">
-        <Card className="">
+        <Card>
           <CardHeader>
             <CardTitle>Billboard</CardTitle>
           </CardHeader>
@@ -22,7 +23,7 @@ export default async function Page() {
             <BillboardSelector />
           </CardContent>
         </Card>
-        <Card className="">
+        <Card>
           <CardHeader>
             <CardTitle>Toasts</CardTitle>
           </CardHeader>
@@ -30,9 +31,17 @@ export default async function Page() {
             <ToastTrigger />
           </CardContent>
         </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Users</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <UserManager />
+          </CardContent>
+        </Card>
       </div>
       <div className="col-span-full sm:col-span-9">
-        <Card className="">
+        <Card>
           <CardHeader>
             <CardTitle>Clues</CardTitle>
           </CardHeader>

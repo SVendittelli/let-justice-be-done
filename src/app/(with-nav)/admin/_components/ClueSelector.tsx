@@ -1,8 +1,6 @@
 "use client";
 
 import type { Clue } from "@prisma/client";
-import { Eye, EyeOff } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
   HoverCard,
@@ -11,6 +9,8 @@ import {
 } from "~/components/ui/hover-card";
 import { Toggle } from "~/components/ui/toggle";
 import { api } from "~/trpc/react";
+import { Eye, EyeOff } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function ClueSelector() {
   const [isClient, setIsClient] = useState(false);

@@ -1,7 +1,7 @@
-import { api, HydrateClient } from "~/trpc/server";
-import PlayerCharacters from "./_components/PlayerCharacters";
 import { auth } from "~/server/auth";
+import { api, HydrateClient } from "~/trpc/server";
 import { redirect } from "next/navigation";
+import PlayerCharacters from "./_components/PlayerCharacters";
 
 export default async function Page() {
   const session = await auth();

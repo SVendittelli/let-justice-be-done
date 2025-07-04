@@ -1,6 +1,6 @@
 import { api, type RouterOutputs } from "~/trpc/react";
-import CharacterCard from "./CharacterCard";
 import { useState } from "react";
+import CharacterCard from "./CharacterCard";
 import CharacterForm, { type CharacterChange } from "./CharacterForm";
 
 type Character = RouterOutputs["pcs"]["getAll"][0];

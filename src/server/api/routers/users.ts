@@ -11,7 +11,7 @@ export const usersRouter = createTRPCRouter({
   }),
 
   getAll: adminProcedure.query(({ ctx }) => {
-    return ctx.db.user.findMany({});
+    return ctx.db.user.findMany({ orderBy: { name: "asc" } });
   }),
 
   getById: adminProcedure.input(z.string().cuid2()).query(({ ctx, input }) => {
@@ -38,6 +38,21 @@ export const usersRouter = createTRPCRouter({
           enabled: input.enabled,
         },
       });
+    }),
+
+  bulkEnable: adminProcedure
+    .input(z.object({ ids: z.array(z.string().cuid2()) }))
+    .mutation(({ ctx, input }) => {
+      return Promise.all([
+        ctx.db.user.updateMany({
+          where: { id: { in: input.ids } },
+          data: { enabled: true },
+        }),
+        ctx.db.user.updateMany({
+          where: { id: { notIn: input.ids }, role: { not: "ADMIN" } },
+          data: { enabled: false },
+        }),
+      ]);
     }),
 
   delete: adminProcedure

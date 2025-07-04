@@ -1,4 +1,3 @@
-import { Pencil } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -10,6 +9,7 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import type { RouterOutputs } from "~/trpc/react";
+import { Pencil } from "lucide-react";
 
 type Character = RouterOutputs["pcs"]["getAll"][0];
 type Props = { character: Character; showEdit: boolean; onEdit: () => void };
