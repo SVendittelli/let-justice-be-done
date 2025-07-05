@@ -9,6 +9,8 @@ set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 main:
     jj bookmark m main --to @-
 
+check: typecheck build
+
 push: typecheck build
     jj git push
 
@@ -23,3 +25,6 @@ typecheck:
 
 build:
     pnpm build
+
+format:
+    pnpm format:write
