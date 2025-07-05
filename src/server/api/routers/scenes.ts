@@ -1,9 +1,9 @@
-import z from "zod";
 import {
   adminProcedure,
   createTRPCRouter,
   protectedProcedure,
 } from "~/server/api/trpc";
+import z from "zod";
 
 export const scenesRouter = createTRPCRouter({
   create: adminProcedure

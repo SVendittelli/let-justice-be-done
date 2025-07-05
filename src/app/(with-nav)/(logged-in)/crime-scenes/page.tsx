@@ -1,6 +1,6 @@
+import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 import CrimeScenes from "./_components/CrimeScenes";
-import { auth } from "~/server/auth";
 
 export default async function Page() {
   const session = await auth();
