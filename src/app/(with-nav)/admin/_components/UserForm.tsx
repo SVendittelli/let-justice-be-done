@@ -76,7 +76,7 @@ export function UserForm({ users, onSubmit }: Props) {
                         />
                       </FormControl>
                       <FormLabel className="text-sm font-normal">
-                        {user.name}
+                        {user.name ?? user.email ?? user.id}
                       </FormLabel>
                     </FormItem>
                   )}
