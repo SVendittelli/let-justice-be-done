@@ -3,8 +3,12 @@
 import { api } from "~/trpc/react";
 import { useEffect, useState } from "react";
 import CrimeScene from "./CrimeScene";
+import { Card, CardContent } from "~/components/ui/card";
+import CrimeSceneForm from "./CrimeSceneForm";
 
-export default function CrimeScenes() {
+type Props = { editable: boolean };
+
+export default function CrimeScenes({ editable = false }: Props) {
   const [isMounted, setIsMounted] = useState(false);
 
   const scenes = api.scenes.getAll.useQuery();
@@ -17,11 +21,18 @@ export default function CrimeScenes() {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-4">
-        {scenes.data.map((scene) => (
-          <CrimeScene key={scene.id} crimeScene={scene} />
-        ))}
-      </div>
+      {editable && <CrimeSceneForm />}
+      {scenes.data.length !== 0 ? (
+        <div className="flex flex-wrap justify-center gap-4">
+          {scenes.data.map((scene) => (
+            <CrimeScene key={scene.id} crimeScene={scene} />
+          ))}
+        </div>
+      ) : (
+        <Card>
+          <CardContent>None yet, you&apos;ll have to investigate!</CardContent>
+        </Card>
+      )}
     </>
   );
 }

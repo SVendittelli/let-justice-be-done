@@ -22,10 +22,12 @@ export default function Clues({ editable = false }: Props) {
 
   return (
     <>
-      <ClueForm
-        deleteEnabled={showDelete}
-        onDeleteEnabledChange={setShowDelete}
-      />
+      {editable && (
+        <ClueForm
+          deleteEnabled={showDelete}
+          onDeleteEnabledChange={setShowDelete}
+        />
+      )}
       {clues.data.length !== 0 ? (
         <div className="flex flex-wrap justify-center gap-4">
           {clues?.data?.map((clue) => (
