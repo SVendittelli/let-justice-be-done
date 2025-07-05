@@ -5,7 +5,11 @@ import {
   BILLBOARD_REFRESH,
   billboardSchema,
 } from "~/lib/pusher";
-import { adminProcedure, createTRPCRouter } from "~/server/api/trpc";
+import {
+  adminProcedure,
+  createTRPCRouter,
+  protectedProcedure,
+} from "~/server/api/trpc";
 import Pusher from "pusher";
 
 const {
@@ -17,10 +21,20 @@ const {
 const pusher = new Pusher({ appId, cluster, key, secret });
 
 export const billboardRouter = createTRPCRouter({
+  current: protectedProcedure
+    .input(billboardSchema.current)
+    .query(async ({ ctx }) => {
+      return ctx.db.billboard.findFirst({ orderBy: { updatedAt: "desc" } });
+    }),
+
   display: adminProcedure
     .input(billboardSchema.display)
-    .mutation(async ({ input }) => {
-      return pusher.trigger(BILLBOARD_CHANNEL, BILLBOARD_DISPLAY, input);
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.billboard
+        .create({ data: input })
+        .then(() =>
+          pusher.trigger(BILLBOARD_CHANNEL, BILLBOARD_DISPLAY, input),
+        );
     }),
 
   refresh: adminProcedure

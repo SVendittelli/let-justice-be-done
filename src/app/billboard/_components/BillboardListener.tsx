@@ -8,6 +8,7 @@ import {
   BILLBOARD_REFRESH,
   type BillboardSchema,
 } from "~/lib/pusher";
+import { api } from "~/trpc/react";
 import { useRouter } from "next/navigation";
 import Pusher from "pusher-js";
 import { useEffect } from "react";
@@ -19,6 +20,22 @@ const pusher = new Pusher(key, { cluster });
 
 export default function BillboardListener() {
   const router = useRouter();
+  const page = api.billboard.current.useQuery();
+
+  useEffect(() => {
+    if (page.data) {
+      const path = sanitizeUrl(page.data.path);
+      if (!path.startsWith("/billboard")) {
+        console.error(
+          "Tried to navigate to invalid path",
+          page.data.path,
+          path,
+        );
+        return;
+      }
+      router.replace(path);
+    }
+  }, [router, page.data]);
 
   useEffect(() => {
     const channel = pusher.subscribe(BILLBOARD_CHANNEL);

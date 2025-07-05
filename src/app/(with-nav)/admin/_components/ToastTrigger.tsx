@@ -46,9 +46,7 @@ export default function ToastTrigger() {
           </Button>
         </form>
       </Form>
-      <Button onClick={() => reveal.mutate(null)}>
-        Send Reveal Clue Toast
-      </Button>
+      <Button onClick={() => reveal.mutate()}>Send Reveal Clue Toast</Button>
     </div>
   );
 }

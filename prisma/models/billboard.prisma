@@ -1,0 +1,6 @@
+model Billboard {
+  id        String   @id @default(cuid(2))
+  label     String
+  path      String
+  updatedAt DateTime @updatedAt
+}
