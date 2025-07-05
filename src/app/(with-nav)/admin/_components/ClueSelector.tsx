@@ -46,7 +46,9 @@ export default function ClueSelector() {
         <div key={clue.id} className="py-2">
           <HoverCard>
             <HoverCardTrigger className="flex justify-between">
-              <span>{clue.title}</span>
+              <span className="truncate">
+                {clue.title}: {clue.text}
+              </span>
               <span className="flex gap-2">
                 {clue.revealed && (
                   <Button size="sm" onClick={() => onShow(clue)}>
@@ -68,7 +70,10 @@ export default function ClueSelector() {
                 </Toggle>
               </span>
             </HoverCardTrigger>
-            <HoverCardContent>{clue.text}</HoverCardContent>
+            <HoverCardContent className="prose">
+              <h2 className="mb-2">{clue.title}</h2>
+              <p>{clue.text}</p>
+            </HoverCardContent>
           </HoverCard>
         </div>
       ))}
