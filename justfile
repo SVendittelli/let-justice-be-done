@@ -12,6 +12,12 @@ main:
 push: typecheck build
     jj git push
 
+pr: typecheck build
+    jj git push -c @
+
+fetch:
+    jj git fetch
+
 typecheck:
     pnpm typecheck
 
