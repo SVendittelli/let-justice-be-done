@@ -1,7 +1,9 @@
 import { billboardRouter } from "~/server/api/routers/billboard";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { cluesRouter } from "./routers/clues";
+import { npcsRouter } from "./routers/npcs";
 import { pcsRouter } from "./routers/pcs";
+import { scenesRouter } from "./routers/scenes";
 import { toastRouter } from "./routers/toast";
 import { usersRouter } from "./routers/users";
 
@@ -13,7 +15,9 @@ import { usersRouter } from "./routers/users";
 export const appRouter = createTRPCRouter({
   billboard: billboardRouter,
   clues: cluesRouter,
+  npcs: npcsRouter,
   pcs: pcsRouter,
+  scenes: scenesRouter,
   toast: toastRouter,
   users: usersRouter,
 });

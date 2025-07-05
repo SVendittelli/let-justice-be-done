@@ -79,6 +79,7 @@ async function createNpcs() {
   }).map((_, i) => ({
     name: randFullName(),
     moniker: randJobTitle(),
+    description: randSentence(),
     type: i === 0 ? "AUTHORITY" : "SUSPECT",
   }));
 
@@ -95,6 +96,7 @@ async function createCrimeScenes() {
   });
   const crimeScenes: Prisma.CrimeSceneCreateManyInput[] = npcs.map((npc) => ({
     name: `${npc.name}'s Room`,
+    description: randSentence(),
   }));
 
   await db.crimeScene.createMany({ data: crimeScenes });
