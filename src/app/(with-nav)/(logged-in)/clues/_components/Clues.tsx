@@ -18,7 +18,7 @@ export default function Clues({ editable = false }: Props) {
     setIsMounted(true);
   }, [setIsMounted]);
 
-  if (!isMounted) return null;
+  if (!isMounted || !clues.data) return null;
 
   return (
     <>
@@ -26,7 +26,7 @@ export default function Clues({ editable = false }: Props) {
         deleteEnabled={showDelete}
         onDeleteEnabledChange={setShowDelete}
       />
-      {clues?.data?.length !== 0 ? (
+      {clues.data.length !== 0 ? (
         <div className="flex flex-wrap justify-center gap-4">
           {clues?.data?.map((clue) => (
             <Clue
