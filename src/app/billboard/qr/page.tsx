@@ -14,6 +14,7 @@ export default function Page() {
     <div className="flex h-dvh items-center justify-center">
       {url && (
         <QRCode
+          title="QR code of the current domain"
           value={url}
           bgColor="transparent"
           fgColor="#f5b26c"
