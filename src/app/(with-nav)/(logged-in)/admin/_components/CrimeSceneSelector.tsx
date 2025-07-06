@@ -36,7 +36,7 @@ export default function SceneSelector() {
   const onShow = (scene: CrimeScene) => {
     display.mutate({
       label: scene.name,
-      path: `/billboard/crime-scene/${scene.id}`,
+      path: `/billboard/crime-scenes/${scene.id}`,
     });
   };
 

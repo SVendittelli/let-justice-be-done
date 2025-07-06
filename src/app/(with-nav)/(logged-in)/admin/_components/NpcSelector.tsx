@@ -36,7 +36,7 @@ export default function NpcSelector() {
   const onShow = (npc: NonPlayerCharacter) => {
     display.mutate({
       label: npc.name,
-      path: `/billboard/npc/${npc.id}`,
+      path: `/billboard/npcs/${npc.id}`,
     });
   };
 

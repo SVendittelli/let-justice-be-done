@@ -36,7 +36,7 @@ export default function ClueSelector() {
   const onShow = (clue: Clue) => {
     display.mutate({
       label: clue.title,
-      path: `/billboard/clue/${clue.id}`,
+      path: `/billboard/clues/${clue.id}`,
     });
   };
 
