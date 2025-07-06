@@ -17,7 +17,12 @@ type Character = RouterOutputs["pcs"]["getAll"][0];
 type Props = { character: Character; showEdit: boolean; onEdit: () => void };
 
 export default function CharacterCard({ character, showEdit, onEdit }: Props) {
-  const name = character.user.name ?? character.user.email ?? character.userId;
+  const name = (
+    character.user.name ??
+    character.user.email ??
+    character.userId
+  ).replace(/@.*/, "");
+
   const initial =
     (character.user.name ?? character.user.email)
       ?.charAt(0)
