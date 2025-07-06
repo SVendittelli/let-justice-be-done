@@ -22,7 +22,7 @@ export default function HomePageLinks({ isAdmin }: Props) {
       { href: "/npcs", label: "NPCs" },
     ]);
   } else {
-    links = [{ href: "/character", label: "Create Character" }];
+    links = [{ href: "/characters", label: "Create Character" }];
   }
 
   return (
