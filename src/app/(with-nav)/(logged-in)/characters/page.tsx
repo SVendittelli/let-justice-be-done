@@ -10,7 +10,10 @@ export default async function Page() {
 
   return (
     <HydrateClient>
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-col items-center gap-4">
+        <div className="prose !prose-invert">
+          <h1>Player Characters</h1>
+        </div>
         <PlayerCharacters isAdmin={session?.user?.role === "ADMIN"} />
       </div>
     </HydrateClient>

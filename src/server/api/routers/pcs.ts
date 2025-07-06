@@ -29,18 +29,28 @@ export const pcsRouter = createTRPCRouter({
 
   getCurrent: protectedProcedure.query(({ ctx }) => {
     return ctx.db.playerCharacter.findUnique({
+      include: { user: { select: { name: true, email: true, image: true } } },
       where: { userId: ctx.session.user.id },
     });
   }),
 
   getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.playerCharacter.findMany({ orderBy: { name: "asc" } });
+    const isAdmin = ctx.session.user.role === "ADMIN";
+    return ctx.db.playerCharacter.findMany({
+      include: { user: { select: { name: true, email: true, image: true } } },
+      where: { ...(!isAdmin && { user: { enabled: true } }) },
+      orderBy: { name: "asc" },
+    });
   }),
 
   getById: protectedProcedure
     .input(z.string().cuid2())
     .query(({ ctx, input }) => {
-      return ctx.db.playerCharacter.findUnique({ where: { id: input } });
+      const isAdmin = ctx.session.user.role === "ADMIN";
+      return ctx.db.playerCharacter.findUnique({
+        include: { user: { select: { name: true, email: true, image: true } } },
+        where: { id: input, ...(!isAdmin && { user: { enabled: true } }) },
+      });
     }),
 
   update: protectedProcedure

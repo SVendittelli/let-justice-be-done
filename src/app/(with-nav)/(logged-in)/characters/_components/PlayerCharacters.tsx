@@ -34,7 +34,7 @@ export default function PlayerCharacters({ isAdmin }: Props) {
   }
 
   return (
-    <>
+    <div className="flex flex-wrap justify-center gap-4">
       {pc.data && <PlayerCharacter character={pc.data} showEdit={true} />}
       {pcs?.data
         ?.filter(({ id }) => id !== pc.data?.id)
@@ -45,6 +45,6 @@ export default function PlayerCharacters({ isAdmin }: Props) {
             showEdit={isAdmin}
           />
         ))}
-    </>
+    </div>
   );
 }
