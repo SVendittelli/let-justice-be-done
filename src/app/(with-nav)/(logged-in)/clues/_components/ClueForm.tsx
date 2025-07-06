@@ -40,7 +40,7 @@ export default function ClueForm({
   onDeleteEnabledChange,
 }: Props) {
   const utils = api.useUtils();
-  const createClue = api.clues.create.useMutation({
+  const create = api.clues.create.useMutation({
     onSuccess: () => utils.clues.invalidate(),
   });
 
@@ -53,8 +53,8 @@ export default function ClueForm({
     },
   });
 
-  function onSubmit(clue: Clue) {
-    createClue.mutate(clue);
+  function onSubmit(data: Clue) {
+    create.mutate(data);
   }
 
   return (

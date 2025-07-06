@@ -10,6 +10,7 @@ type Props = { editable: boolean };
 
 export default function CrimeScenes({ editable = false }: Props) {
   const [isMounted, setIsMounted] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
 
   const scenes = api.scenes.getAll.useQuery();
 
@@ -21,11 +22,21 @@ export default function CrimeScenes({ editable = false }: Props) {
 
   return (
     <>
-      {editable && <CrimeSceneForm />}
+      {editable && (
+        <CrimeSceneForm
+          deleteEnabled={showDelete}
+          onDeleteEnabledChange={setShowDelete}
+        />
+      )}
       {scenes.data.length !== 0 ? (
         <div className="flex flex-wrap justify-center gap-4">
           {scenes.data.map((scene) => (
-            <CrimeScene key={scene.id} crimeScene={scene} />
+            <CrimeScene
+              key={scene.id}
+              crimeScene={scene}
+              editable={editable}
+              deletable={showDelete}
+            />
           ))}
         </div>
       ) : (
