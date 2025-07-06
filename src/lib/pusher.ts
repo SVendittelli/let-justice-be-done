@@ -20,6 +20,9 @@ export const TOAST_REVEAL = "reveal";
 
 export const toastSchema = {
   message: z.string().min(1),
-  reveal: z.void(),
+  reveal: z.object({
+    message: z.string().min(1),
+    path: z.string().startsWith("/"),
+  }),
 };
 export type ToastSchema = typeof toastSchema;

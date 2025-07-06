@@ -23,7 +23,9 @@ export const toastRouter = createTRPCRouter({
       return pusher.trigger(TOAST_CHANNEL, TOAST_MESSAGE, input);
     }),
 
-  reveal: adminProcedure.input(toastSchema.reveal).mutation(async () => {
-    return pusher.trigger(TOAST_CHANNEL, TOAST_REVEAL, null);
-  }),
+  reveal: adminProcedure
+    .input(toastSchema.reveal)
+    .mutation(async ({ input }) => {
+      return pusher.trigger(TOAST_CHANNEL, TOAST_REVEAL, input);
+    }),
 });

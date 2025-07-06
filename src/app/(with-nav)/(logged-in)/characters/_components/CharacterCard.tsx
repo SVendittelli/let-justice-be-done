@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -11,7 +12,6 @@ import {
 } from "~/components/ui/card";
 import type { RouterOutputs } from "~/trpc/react";
 import { Pencil } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 
 type Character = RouterOutputs["pcs"]["getAll"][0];
 type Props = { character: Character; showEdit: boolean; onEdit: () => void };

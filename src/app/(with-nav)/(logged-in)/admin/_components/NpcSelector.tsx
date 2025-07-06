@@ -1,6 +1,6 @@
 "use client";
 
-import type { Clue } from "@prisma/client";
+import type { NonPlayerCharacter } from "@prisma/client";
 import { Button } from "~/components/ui/button";
 import {
   HoverCard,
@@ -9,16 +9,16 @@ import {
 } from "~/components/ui/hover-card";
 import { Toggle } from "~/components/ui/toggle";
 import { api } from "~/trpc/react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Gavel, MessageCircleQuestionMark } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function ClueSelector() {
+export default function NpcSelector() {
   const [isMounted, setIsMounted] = useState(false);
 
   const utils = api.useUtils();
-  const clues = api.clues.getAll.useQuery();
-  const updateClue = api.clues.update.useMutation({
-    onSuccess: () => utils.clues.invalidate(),
+  const npcs = api.npcs.getAll.useQuery();
+  const updateNpc = api.npcs.update.useMutation({
+    onSuccess: () => utils.npcs.invalidate(),
   });
   const display = api.billboard.display.useMutation();
 
@@ -30,39 +30,44 @@ export default function ClueSelector() {
     return null;
   }
 
-  const onUpdate = (clue: Clue, revealed: boolean) => {
-    updateClue.mutate({ ...clue, revealed });
+  const onUpdate = (npc: NonPlayerCharacter, revealed: boolean) => {
+    updateNpc.mutate({ ...npc, revealed });
   };
-  const onShow = (clue: Clue) => {
+  const onShow = (npc: NonPlayerCharacter) => {
     display.mutate({
-      label: clue.title,
-      path: `/billboard/clue/${clue.id}`,
+      label: npc.name,
+      path: `/billboard/npc/${npc.id}`,
     });
   };
 
   return (
     <>
-      {clues.data?.map((clue) => (
-        <div key={clue.id} className="py-2">
+      {npcs.data?.map((npc) => (
+        <div key={npc.id} className="py-2">
           <HoverCard>
             <HoverCardTrigger className="flex justify-between">
               <span className="prose truncate">
-                <b>{clue.title}</b>: {clue.text}
+                {npc.type === "SUSPECT" ? (
+                  <MessageCircleQuestionMark className="inline" />
+                ) : (
+                  <Gavel className="inline" />
+                )}{" "}
+                <b>{npc.name}</b> (<i>{npc.moniker}</i>): {npc.description}
               </span>
               <span className="flex gap-2">
-                {clue.revealed && (
-                  <Button size="sm" onClick={() => onShow(clue)}>
+                {npc.revealed && (
+                  <Button size="sm" onClick={() => onShow(npc)}>
                     Show
                   </Button>
                 )}
                 <Toggle
                   variant="outline"
                   size="sm"
-                  defaultPressed={clue.revealed}
-                  onPressedChange={(revealed) => onUpdate(clue, revealed)}
+                  defaultPressed={npc.revealed}
+                  onPressedChange={(revealed) => onUpdate(npc, revealed)}
                   aria-label="Toggle visibility"
                 >
-                  {clue.revealed ? (
+                  {npc.revealed ? (
                     <Eye className="size-4" />
                   ) : (
                     <EyeOff className="size-4" />
@@ -71,8 +76,11 @@ export default function ClueSelector() {
               </span>
             </HoverCardTrigger>
             <HoverCardContent className="prose">
-              <h2 className="mb-2">{clue.title}</h2>
-              <p>{clue.text}</p>
+              <h2 className="mb-2">{npc.name}</h2>
+              <p>
+                <i>{npc.moniker}</i>
+              </p>
+              <p>{npc.description}</p>
             </HoverCardContent>
           </HoverCard>
         </div>

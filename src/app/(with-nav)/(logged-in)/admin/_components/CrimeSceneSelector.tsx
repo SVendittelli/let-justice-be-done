@@ -1,6 +1,6 @@
 "use client";
 
-import type { Clue } from "@prisma/client";
+import type { CrimeScene } from "@prisma/client";
 import { Button } from "~/components/ui/button";
 import {
   HoverCard,
@@ -12,13 +12,13 @@ import { api } from "~/trpc/react";
 import { Eye, EyeOff } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function ClueSelector() {
+export default function SceneSelector() {
   const [isMounted, setIsMounted] = useState(false);
 
   const utils = api.useUtils();
-  const clues = api.clues.getAll.useQuery();
-  const updateClue = api.clues.update.useMutation({
-    onSuccess: () => utils.clues.invalidate(),
+  const scenes = api.scenes.getAll.useQuery();
+  const updateScene = api.scenes.update.useMutation({
+    onSuccess: () => utils.scenes.invalidate(),
   });
   const display = api.billboard.display.useMutation();
 
@@ -30,39 +30,39 @@ export default function ClueSelector() {
     return null;
   }
 
-  const onUpdate = (clue: Clue, revealed: boolean) => {
-    updateClue.mutate({ ...clue, revealed });
+  const onUpdate = (scene: CrimeScene, revealed: boolean) => {
+    updateScene.mutate({ ...scene, revealed });
   };
-  const onShow = (clue: Clue) => {
+  const onShow = (scene: CrimeScene) => {
     display.mutate({
-      label: clue.title,
-      path: `/billboard/clue/${clue.id}`,
+      label: scene.name,
+      path: `/billboard/crime-scene/${scene.id}`,
     });
   };
 
   return (
     <>
-      {clues.data?.map((clue) => (
-        <div key={clue.id} className="py-2">
+      {scenes.data?.map((scene) => (
+        <div key={scene.id} className="py-2">
           <HoverCard>
             <HoverCardTrigger className="flex justify-between">
               <span className="prose truncate">
-                <b>{clue.title}</b>: {clue.text}
+                <b>{scene.name}</b>: {scene.description}
               </span>
               <span className="flex gap-2">
-                {clue.revealed && (
-                  <Button size="sm" onClick={() => onShow(clue)}>
+                {scene.revealed && (
+                  <Button size="sm" onClick={() => onShow(scene)}>
                     Show
                   </Button>
                 )}
                 <Toggle
                   variant="outline"
                   size="sm"
-                  defaultPressed={clue.revealed}
-                  onPressedChange={(revealed) => onUpdate(clue, revealed)}
+                  defaultPressed={scene.revealed}
+                  onPressedChange={(revealed) => onUpdate(scene, revealed)}
                   aria-label="Toggle visibility"
                 >
-                  {clue.revealed ? (
+                  {scene.revealed ? (
                     <Eye className="size-4" />
                   ) : (
                     <EyeOff className="size-4" />
@@ -71,8 +71,8 @@ export default function ClueSelector() {
               </span>
             </HoverCardTrigger>
             <HoverCardContent className="prose">
-              <h2 className="mb-2">{clue.title}</h2>
-              <p>{clue.text}</p>
+              <h2 className="mb-2">{scene.name}</h2>
+              <p>{scene.description}</p>
             </HoverCardContent>
           </HoverCard>
         </div>

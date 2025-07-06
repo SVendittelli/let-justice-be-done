@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import AdminCard from "./_components/AdminCard";
 import BillboardSelector from "./_components/BillboardSelector";
 import ClueSelector from "./_components/ClueSelector";
+import CrimeSceneSelector from "./_components/CrimeSceneSelector";
+import NpcSelector from "./_components/NpcSelector";
 import ToastTrigger from "./_components/ToastTrigger";
 import UserManager from "./_components/UserManager";
 
@@ -25,9 +27,15 @@ export default async function Page() {
           <UserManager />
         </AdminCard>
       </div>
-      <div className="col-span-full sm:col-span-9">
+      <div className="col-span-full flex flex-col gap-4 sm:col-span-9">
         <AdminCard title="Clues">
           <ClueSelector />
+        </AdminCard>
+        <AdminCard title="NPCs">
+          <NpcSelector />
+        </AdminCard>
+        <AdminCard title="Crime Scenes">
+          <CrimeSceneSelector />
         </AdminCard>
       </div>
     </div>

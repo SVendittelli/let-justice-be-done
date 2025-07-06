@@ -1,5 +1,6 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -13,13 +14,25 @@ import {
 import { Input } from "~/components/ui/input";
 import { api } from "~/trpc/react";
 import { useForm } from "react-hook-form";
+import z from "zod";
 
-type Message = { text: string };
+const reveals: { type: string; path: string }[] = [
+  { type: "A Clue", path: "/clues" },
+  { type: "An NPC", path: "/npcs" },
+  { type: "A Crime Scene", path: "/crime-scenes" },
+];
+
+const messageSchema = z.object({ text: z.string().min(1) });
+type Message = z.infer<typeof messageSchema>;
+
 export default function ToastTrigger() {
   const message = api.toast.message.useMutation();
   const reveal = api.toast.reveal.useMutation();
 
-  const form = useForm<Message>({ defaultValues: { text: "" } });
+  const form = useForm<Message>({
+    resolver: zodResolver(messageSchema),
+    defaultValues: { text: "" },
+  });
 
   const sendMessage = ({ text }: Message) => message.mutate(text);
 
@@ -46,7 +59,14 @@ export default function ToastTrigger() {
           </Button>
         </form>
       </Form>
-      <Button onClick={() => reveal.mutate()}>Send Reveal Clue Toast</Button>
+      {reveals.map(({ type, path }) => {
+        const message = `${type} has been revealed!`;
+        return (
+          <Button key={type} onClick={() => reveal.mutate({ message, path })}>
+            Send {type} Toast
+          </Button>
+        );
+      })}
     </div>
   );
 }

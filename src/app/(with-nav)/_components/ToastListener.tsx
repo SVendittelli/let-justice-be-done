@@ -29,14 +29,14 @@ export default function ToastListener() {
       toast(message);
     });
 
-    channel.bind(TOAST_REVEAL, () => {
-      toast("A new clue has been revealed!", {
+    channel.bind(TOAST_REVEAL, (data: z.infer<ToastSchema["reveal"]>) => {
+      toast(data.message, {
         action: {
           label: "See it",
           onClick: () => {
-            utils.clues
+            utils
               .invalidate()
-              .then(() => router.push("/clues"))
+              .then(() => router.push(data.path))
               .catch((e) => console.error(e));
           },
         },
@@ -46,7 +46,7 @@ export default function ToastListener() {
     return () => {
       pusher.unsubscribe(TOAST_CHANNEL);
     };
-  }, [router, utils.clues]);
+  }, [router, utils]);
 
   return null;
 }
