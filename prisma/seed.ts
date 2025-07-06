@@ -22,7 +22,7 @@ async function main() {
       name: "Admin",
       email: "sam.vendittelli@hotmail.com",
       emailVerified: randPastDate(),
-      image: randAvatar(),
+      image: `${randAvatar()}?${Math.random()}`,
       role: "ADMIN",
       enabled: true,
     },
@@ -41,12 +41,12 @@ async function createPlayers() {
   }
 
   const users = Array.from({ length: 6 }).map((_, i) => {
-    const { username, email, img } = randUser();
+    const { username, email } = randUser();
     const user: Prisma.UserCreateManyInput = {
       name: username,
       email,
       emailVerified: randPastDate(),
-      image: img,
+      image: `${randAvatar()}?${Math.random()}`,
       role: "USER",
       enabled: i % 2 === 0,
     };

@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
-import { Card, CardContent } from "~/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Form,
   FormControl,
@@ -47,6 +47,11 @@ export default function CharacterForm({
 
   return (
     <Card className="w-full sm:w-sm">
+      <CardHeader>
+        <CardTitle>
+          {defaultValues ? "Edit Character" : "Create Character"}
+        </CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
