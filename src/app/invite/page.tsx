@@ -113,7 +113,7 @@ export default async function Page() {
             width={100}
           />
           <span>
-            <b>Lead Detective Holden Vaugh</b>
+            <b>Lead Detective Holden Vaughn</b>
             <br />
             Murder Squad
             <br />
