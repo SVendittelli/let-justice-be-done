@@ -16,7 +16,7 @@ export default async function Page() {
   const originalDate = new Date();
   originalDate.setUTCHours(2, 37, 15);
   const fwdDate = new Date();
-  fwdDate.setUTCHours(7, 36, 44);
+  fwdDate.setUTCHours(4, 36, 44);
 
   return (
     <main className="flex min-h-dvh justify-center bg-white p-2 sm:p-8 dark:bg-[#222222]">
