@@ -21,6 +21,15 @@ export default async function Credits() {
       licence: "CC0 1.0",
       licenceLink: "https://creativecommons.org/publicdomain/zero/1.0/",
     },
+    {
+      title: "Badge of the Metropolitan Police Service (Charles III)",
+      author: "ProfAuthor",
+      authorLink: "https://commons.wikimedia.org/wiki/User:ProfAuthor",
+      source:
+        "https://commons.wikimedia.org/wiki/File:Badge_of_the_Metropolitan_Police_Service_(Charles_III).svg",
+      licence: "CC BY-SA 4.0",
+      licenceLink: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
   ];
 
   return (
