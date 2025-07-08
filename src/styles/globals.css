@@ -6,8 +6,14 @@
 @theme {
   /* Fonts */
   --font-sans:
-    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    var(--font-roboto), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif:
+    var(--font-roboto-slab), ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+  --font-title:
+    var(--font-noto-serif), ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
 
   /* Theme colors */
   --color-*: initial;
