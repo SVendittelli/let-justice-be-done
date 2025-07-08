@@ -8,6 +8,10 @@ import NpcSelector from "./_components/NpcSelector";
 import ToastTrigger from "./_components/ToastTrigger";
 import UserManager from "./_components/UserManager";
 
+export const metadata = {
+  title: "Admin Dashboard",
+};
+
 export default async function Page() {
   const session = await auth();
   if (session?.user?.role !== "ADMIN") {
