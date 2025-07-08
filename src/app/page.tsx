@@ -22,7 +22,7 @@ export default async function Home() {
       className="grid min-h-dvh grid-cols-[repeat(3,_auto)] grid-rows-[136px_minmax(360px,_min-content)_auto_min-content] gap-y-4 px-6 pt-6 text-gold"
       role="main"
     >
-      <h1 className="col-span-3 col-start-1 row-1 self-center text-center text-5xl font-extrabold tracking-tight sm:text-7xl">
+      <h1 className="col-span-3 col-start-1 row-1 self-center text-center font-title text-5xl font-extrabold tracking-tight sm:text-7xl">
         <span className="inline-block">Let Justice</span>{" "}
         <span className="inline-block">Be Done</span>
       </h1>

@@ -19,7 +19,7 @@ export default async function Page() {
   fwdDate.setUTCHours(4, 36, 44);
 
   return (
-    <main className="flex min-h-dvh justify-center bg-white p-2 sm:p-8 dark:bg-[#222222]">
+    <main className="flex min-h-dvh justify-center bg-white p-2 font-sans sm:p-8 dark:bg-[#222222]">
       <div className="prose text-black dark:text-white">
         <h2 className="text-black dark:text-white">
           Fwd: Request for consultation [TCOTLR]
@@ -122,7 +122,7 @@ export default async function Page() {
             Metropolitan Police
           </span>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center font-serif">
           <Link href={session ? "/" : "/api/auth/signin"}>
             <Button size="lg">Accept the case</Button>
           </Link>

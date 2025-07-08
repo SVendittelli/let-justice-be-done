@@ -4,7 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 import { type Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Noto_Serif, Roboto, Roboto_Slab } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Let Justice Be Done",
@@ -24,16 +24,27 @@ export const metadata: Metadata = {
   ],
 };
 
-const geist = Geist({
+const notoSerif = Noto_Serif({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-noto-serif",
+});
+const roboto = Roboto({
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
+const robotoSlab = Roboto_Slab({
+  subsets: ["latin"],
+  variable: "--font-roboto-slab",
 });
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable}`}>
+    <html
+      lang="en"
+      className={`${notoSerif.variable} ${roboto.variable} ${robotoSlab.variable} font-serif`}
+    >
       <body className="bg-gold prose-a:no-underline">
         <div className="min-h-dvh rounded-xl bg-gradient-to-b from-red-medium to-red-dark inset-ring-6 inset-ring-gold sm:inset-ring-8">
           <TRPCReactProvider>{children}</TRPCReactProvider>
