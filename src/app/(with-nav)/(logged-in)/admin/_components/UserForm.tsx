@@ -41,9 +41,9 @@ export function UserForm({ users, onSubmit }: Props) {
             )
           }
         >
-          Select All
+          All
         </Button>
-        <Button onClick={() => form.setValue("ids", [])}>Select None</Button>
+        <Button onClick={() => form.setValue("ids", [])}>None</Button>
       </div>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField

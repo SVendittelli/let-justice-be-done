@@ -1,10 +1,12 @@
 "use client";
 
+import SuspicionDisplay from "~/components/SuspicionDisplay";
 import { env } from "~/env";
 import {
   TOAST_CHANNEL,
   TOAST_MESSAGE,
   TOAST_REVEAL,
+  TOAST_SUSPICION,
   type ToastSchema,
 } from "~/lib/pusher";
 import { api } from "~/trpc/react";
@@ -18,6 +20,8 @@ const { NEXT_PUBLIC_PUSHER_KEY: key, NEXT_PUBLIC_PUSHER_CLUSTER: cluster } =
   env;
 const pusher = new Pusher(key, { cluster });
 
+const duration = 5_000; // 5 seconds
+
 export default function ToastListener() {
   const router = useRouter();
   const utils = api.useUtils();
@@ -26,7 +30,7 @@ export default function ToastListener() {
     const channel = pusher.subscribe(TOAST_CHANNEL);
 
     channel.bind(TOAST_MESSAGE, (message: z.infer<ToastSchema["message"]>) => {
-      toast(message);
+      toast(message, { duration });
     });
 
     channel.bind(TOAST_REVEAL, (data: z.infer<ToastSchema["reveal"]>) => {
@@ -40,10 +44,29 @@ export default function ToastListener() {
               .catch((e) => console.error(e));
           },
         },
+        duration,
       });
     });
 
+    channel.bind(
+      TOAST_SUSPICION,
+      (count: z.infer<ToastSchema["suspicion"]>) => {
+        utils.suspicion
+          .invalidate()
+          .then(() =>
+            toast(
+              <>
+                Suspicion: <SuspicionDisplay count={count} />
+              </>,
+              { duration },
+            ),
+          )
+          .catch((e) => console.error(e));
+      },
+    );
+
     return () => {
+      channel.unbind_all();
       pusher.unsubscribe(TOAST_CHANNEL);
     };
   }, [router, utils]);

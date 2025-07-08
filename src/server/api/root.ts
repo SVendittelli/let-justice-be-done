@@ -4,6 +4,7 @@ import { cluesRouter } from "./routers/clues";
 import { npcsRouter } from "./routers/npcs";
 import { pcsRouter } from "./routers/pcs";
 import { scenesRouter } from "./routers/scenes";
+import { suspicionRouter } from "./routers/suspicion";
 import { toastRouter } from "./routers/toast";
 import { usersRouter } from "./routers/users";
 
@@ -18,6 +19,7 @@ export const appRouter = createTRPCRouter({
   npcs: npcsRouter,
   pcs: pcsRouter,
   scenes: scenesRouter,
+  suspicion: suspicionRouter,
   toast: toastRouter,
   users: usersRouter,
 });
