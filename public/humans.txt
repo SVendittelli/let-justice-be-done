@@ -1,0 +1,17 @@
+/* TEAM */
+Developer: Sam Vendittelli
+Contact: sam.vendittelli@hotmail.com
+Site: https://vendittelli.co.uk/
+GitHub: https://github.com/SVendittelli/
+Location: Maidenhead, UK
+
+/* THANKS */
+Alison Quinn: https://www.alisonquinn.co.uk/
+
+/* SITE */
+Last updated: yyyy-mm-dd
+Language: English
+Components: Next.js, tRPC, Prisma, tailwind, shadcn, pusher, resend
+Software: neovim
+
+/* What is this file? See here: https://humanstxt.org/ */
