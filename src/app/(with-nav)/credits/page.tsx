@@ -1,6 +1,10 @@
 import { Card, CardContent } from "~/components/ui/card";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Credits",
+};
+
 export default async function Credits() {
   const ccAttributions = [
     {
