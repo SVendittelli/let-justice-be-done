@@ -5,6 +5,7 @@ import BillboardSelector from "./_components/BillboardSelector";
 import ClueSelector from "./_components/ClueSelector";
 import CrimeSceneSelector from "./_components/CrimeSceneSelector";
 import NpcSelector from "./_components/NpcSelector";
+import Suspicion from "./_components/Suspicion";
 import ToastTrigger from "./_components/ToastTrigger";
 import UserManager from "./_components/UserManager";
 
@@ -23,6 +24,9 @@ export default async function Page() {
       <div className="col-span-full flex flex-col gap-4 sm:col-span-3">
         <AdminCard title="Billboard">
           <BillboardSelector />
+        </AdminCard>
+        <AdminCard title="Suspicion">
+          <Suspicion />
         </AdminCard>
         <AdminCard title="Toasts">
           <ToastTrigger />

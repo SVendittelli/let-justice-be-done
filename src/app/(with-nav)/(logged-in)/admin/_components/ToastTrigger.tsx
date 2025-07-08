@@ -13,6 +13,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { api } from "~/trpc/react";
+import { MessageSquareShare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
@@ -55,7 +56,7 @@ export default function ToastTrigger() {
             )}
           />
           <Button type="submit" className="w-full">
-            Send Message
+            <MessageSquareShare /> Message
           </Button>
         </form>
       </Form>
@@ -63,7 +64,7 @@ export default function ToastTrigger() {
         const message = `${type} has been revealed!`;
         return (
           <Button key={type} onClick={() => reveal.mutate({ message, path })}>
-            Send {type} Toast
+            <MessageSquareShare /> {type}
           </Button>
         );
       })}

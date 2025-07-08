@@ -3,6 +3,7 @@ import {
   TOAST_CHANNEL,
   TOAST_MESSAGE,
   TOAST_REVEAL,
+  TOAST_SUSPICION,
   toastSchema,
 } from "~/lib/pusher";
 import { adminProcedure, createTRPCRouter } from "~/server/api/trpc";
@@ -28,4 +29,10 @@ export const toastRouter = createTRPCRouter({
     .mutation(async ({ input }) => {
       return pusher.trigger(TOAST_CHANNEL, TOAST_REVEAL, input);
     }),
+
+  suspicion: adminProcedure.mutation(async ({ ctx }) => {
+    return ctx.db.suspicion
+      .count()
+      .then((count) => pusher.trigger(TOAST_CHANNEL, TOAST_SUSPICION, count));
+  }),
 });

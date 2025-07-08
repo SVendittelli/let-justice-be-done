@@ -17,6 +17,7 @@ export type BillboardSchema = typeof billboardSchema;
 export const TOAST_CHANNEL = "toast";
 export const TOAST_MESSAGE = "message";
 export const TOAST_REVEAL = "reveal";
+export const TOAST_SUSPICION = "suspicion";
 
 export const toastSchema = {
   message: z.string().min(1),
@@ -24,5 +25,6 @@ export const toastSchema = {
     message: z.string().min(1),
     path: z.string().startsWith("/"),
   }),
+  suspicion: z.number().min(0).max(7),
 };
 export type ToastSchema = typeof toastSchema;

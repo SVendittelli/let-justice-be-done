@@ -9,7 +9,7 @@ import {
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Gavel, MessageCircleQuestionMark } from "lucide-react";
 
 type Props = {
   npc: RouterOutputs["npcs"]["getAll"][0];
@@ -17,11 +17,7 @@ type Props = {
   deletable: boolean;
 };
 
-export default function NonPlayerCharacter({
-  npc,
-  editable = false,
-  deletable = false,
-}: Props) {
+export default function NonPlayerCharacter({ npc, deletable = false }: Props) {
   const utils = api.useUtils();
   const invalidate = () => utils.npcs.invalidate();
 
@@ -36,32 +32,31 @@ export default function NonPlayerCharacter({
       <CardHeader>
         <CardTitle>{npc.name}</CardTitle>
         <CardDescription>{npc.moniker}</CardDescription>
-        {editable && (
-          <CardAction className="flex gap-2">
-            {deletable && (
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => deleteNpc.mutate(npc.id)}
-              >
-                Delete
-              </Button>
-            )}
-            <Toggle
-              variant="outline"
+        <CardAction className="flex gap-2">
+          {npc.type === "SUSPECT" ? <MessageCircleQuestionMark /> : <Gavel />}
+          {deletable && (
+            <Button
+              variant="destructive"
               size="sm"
-              defaultPressed={npc.revealed}
-              onPressedChange={onUpdate}
-              aria-label="Toggle visibility"
+              onClick={() => deleteNpc.mutate(npc.id)}
             >
-              {npc.revealed ? (
-                <Eye className="size-4" />
-              ) : (
-                <EyeOff className="size-4" />
-              )}
-            </Toggle>
-          </CardAction>
-        )}
+              Delete
+            </Button>
+          )}
+          <Toggle
+            variant="outline"
+            size="sm"
+            defaultPressed={npc.revealed}
+            onPressedChange={onUpdate}
+            aria-label="Toggle visibility"
+          >
+            {npc.revealed ? (
+              <Eye className="size-4" />
+            ) : (
+              <EyeOff className="size-4" />
+            )}
+          </Toggle>
+        </CardAction>
       </CardHeader>
       <CardContent>{npc.description}</CardContent>
     </Card>
