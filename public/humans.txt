@@ -9,7 +9,7 @@ Location: Maidenhead, UK
 Alison Quinn: https://www.alisonquinn.co.uk/
 
 /* SITE */
-Last updated: yyyy-mm-dd
+Last updated: 2025-07-08
 Language: English
 Components: Next.js, tRPC, Prisma, tailwind, shadcn, pusher, resend
 Software: neovim
