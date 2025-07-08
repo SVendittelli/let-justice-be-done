@@ -7,8 +7,11 @@ import { type Metadata } from "next";
 import { Noto_Serif, Roboto, Roboto_Slab } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Let Justice Be Done",
-  description: "Let Justice Be Done",
+  title: {
+    default: "Let Justice Be Done",
+    template: "%s | Let Justice Be Done",
+  },
+  description: "Catching the Right People for the Wrong Reasons",
   icons: [
     {
       rel: "icon",
@@ -22,6 +25,9 @@ export const metadata: Metadata = {
     },
     { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
   ],
+  authors: { url: "/humans.txt" },
+  generator: "Next.js",
+  formatDetection: { telephone: false },
 };
 
 const notoSerif = Noto_Serif({
