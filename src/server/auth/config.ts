@@ -43,4 +43,7 @@ export const authConfig = {
       },
     }),
   },
+  theme: {
+    logo: "/icon.svg",
+  },
 } satisfies NextAuthConfig;
