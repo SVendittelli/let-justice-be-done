@@ -9,8 +9,9 @@ const config = {
   images: {
     remotePatterns: [
       new URL("https://i.ibb.co/**"),
-      new URL("https://placehold.co/**"),
+      // Dev image URLs
       new URL("https://i.pravatar.cc/**"),
+      new URL("https://picsum.photos/**"),
     ],
   },
 };

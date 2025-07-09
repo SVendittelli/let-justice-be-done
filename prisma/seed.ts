@@ -1,6 +1,7 @@
 import {
   randAvatar,
   randFullName,
+  randImg,
   randJobTitle,
   randNumber,
   randParagraph,
@@ -81,6 +82,9 @@ async function createNpcs() {
     moniker: randJobTitle(),
     description: randSentence(),
     type: i === 0 ? "AUTHORITY" : "SUSPECT",
+    imageUrl: randImg({ height: 1536, width: 1024 }).replace(/\?.*$/, ""),
+    imageBlurData:
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
   }));
 
   await db.nonPlayerCharacter.createMany({ data: npcs });

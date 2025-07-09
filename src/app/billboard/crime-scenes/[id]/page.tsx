@@ -1,7 +1,7 @@
 "use client";
 
 import { api } from "~/trpc/react";
-import { DoorOpen, UserRoundSearch } from "lucide-react";
+import { DoorOpen } from "lucide-react";
 import { use } from "react";
 
 type Props = {
