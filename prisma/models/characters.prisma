@@ -15,13 +15,15 @@ enum NPCType {
 }
 
 model NonPlayerCharacter {
-  id          String       @id @default(cuid(2))
-  name        String
-  moniker     String
-  description String
-  type        NPCType
-  clues       Clue[]
-  crimeScenes CrimeScene[]
-  revealed    Boolean      @default(false)
-  revealedAt  DateTime?
+  id            String       @id @default(cuid(2))
+  name          String
+  moniker       String
+  description   String
+  type          NPCType
+  imageUrl      String
+  imageBlurData String
+  clues         Clue[]
+  crimeScenes   CrimeScene[]
+  revealed      Boolean      @default(false)
+  revealedAt    DateTime?
 }

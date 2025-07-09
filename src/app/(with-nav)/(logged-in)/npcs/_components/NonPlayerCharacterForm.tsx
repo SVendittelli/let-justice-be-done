@@ -35,6 +35,8 @@ const npcSchema = z.object({
   moniker: z.string().min(1),
   description: z.string().min(1),
   type: z.enum(["AUTHORITY", "SUSPECT"]),
+  imageUrl: z.string().url(),
+  imageBlurData: z.string().min(1),
   revealed: z.boolean(),
 });
 type Npc = z.infer<typeof npcSchema>;
@@ -60,6 +62,8 @@ export default function NonPlayerCharacterForm({
       moniker: "",
       description: "",
       type: "SUSPECT",
+      imageUrl: "",
+      imageBlurData: "",
       revealed: false,
     },
   });
@@ -165,6 +169,39 @@ export default function NonPlayerCharacterForm({
                       </Select>
                       <FormDescription>
                         The description of the NPC.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Image</FormLabel>
+                      <FormControl>
+                        <Input placeholder="https://..." {...field} />
+                      </FormControl>
+                      <FormDescription>Image of the NPC.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="imageBlurData"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Image Blur Data</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="data:image/png;base64,"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Data URL of the blured image.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
