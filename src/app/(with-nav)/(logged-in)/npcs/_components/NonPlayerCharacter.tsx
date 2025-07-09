@@ -4,12 +4,14 @@ import {
   CardAction,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { Eye, EyeOff, Gavel, UserRoundSearch } from "lucide-react";
+import Image from "next/image";
 
 type Props = {
   npc: RouterOutputs["npcs"]["getAll"][0];
@@ -59,6 +61,16 @@ export default function NonPlayerCharacter({ npc, deletable = false }: Props) {
         </CardAction>
       </CardHeader>
       <CardContent>{npc.description}</CardContent>
+      <CardFooter>
+        <Image
+          src={npc.imageUrl}
+          blurDataURL={npc.imageBlurData}
+          alt={`Portrait of ${npc.name}`}
+          width={1024}
+          height={1536}
+          className="aspect-square w-full rounded-xl object-none object-top"
+        />
+      </CardFooter>
     </Card>
   );
 }

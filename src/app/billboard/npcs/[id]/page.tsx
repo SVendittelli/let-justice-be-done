@@ -23,9 +23,9 @@ export default function Page({ params }: Props) {
         alt={`Portrait of ${npc.data.name}`}
         width={1024}
         height={1536}
-        className="w-1/4"
+        className="w-1/3 rounded-2xl"
       />
-      <div className="flex max-w-3/4 flex-col gap-6 text-gold">
+      <div className="flex max-w-2/3 flex-col gap-6 text-gold">
         <div className="flex max-w-full items-center gap-4">
           {npc.data.type === "SUSPECT" ? (
             <UserRoundSearch className="size-14" />
