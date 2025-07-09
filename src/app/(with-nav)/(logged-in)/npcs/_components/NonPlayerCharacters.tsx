@@ -35,7 +35,7 @@ export default function NonPlayerCharacters({ editable = false }: Props) {
       {count !== 0 ? (
         <>
           <div className="prose !prose-invert">
-            <h2>
+            <h2 id="suspects">
               <UserRoundSearch className="inline" /> Suspects
             </h2>
           </div>
@@ -50,8 +50,8 @@ export default function NonPlayerCharacters({ editable = false }: Props) {
             ))}
           </div>
           <div className="prose !prose-invert">
-            <h2>
-              <Gavel className="inline" /> Authority
+            <h2 id="authority">
+              <Gavel className="inline" /> The Authority
             </h2>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
