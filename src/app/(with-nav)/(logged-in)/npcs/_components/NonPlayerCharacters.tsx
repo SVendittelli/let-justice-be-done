@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "~/components/ui/card";
 import { api } from "~/trpc/react";
-import { Gavel, MessageCircleQuestionMark } from "lucide-react";
+import { Gavel, UserRoundSearch } from "lucide-react";
 import { useEffect, useState } from "react";
 import NonPlayerCharacter from "./NonPlayerCharacter";
 import NonPlayerCharacterForm from "./NonPlayerCharacterForm";
@@ -36,7 +36,7 @@ export default function NonPlayerCharacters({ editable = false }: Props) {
         <>
           <div className="prose !prose-invert">
             <h2>
-              Suspects <MessageCircleQuestionMark className="inline" />
+              <UserRoundSearch className="inline" /> Suspects
             </h2>
           </div>
           <div className="flex flex-wrap justify-center gap-4">
@@ -51,8 +51,7 @@ export default function NonPlayerCharacters({ editable = false }: Props) {
           </div>
           <div className="prose !prose-invert">
             <h2>
-              Authority
-              <Gavel className="inline" />
+              <Gavel className="inline" /> Authority
             </h2>
           </div>
           <div className="flex flex-wrap justify-center gap-4">

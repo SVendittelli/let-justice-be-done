@@ -9,7 +9,7 @@ import {
 } from "~/components/ui/hover-card";
 import { Toggle } from "~/components/ui/toggle";
 import { api } from "~/trpc/react";
-import { Eye, EyeOff } from "lucide-react";
+import { DoorOpen, Eye, EyeOff, Presentation } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function SceneSelector() {
@@ -46,13 +46,14 @@ export default function SceneSelector() {
         <div key={scene.id} className="py-2">
           <HoverCard>
             <HoverCardTrigger className="flex justify-between">
-              <span className="prose truncate">
+              <span className="prose max-w-full truncate">
+                <DoorOpen className="inline" />
                 <b>{scene.name}</b>: {scene.description}
               </span>
               <span className="flex gap-2">
                 {scene.revealed && (
                   <Button size="sm" onClick={() => onShow(scene)}>
-                    Show
+                    <Presentation />
                   </Button>
                 )}
                 <Toggle

@@ -15,12 +15,32 @@ import Pusher from "pusher-js";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import type z from "zod";
+import {
+  DoorOpen,
+  MessageSquare,
+  Search,
+  Target,
+  UserRoundSearch,
+} from "lucide-react";
 
 const { NEXT_PUBLIC_PUSHER_KEY: key, NEXT_PUBLIC_PUSHER_CLUSTER: cluster } =
   env;
 const pusher = new Pusher(key, { cluster });
 
 const duration = 5_000; // 5 seconds
+
+function Icon({ type }: { type: z.infer<ToastSchema["reveal"]>["type"] }) {
+  switch (type) {
+    case "CLUE":
+      return <Search />;
+    case "NPC":
+      return <UserRoundSearch />;
+    case "CRIME_SCENE":
+      return <DoorOpen />;
+    default:
+      return null;
+  }
+}
 
 export default function ToastListener() {
   const router = useRouter();
@@ -30,7 +50,7 @@ export default function ToastListener() {
     const channel = pusher.subscribe(TOAST_CHANNEL);
 
     channel.bind(TOAST_MESSAGE, (message: z.infer<ToastSchema["message"]>) => {
-      toast(message, { duration });
+      toast(message, { duration, icon: <MessageSquare /> });
     });
 
     channel.bind(TOAST_REVEAL, (data: z.infer<ToastSchema["reveal"]>) => {
@@ -45,6 +65,7 @@ export default function ToastListener() {
           },
         },
         duration,
+        icon: <Icon type={data.type} />,
       });
     });
 
@@ -58,7 +79,7 @@ export default function ToastListener() {
               <>
                 Suspicion: <SuspicionDisplay count={count} />
               </>,
-              { duration },
+              { duration, icon: <Target /> },
             ),
           )
           .catch((e) => console.error(e));

@@ -9,7 +9,13 @@ import {
 } from "~/components/ui/hover-card";
 import { Toggle } from "~/components/ui/toggle";
 import { api } from "~/trpc/react";
-import { Eye, EyeOff, Gavel, MessageCircleQuestionMark } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Gavel,
+  Presentation,
+  UserRoundSearch,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function NpcSelector() {
@@ -46,9 +52,9 @@ export default function NpcSelector() {
         <div key={npc.id} className="py-2">
           <HoverCard>
             <HoverCardTrigger className="flex justify-between">
-              <span className="prose truncate">
+              <span className="prose max-w-full truncate">
                 {npc.type === "SUSPECT" ? (
-                  <MessageCircleQuestionMark className="inline" />
+                  <UserRoundSearch className="inline" />
                 ) : (
                   <Gavel className="inline" />
                 )}{" "}
@@ -57,7 +63,7 @@ export default function NpcSelector() {
               <span className="flex gap-2">
                 {npc.revealed && (
                   <Button size="sm" onClick={() => onShow(npc)}>
-                    Show
+                    <Presentation />
                   </Button>
                 )}
                 <Toggle

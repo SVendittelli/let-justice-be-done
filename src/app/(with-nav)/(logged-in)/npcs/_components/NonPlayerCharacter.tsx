@@ -9,7 +9,7 @@ import {
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff, Gavel, MessageCircleQuestionMark } from "lucide-react";
+import { Eye, EyeOff, Gavel, UserRoundSearch } from "lucide-react";
 
 type Props = {
   npc: RouterOutputs["npcs"]["getAll"][0];
@@ -33,7 +33,7 @@ export default function NonPlayerCharacter({ npc, deletable = false }: Props) {
         <CardTitle>{npc.name}</CardTitle>
         <CardDescription>{npc.moniker}</CardDescription>
         <CardAction className="flex gap-2">
-          {npc.type === "SUSPECT" ? <MessageCircleQuestionMark /> : <Gavel />}
+          {npc.type === "SUSPECT" ? <UserRoundSearch /> : <Gavel />}
           {deletable && (
             <Button
               variant="destructive"

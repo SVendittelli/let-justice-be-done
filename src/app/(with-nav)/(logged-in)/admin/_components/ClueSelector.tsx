@@ -9,7 +9,7 @@ import {
 } from "~/components/ui/hover-card";
 import { Toggle } from "~/components/ui/toggle";
 import { api } from "~/trpc/react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Presentation, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function ClueSelector() {
@@ -46,13 +46,14 @@ export default function ClueSelector() {
         <div key={clue.id} className="py-2">
           <HoverCard>
             <HoverCardTrigger className="flex justify-between">
-              <span className="prose truncate">
+              <span className="prose max-w-full truncate">
+                <Search className="inline" />
                 <b>{clue.title}</b>: {clue.text}
               </span>
               <span className="flex gap-2">
                 {clue.revealed && (
                   <Button size="sm" onClick={() => onShow(clue)}>
-                    Show
+                    <Presentation />
                   </Button>
                 )}
                 <Toggle

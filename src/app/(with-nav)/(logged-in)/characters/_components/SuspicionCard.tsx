@@ -3,6 +3,7 @@
 import SuspicionDisplay from "~/components/SuspicionDisplay";
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -10,6 +11,7 @@ import {
 } from "~/components/ui/card";
 import { api } from "~/trpc/react";
 import { useEffect, useState } from "react";
+import { Target } from "lucide-react";
 
 export default function SuspicionCard() {
   const [isMounted, setIsMounted] = useState(false);
@@ -26,6 +28,9 @@ export default function SuspicionCard() {
       <CardHeader>
         <CardTitle>Suspicion</CardTitle>
         <CardDescription>Get to 7 and it is game over.</CardDescription>
+        <CardAction>
+          <Target />
+        </CardAction>
       </CardHeader>
       <CardContent>
         <SuspicionDisplay count={count.data ?? 0} />
