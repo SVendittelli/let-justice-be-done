@@ -1,7 +1,7 @@
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
-import Clues from "./_components/Clues";
 import { Search } from "lucide-react";
+import Clues from "./_components/Clues";
 
 export const metadata = {
   title: "Clues",

@@ -1,8 +1,8 @@
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
+import { UserRound } from "lucide-react";
 import PlayerCharacters from "./_components/PlayerCharacters";
 import SuspicionCard from "./_components/SuspicionCard";
-import { UserRound } from "lucide-react";
 
 export const metadata = {
   title: "Player Characters",

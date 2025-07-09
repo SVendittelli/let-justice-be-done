@@ -1,7 +1,7 @@
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
-import CrimeScenes from "./_components/CrimeScenes";
 import { DoorOpen } from "lucide-react";
+import CrimeScenes from "./_components/CrimeScenes";
 
 export const metadata = {
   title: "Crime Scenes",

@@ -1,7 +1,7 @@
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
-import NonPlayerCharacters from "./_components/NonPlayerCharacters";
 import { Users } from "lucide-react";
+import NonPlayerCharacters from "./_components/NonPlayerCharacters";
 
 export const metadata = {
   title: "Non-Player Characters",

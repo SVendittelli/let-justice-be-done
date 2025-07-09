@@ -10,8 +10,8 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { api } from "~/trpc/react";
-import { useEffect, useState } from "react";
 import { Target } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function SuspicionCard() {
   const [isMounted, setIsMounted] = useState(false);
