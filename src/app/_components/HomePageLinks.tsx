@@ -20,9 +20,13 @@ export default function HomePageLinks({ isAdmin }: Props) {
       { href: "/clues", label: "Clues" },
       { href: "/crime-scenes", label: "Crime Scenes" },
       { href: "/npcs", label: "NPCs" },
+      { href: "/rules", label: "Rules" },
     ]);
   } else {
-    links = [{ href: "/characters", label: "Create Character" }];
+    links = [
+      { href: "/characters", label: "Create Character" },
+      { href: "/rules", label: "Rules" },
+    ];
   }
 
   return (

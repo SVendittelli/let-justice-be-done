@@ -24,6 +24,7 @@ export const toastSchema = {
   reveal: z.object({
     message: z.string().min(1),
     path: z.string().startsWith("/"),
+    type: z.enum(["CLUE", "NPC", "CRIME_SCENE"]),
   }),
   suspicion: z.number().min(0).max(7),
 };

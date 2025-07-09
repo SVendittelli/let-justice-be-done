@@ -17,10 +17,14 @@ import { MessageSquareShare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-const reveals: { type: string; path: string }[] = [
-  { type: "A Clue", path: "/clues" },
-  { type: "An NPC", path: "/npcs" },
-  { type: "A Crime Scene", path: "/crime-scenes" },
+const reveals: {
+  type: "CLUE" | "NPC" | "CRIME_SCENE";
+  name: string;
+  path: string;
+}[] = [
+  { type: "CLUE", name: "A Clue", path: "/clues" },
+  { type: "NPC", name: "An NPC", path: "/npcs" },
+  { type: "CRIME_SCENE", name: "A Crime Scene", path: "/crime-scenes" },
 ];
 
 const messageSchema = z.object({ text: z.string().min(1) });
@@ -60,11 +64,14 @@ export default function ToastTrigger() {
           </Button>
         </form>
       </Form>
-      {reveals.map(({ type, path }) => {
-        const message = `${type} has been revealed!`;
+      {reveals.map(({ type, name, path }) => {
+        const message = `${name} has been revealed!`;
         return (
-          <Button key={type} onClick={() => reveal.mutate({ message, path })}>
-            <MessageSquareShare /> {type}
+          <Button
+            key={type}
+            onClick={() => reveal.mutate({ message, path, type })}
+          >
+            <MessageSquareShare /> {name}
           </Button>
         );
       })}

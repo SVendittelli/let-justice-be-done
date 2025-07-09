@@ -10,6 +10,13 @@ import {
   type ToastSchema,
 } from "~/lib/pusher";
 import { api } from "~/trpc/react";
+import {
+  DoorOpen,
+  MessageSquare,
+  Search,
+  Target,
+  UserRoundSearch,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import Pusher from "pusher-js";
 import { useEffect } from "react";
@@ -22,6 +29,19 @@ const pusher = new Pusher(key, { cluster });
 
 const duration = 5_000; // 5 seconds
 
+function Icon({ type }: { type: z.infer<ToastSchema["reveal"]>["type"] }) {
+  switch (type) {
+    case "CLUE":
+      return <Search />;
+    case "NPC":
+      return <UserRoundSearch />;
+    case "CRIME_SCENE":
+      return <DoorOpen />;
+    default:
+      return null;
+  }
+}
+
 export default function ToastListener() {
   const router = useRouter();
   const utils = api.useUtils();
@@ -30,7 +50,7 @@ export default function ToastListener() {
     const channel = pusher.subscribe(TOAST_CHANNEL);
 
     channel.bind(TOAST_MESSAGE, (message: z.infer<ToastSchema["message"]>) => {
-      toast(message, { duration });
+      toast(message, { duration, icon: <MessageSquare /> });
     });
 
     channel.bind(TOAST_REVEAL, (data: z.infer<ToastSchema["reveal"]>) => {
@@ -45,6 +65,7 @@ export default function ToastListener() {
           },
         },
         duration,
+        icon: <Icon type={data.type} />,
       });
     });
 
@@ -58,7 +79,7 @@ export default function ToastListener() {
               <>
                 Suspicion: <SuspicionDisplay count={count} />
               </>,
-              { duration },
+              { duration, icon: <Target /> },
             ),
           )
           .catch((e) => console.error(e));

@@ -1,5 +1,6 @@
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
+import { Users } from "lucide-react";
 import NonPlayerCharacters from "./_components/NonPlayerCharacters";
 
 export const metadata = {
@@ -14,8 +15,9 @@ export default async function Page() {
   return (
     <HydrateClient>
       <div className="flex flex-col items-center gap-4">
-        <div className="prose text-center !prose-invert">
-          <h1>Non-Player Characters</h1>
+        <div className="prose flex items-center gap-2 text-center !prose-invert">
+          <Users className="inline size-8" />
+          <h1>NPCs</h1>
         </div>
         <NonPlayerCharacters editable={session?.user?.role === "ADMIN"} />
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { api } from "~/trpc/react";
-import { Search } from "lucide-react";
+import { DoorOpen, UserRoundSearch } from "lucide-react";
 import { use } from "react";
 
 type Props = {
@@ -10,18 +10,18 @@ type Props = {
 
 export default function Page({ params }: Props) {
   const { id } = use(params);
-  const clue = api.clues.getById.useQuery(id);
+  const crimeScene = api.scenes.getById.useQuery(id);
 
-  if (!clue.data) return null;
+  if (!crimeScene.data) return null;
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-6">
       <div className="prose flex max-w-3/4 items-center gap-4 !prose-invert">
-        <Search className="size-14" />
-        <h1 className="text-7xl">{clue.data.title}</h1>
+        <DoorOpen className="size-14" />
+        <h1 className="text-7xl">{crimeScene.data.name}</h1>
       </div>
       <div className="prose max-w-3/4 !prose-invert">
-        <p className="text-center text-5xl">{clue.data.text}</p>
+        <p className="text-center text-5xl">{crimeScene.data.description}</p>
       </div>
     </div>
   );

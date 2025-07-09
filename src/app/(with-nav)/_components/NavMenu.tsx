@@ -16,6 +16,7 @@ export default function NavMenu({ className }: Props) {
     { href: "/clues", label: "Clues" },
     { href: "/crime-scenes", label: "Scenes" },
     { href: "/npcs", label: "NPCs" },
+    { href: "/rules", label: "Rules" },
   ];
 
   return (
