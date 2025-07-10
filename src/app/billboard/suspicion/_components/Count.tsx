@@ -16,6 +16,9 @@ export default function Count() {
   if (!isMounted) return null;
 
   return (
-    <SuspicionDisplay className="size-10 sm:size-24" count={count.data ?? 0} />
+    <SuspicionDisplay
+      className="size-10 text-gold sm:size-24"
+      count={count.data ?? 0}
+    />
   );
 }
