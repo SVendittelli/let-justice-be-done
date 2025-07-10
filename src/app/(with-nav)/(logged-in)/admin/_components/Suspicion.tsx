@@ -2,7 +2,13 @@
 
 import { Button } from "~/components/ui/button";
 import { api } from "~/trpc/react";
-import { LoaderCircle, MessageSquareShare, Minus, Plus } from "lucide-react";
+import {
+  LoaderCircle,
+  MessageSquareShare,
+  Minus,
+  Plus,
+  Presentation,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Suspicion() {
@@ -18,6 +24,8 @@ export default function Suspicion() {
   const remove = api.suspicion.delete.useMutation({ onSuccess });
   const add = api.suspicion.create.useMutation({ onSuccess });
 
+  const display = api.billboard.display.useMutation();
+
   useEffect(() => {
     setIsMounted(true);
   }, [setIsMounted]);
@@ -30,6 +38,9 @@ export default function Suspicion() {
 
   return (
     <div className="flex items-center justify-evenly">
+      <Button onClick={() => onSuccess()}>
+        <MessageSquareShare />
+      </Button>
       <Button onClick={() => remove.mutate()} disabled={suspicion === 0}>
         {remove.isPending ? (
           <LoaderCircle className="animate-spin" />
@@ -43,8 +54,12 @@ export default function Suspicion() {
       <Button onClick={() => add.mutate()} disabled={suspicion === 7}>
         {add.isPending ? <LoaderCircle className="animate-spin" /> : <Plus />}
       </Button>
-      <Button onClick={() => onSuccess()}>
-        <MessageSquareShare />
+      <Button
+        onClick={() =>
+          display.mutate({ path: "/billboard/suspicion", label: "Suspicion" })
+        }
+      >
+        <Presentation />
       </Button>
     </div>
   );

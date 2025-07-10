@@ -20,6 +20,8 @@ const pusher = new Pusher(key, { cluster });
 
 export default function BillboardListener() {
   const router = useRouter();
+
+  const utils = api.useUtils();
   const page = api.billboard.current.useQuery();
 
   useEffect(() => {
@@ -52,14 +54,16 @@ export default function BillboardListener() {
       },
     );
 
-    channel.bind(BILLBOARD_REFRESH, () => {
+    channel.bind(BILLBOARD_REFRESH, async () => {
+      await utils.invalidate();
       router.refresh();
     });
 
     return () => {
+      channel.unbind_all();
       pusher.unsubscribe(BILLBOARD_CHANNEL);
     };
-  }, [router]);
+  }, [router, utils]);
 
   return null;
 }
