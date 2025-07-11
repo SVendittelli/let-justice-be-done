@@ -10,7 +10,7 @@ import {
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff, Gavel, UserRoundSearch } from "lucide-react";
+import { Eye, EyeOff, Gavel, Trash, UserRoundSearch } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -39,24 +39,20 @@ export default function NonPlayerCharacter({ npc, deletable = false }: Props) {
           {deletable && (
             <Button
               variant="destructive"
-              size="sm"
+              size="icon"
               onClick={() => deleteNpc.mutate(npc.id)}
             >
-              Delete
+              <Trash />
             </Button>
           )}
           <Toggle
             variant="outline"
-            size="sm"
+            size="icon"
             defaultPressed={npc.revealed}
             onPressedChange={onUpdate}
             aria-label="Toggle visibility"
           >
-            {npc.revealed ? (
-              <Eye className="size-4" />
-            ) : (
-              <EyeOff className="size-4" />
-            )}
+            {npc.revealed ? <Eye /> : <EyeOff />}
           </Toggle>
         </CardAction>
       </CardHeader>

@@ -4,7 +4,7 @@ import { Card, CardContent } from "~/components/ui/card";
 import { api } from "~/trpc/react";
 import { useEffect, useState } from "react";
 import Clue from "./Clue";
-import ClueForm from "./ClueForm";
+import ClueAdmin from "./ClueAdmin";
 
 type Props = { editable: boolean };
 
@@ -23,7 +23,7 @@ export default function Clues({ editable = false }: Props) {
   return (
     <>
       {editable && (
-        <ClueForm
+        <ClueAdmin
           deleteEnabled={showDelete}
           onDeleteEnabledChange={setShowDelete}
         />

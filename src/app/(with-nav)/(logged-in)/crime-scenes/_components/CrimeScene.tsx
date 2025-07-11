@@ -8,7 +8,7 @@ import {
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Trash } from "lucide-react";
 
 type Props = {
   crimeScene: RouterOutputs["scenes"]["getAll"][0];
@@ -39,24 +39,20 @@ export default function CrimeScene({
             {deletable && (
               <Button
                 variant="destructive"
-                size="sm"
+                size="icon"
                 onClick={() => deleteScene.mutate(crimeScene.id)}
               >
-                Delete
+                <Trash />
               </Button>
             )}
             <Toggle
               variant="outline"
-              size="sm"
+              size="icon"
               defaultPressed={crimeScene.revealed}
               onPressedChange={onUpdate}
               aria-label="Toggle visibility"
             >
-              {crimeScene.revealed ? (
-                <Eye className="size-4" />
-              ) : (
-                <EyeOff className="size-4" />
-              )}
+              {crimeScene.revealed ? <Eye /> : <EyeOff />}
             </Toggle>
           </CardAction>
         )}

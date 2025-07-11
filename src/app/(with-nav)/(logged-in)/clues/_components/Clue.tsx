@@ -1,18 +1,12 @@
 "use client";
 
-import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
-import { Toggle } from "~/components/ui/toggle";
-import { api, type RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff } from "lucide-react";
+import type { Clue } from "@prisma/client";
+import { Card, CardContent } from "~/components/ui/card";
+import { api } from "~/trpc/react";
+import { useState } from "react";
+import ClueCard from "./ClueCard";
+import ClueForm, { type ClueChange } from "./ClueForm";
 
-type Clue = RouterOutputs["clues"]["getAll"][0];
 type Props = { clue: Clue; editable: boolean; deletable: boolean };
 
 export default function Clue({
@@ -20,47 +14,48 @@ export default function Clue({
   editable = false,
   deletable = false,
 }: Props) {
+  const [editing, setEditing] = useState(false);
+
   const utils = api.useUtils();
   const invalidate = () => utils.clues.getAll.invalidate();
 
   const updateClue = api.clues.update.useMutation({ onSuccess: invalidate });
   const deleteClue = api.clues.delete.useMutation({ onSuccess: invalidate });
 
-  const onUpdate = (revealed: boolean) =>
+  const handleUpdate = (data: ClueChange) => {
+    updateClue.mutate(
+      { ...clue, ...data },
+      {
+        onSuccess: () => {
+          utils.pcs
+            .invalidate()
+            .then(() => setEditing(false))
+            .catch(console.error);
+        },
+      },
+    );
+  };
+  const handleChangeVisibility = (revealed: boolean) =>
     updateClue.mutate({ ...clue, revealed });
 
-  return (
-    <Card className="w-full sm:w-sm">
-      <CardHeader>
-        <CardTitle>{clue?.title}</CardTitle>
-        {editable && (
-          <CardAction className="flex gap-2">
-            {deletable && (
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => deleteClue.mutate(clue.id)}
-              >
-                Delete
-              </Button>
-            )}
-            <Toggle
-              variant="outline"
-              size="sm"
-              defaultPressed={clue.revealed}
-              onPressedChange={onUpdate}
-              aria-label="Toggle visibility"
-            >
-              {clue.revealed ? (
-                <Eye className="size-4" />
-              ) : (
-                <EyeOff className="size-4" />
-              )}
-            </Toggle>
-          </CardAction>
-        )}
-      </CardHeader>
-      <CardContent>{clue?.text}</CardContent>
+  return editing ? (
+    <Card>
+      <CardContent>
+        <ClueForm
+          defaultValues={clue}
+          onSubmit={handleUpdate}
+          isPending={updateClue.isPending}
+        />
+      </CardContent>
     </Card>
+  ) : (
+    <ClueCard
+      clue={clue}
+      editable={editable}
+      onEdit={() => setEditing(true)}
+      deletable={deletable}
+      onDelete={() => deleteClue.mutate(clue.id)}
+      onChangeVisibility={handleChangeVisibility}
+    />
   );
 }

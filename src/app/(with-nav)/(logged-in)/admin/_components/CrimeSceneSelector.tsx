@@ -52,22 +52,18 @@ export default function SceneSelector() {
               </span>
               <span className="flex gap-2">
                 {scene.revealed && (
-                  <Button size="sm" onClick={() => onShow(scene)}>
+                  <Button size="icon" onClick={() => onShow(scene)}>
                     <Presentation />
                   </Button>
                 )}
                 <Toggle
                   variant="outline"
-                  size="sm"
+                  size="icon"
                   defaultPressed={scene.revealed}
                   onPressedChange={(revealed) => onUpdate(scene, revealed)}
                   aria-label="Toggle visibility"
                 >
-                  {scene.revealed ? (
-                    <Eye className="size-4" />
-                  ) : (
-                    <EyeOff className="size-4" />
-                  )}
+                  {scene.revealed ? <Eye /> : <EyeOff />}
                 </Toggle>
               </span>
             </HoverCardTrigger>

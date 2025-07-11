@@ -27,13 +27,13 @@ export type CharacterChange = z.infer<typeof formSchema>;
 type Props = {
   defaultValues?: CharacterChange;
   onSubmit: (data: CharacterChange) => void;
-  saving: boolean;
+  isPending: boolean;
 };
 
 export default function CharacterForm({
   defaultValues,
   onSubmit,
-  saving,
+  isPending,
 }: Props) {
   const form = useForm<CharacterChange>({
     resolver: zodResolver(formSchema),
@@ -134,8 +134,8 @@ export default function CharacterForm({
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" disabled={saving}>
-              {saving && <LoaderCircle className="animate-spin" />}
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending && <LoaderCircle className="animate-spin" />}
               {defaultValues ? "Update" : "Create"} Character
             </Button>
           </form>
