@@ -104,28 +104,28 @@ export default function Page() {
             </CollapsibleContent>
           </Collapsible>
           <p>
-            You may also come up with your own, so long as it&apos;apos;s
-            something that will help you know where to look, convince people to
-            talk, or create evidence where there is none.
+            You may also come up with your own, so long as it&apos;s something
+            that will help you know where to look, convince people to talk, or
+            create evidence where there is none.
           </p>
           <h3>Description</h3>
           <p>
-            This is how they&apos;apos;d describe your character in a book. It
-            doesn&apos;apos;t have to take in every detail about them, just the
+            This is how they&apos;d describe your character in a book. It
+            doesn&apos;t have to take in every detail about them, just the
             important ones. The particular glasses on the edge of their nose.
             Their dirty beige coat. The care they take in maintaining their
-            mustache. The lipstick they apply to take people&apos;apos;s eyes
-            away from their bad teeth. The way they look rather pleasantly like
-            a blond satan.
+            mustache. The lipstick they apply to take people&apos;s eyes away
+            from their bad teeth. The way they look rather pleasantly like a
+            blond satan.
           </p>
           <h3>Name & Pronouns</h3>
           <p>
             There are three schools of thought when it comes to Names: You can
             have a name that you could hear every day (Sam Spade, Jane Marple,
-            Patrick Jane, Jessica Fletcher…), the strangest name
-            you&apos;apos;ve ever heard (Sherlock Holmes, Ellery Queen, Nero
-            Wolfe, Benoit Blanc…) or no name at all (The Continental Op, The
-            Second Mrs de Winter, um… others…)
+            Patrick Jane, Jessica Fletcher…), the strangest name you&apos;ve
+            ever heard (Sherlock Holmes, Ellery Queen, Nero Wolfe, Benoit
+            Blanc…) or no name at all (The Continental Op, The Second Mrs de
+            Winter, um… others…)
           </p>
           <p>Same goes for Pronouns.</p>
           <h2>Taking an Action</h2>
@@ -146,8 +146,8 @@ export default function Page() {
             <UndertakeTooltip /> roll will not get you a <ClueTooltip />.
           </p>
           <p>
-            If the action doesn&apos;apos;t fit the <MoveTooltip /> you want to
-            do, you may change your action.
+            If the action doesn&apos;t fit the <MoveTooltip /> you want to do,
+            you may change your action.
           </p>
           <h3>Add Dice for Traits</h3>
           <p>
@@ -156,7 +156,7 @@ export default function Page() {
             have that would help you accomplish this action.
           </p>
           <p>
-            For instance, when you&apos;apos;re{" "}
+            For instance, when you&apos;re{" "}
             <InterrogateTooltip linkText="provoking" /> a <SuspectTooltip />{" "}
             into revealing a <ClueTooltip />, you may use{" "}
             <TraitsTooltip linkText="Spirit Medium" /> to irritate their
@@ -293,8 +293,8 @@ export default function Page() {
             <ClueTooltip />, but the GM introduces a <ComplicationTooltip />.
           </p>
           <p>
-            On a <RollResultTooltip result="FAILURE" />, they don&apos;apos;t
-            play your game. The GM will introduce a <ComplicationTooltip />.
+            On a <RollResultTooltip result="FAILURE" />, they don&apos;t play
+            your game. The GM will introduce a <ComplicationTooltip />.
           </p>
           <h3 id="move-fabricate">Fabricate</h3>
           <p>
@@ -312,14 +312,14 @@ export default function Page() {
             <ClueTooltip />, but your group gains <SuspicionTooltip />.
           </p>
           <p>
-            On a <RollResultTooltip result="FAILURE" />, it doesn&apos;apos;t
-            work and your group gains 2 <SuspicionTooltip /> and a{" "}
+            On a <RollResultTooltip result="FAILURE" />, it doesn&apos;t work
+            and your group gains 2 <SuspicionTooltip /> and a{" "}
             <ComplicationTooltip />.
           </p>
           <h3 id="move-undertake">Undertake</h3>
           <p>
-            If you do anything that isn&apos;apos;t covered by the other moves,
-            roll your
+            If you do anything that isn&apos;t covered by the other moves, roll
+            your
             <TraitsTooltip /> and any <ClueTooltip /> that help.
           </p>
           <p>
@@ -334,8 +334,8 @@ export default function Page() {
             the GM introduces a <ComplicationTooltip />.
           </p>
           <p>
-            On a <RollResultTooltip result="FAILURE" />, it doesn&apos;apos;t
-            work. The GM introduces a <ComplicationTooltip />.
+            On a <RollResultTooltip result="FAILURE" />, it doesn&apos;t work.
+            The GM introduces a <ComplicationTooltip />.
           </p>
           <h3 id="move-elucidate">Elucidate</h3>
           <p>
@@ -354,9 +354,9 @@ export default function Page() {
           <h2 id="complications">Complications</h2>
           <ul>
             <li>
-              <b>Obstacle</b>: Something interrupts you that means
-              you&apos;apos;ll need to complete the <UndertakeTooltip /> move if
-              you want to proceed.
+              <b>Obstacle</b>: Something interrupts you that means you&apos;ll
+              need to complete the <UndertakeTooltip /> move if you want to
+              proceed.
             </li>
             <li>
               <b>Lost Opportunity</b>:{" "}
@@ -424,7 +424,7 @@ export default function Page() {
           <p>
             Gaining <SuspicionTooltip /> means that the{" "}
             <SuspectTooltip linkText="Suspects" /> and <TheAuthorityTooltip />{" "}
-            start to figure out what you&apos;apos;re <i>really</i> trying to do
+            start to figure out what you&apos;re <i>really</i> trying to do
             here. The only way the group will gain it is by using the{" "}
             <FabricateTooltip /> move to alter, plant, or create{" "}
             <ClueTooltip linkText="Clues" />. This is purely optional and the{" "}
@@ -441,11 +441,11 @@ export default function Page() {
           <p>
             You are foiled, disgraced, and will possibly face massive criminal
             repercussions for not just this case, but every one of the cases
-            you&apos;apos;ve solved up to this point.
+            you&apos;ve solved up to this point.
           </p>
           <p>
             Each player will narrate a short epilogue of what their
-            character&apos;apos;s life is like now, either in prison, forced
+            character&apos;s life is like now, either in prison, forced
             retirement, living life on the run, or whatever else feels
             appropriate. Do they miss their life as a renowned investigator? Do
             they regret what they tried to do? Or do they wish they just had one
