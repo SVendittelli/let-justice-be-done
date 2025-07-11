@@ -1,4 +1,4 @@
-import type { Clue } from "@prisma/client";
+import type { CrimeScene } from "@prisma/client";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -11,7 +11,7 @@ import { Toggle } from "~/components/ui/toggle";
 import { Eye, EyeOff, Pencil, Trash } from "lucide-react";
 
 type Props = {
-  clue: Clue;
+  crimeScene: CrimeScene;
   editable: boolean;
   onEdit: () => void;
   deletable: boolean;
@@ -19,8 +19,8 @@ type Props = {
   onChangeVisibility: (visible: boolean) => void;
 };
 
-export default function ClueCard({
-  clue,
+export default function CrimeSceneCard({
+  crimeScene,
   editable,
   onEdit,
   deletable,
@@ -30,7 +30,7 @@ export default function ClueCard({
   return (
     <Card className="w-full sm:w-sm">
       <CardHeader>
-        <CardTitle>{clue.title}</CardTitle>
+        <CardTitle>{crimeScene.name}</CardTitle>
         {editable && (
           <CardAction className="flex gap-2">
             {deletable && (
@@ -44,16 +44,16 @@ export default function ClueCard({
             <Toggle
               variant="outline"
               size="icon"
-              defaultPressed={clue.revealed}
+              defaultPressed={crimeScene.revealed}
               onPressedChange={onChangeVisibility}
               aria-label="Toggle visibility"
             >
-              {clue.revealed ? <Eye /> : <EyeOff />}
+              {crimeScene.revealed ? <Eye /> : <EyeOff />}
             </Toggle>
           </CardAction>
         )}
       </CardHeader>
-      <CardContent>{clue.text}</CardContent>
+      <CardContent>{crimeScene.description}</CardContent>
     </Card>
   );
 }

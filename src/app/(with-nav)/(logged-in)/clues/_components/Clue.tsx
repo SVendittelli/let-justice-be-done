@@ -17,29 +17,20 @@ export default function Clue({
   const [editing, setEditing] = useState(false);
 
   const utils = api.useUtils();
-  const invalidate = () => utils.clues.getAll.invalidate();
+  const invalidate = () =>
+    utils.clues.getAll.invalidate().then(() => setEditing(false));
 
   const updateClue = api.clues.update.useMutation({ onSuccess: invalidate });
   const deleteClue = api.clues.delete.useMutation({ onSuccess: invalidate });
 
   const handleUpdate = (data: ClueChange) => {
-    updateClue.mutate(
-      { ...clue, ...data },
-      {
-        onSuccess: () => {
-          utils.pcs
-            .invalidate()
-            .then(() => setEditing(false))
-            .catch(console.error);
-        },
-      },
-    );
+    updateClue.mutate({ ...clue, ...data });
   };
   const handleChangeVisibility = (revealed: boolean) =>
     updateClue.mutate({ ...clue, revealed });
 
   return editing ? (
-    <Card>
+    <Card className="w-full sm:w-sm">
       <CardContent>
         <ClueForm
           defaultValues={clue}
