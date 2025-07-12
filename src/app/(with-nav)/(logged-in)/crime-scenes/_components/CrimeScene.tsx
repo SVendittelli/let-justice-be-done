@@ -1,4 +1,11 @@
-import { Card, CardContent } from "~/components/ui/card";
+import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { useState } from "react";
 import CrimeSceneCard from "./CrimeSceneCard";
@@ -32,6 +39,12 @@ export default function CrimeScene({
 
   return editing ? (
     <Card className="w-full sm:w-sm">
+      <CardHeader>
+        <CardTitle>Edit Crime Scene</CardTitle>
+        <CardAction>
+          <Button onClick={() => setEditing(false)}>Cancel</Button>
+        </CardAction>
+      </CardHeader>
       <CardContent>
         <CrimeSceneForm
           defaultValues={crimeScene}
