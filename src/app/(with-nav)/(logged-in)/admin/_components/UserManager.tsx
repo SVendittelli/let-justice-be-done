@@ -24,6 +24,7 @@ export default function UserManager() {
     <UserForm
       users={users.data.filter(({ role }) => role !== "ADMIN")}
       onSubmit={handleUpdate}
+      isPending={update.isPending}
     />
   );
 }

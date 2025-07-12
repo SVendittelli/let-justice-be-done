@@ -9,6 +9,7 @@ import {
   FormLabel,
 } from "~/components/ui/form";
 import type { RouterOutputs } from "~/trpc/react";
+import { LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
@@ -20,9 +21,10 @@ type FormSchema = z.infer<typeof formSchema>;
 type Props = {
   users: RouterOutputs["users"]["getAll"];
   onSubmit: (data: FormSchema) => void;
+  isPending: boolean;
 };
 
-export function UserForm({ users, onSubmit }: Props) {
+export function UserForm({ users, onSubmit, isPending }: Props) {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -85,7 +87,8 @@ export function UserForm({ users, onSubmit }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="mt-2">
+        <Button type="submit" className="mt-2 w-full" disabled={isPending}>
+          {isPending && <LoaderCircle className="animate-spin" />}
           Enable
         </Button>
       </form>
