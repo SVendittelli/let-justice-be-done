@@ -1,17 +1,20 @@
-import type { Clue } from "@prisma/client";
+import NpcAvatar from "~/components/NpcAvatar";
+import SceneAvatar from "~/components/SceneAvatar";
 import { Button } from "~/components/ui/button";
 import {
   Card,
   CardAction,
   CardContent,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
+import type { RouterOutputs } from "~/trpc/react";
 import { Eye, EyeOff, Pencil, Trash } from "lucide-react";
 
 type Props = {
-  clue: Clue;
+  clue: RouterOutputs["clues"]["getAll"][0];
   editable: boolean;
   onEdit: () => void;
   deletable: boolean;
@@ -56,6 +59,15 @@ export default function ClueCard({
         )}
       </CardHeader>
       <CardContent>{clue.text}</CardContent>
+      <CardFooter className="flex flex-col items-start">
+        <div className="mb-2 font-semibold">Related NPCs & Crime Scenes</div>
+        {clue.npcs.map((npc) => (
+          <NpcAvatar key={npc.id} npc={npc} />
+        ))}
+        {clue.crimeScenes.map((scene) => (
+          <SceneAvatar key={scene.id} crimeScene={scene} />
+        ))}
+      </CardFooter>
     </Card>
   );
 }

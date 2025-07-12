@@ -27,8 +27,14 @@ export const cluesRouter = createTRPCRouter({
 
   getAll: protectedProcedure.query(({ ctx }) => {
     const isAdmin = ctx.session.user.role === "ADMIN";
+    const where = { ...(!isAdmin && { revealed: true }) };
+
     return ctx.db.clue.findMany({
-      where: { ...(!isAdmin && { revealed: true }) },
+      where,
+      include: {
+        crimeScenes: { where, orderBy: { name: "asc" } },
+        npcs: { where, orderBy: { name: "asc" } },
+      },
       orderBy: [
         { revealedAt: { sort: "desc", nulls: "last" } },
         { title: "asc" },
@@ -62,6 +68,46 @@ export const cluesRouter = createTRPCRouter({
           text: input.text,
           revealed: input.revealed,
           revealedAt: input.revealed ? new Date() : null,
+        },
+      });
+    }),
+
+  link: adminProcedure
+    .input(
+      z.object({
+        id: z.string().cuid2(),
+        crimeScenes: z.array(z.string().cuid2()).optional(),
+        npcs: z.array(z.string().cuid2()).optional(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const crimeScenes = input.crimeScenes ?? [];
+      const npcs = input.npcs ?? [];
+      return ctx.db.clue.update({
+        where: { id: input.id },
+        data: {
+          crimeScenes: { connect: crimeScenes.map((id) => ({ id })) },
+          npcs: { connect: npcs.map((id) => ({ id })) },
+        },
+      });
+    }),
+
+  unlink: adminProcedure
+    .input(
+      z.object({
+        id: z.string().cuid2(),
+        crimeScenes: z.array(z.string().cuid2()).optional(),
+        npcs: z.array(z.string().cuid2()).optional(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const crimeScenes = input.crimeScenes ?? [];
+      const npcs = input.npcs ?? [];
+      return ctx.db.clue.update({
+        where: { id: input.id },
+        data: {
+          crimeScenes: { disconnect: crimeScenes.map((id) => ({ id })) },
+          npcs: { disconnect: npcs.map((id) => ({ id })) },
         },
       });
     }),

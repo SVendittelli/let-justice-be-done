@@ -27,8 +27,14 @@ export const scenesRouter = createTRPCRouter({
 
   getAll: protectedProcedure.query(({ ctx }) => {
     const isAdmin = ctx.session.user.role === "ADMIN";
+    const where = { ...(!isAdmin && { revealed: true }) };
+
     return ctx.db.crimeScene.findMany({
-      where: { ...(!isAdmin && { revealed: true }) },
+      where,
+      include: {
+        clues: { where, orderBy: { title: "asc" } },
+        npcs: { where, orderBy: { name: "asc" } },
+      },
       orderBy: { name: "asc" },
     });
   }),

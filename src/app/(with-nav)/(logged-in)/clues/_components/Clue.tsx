@@ -1,6 +1,5 @@
 "use client";
 
-import type { Clue } from "@prisma/client";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -9,12 +8,16 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { api } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import { useState } from "react";
 import ClueCard from "./ClueCard";
 import ClueForm, { type ClueChange } from "./ClueForm";
 
-type Props = { clue: Clue; editable: boolean; deletable: boolean };
+type Props = {
+  clue: RouterOutputs["clues"]["getAll"][0];
+  editable: boolean;
+  deletable: boolean;
+};
 
 export default function Clue({
   clue,

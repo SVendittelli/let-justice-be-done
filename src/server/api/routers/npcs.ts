@@ -35,8 +35,14 @@ export const npcsRouter = createTRPCRouter({
 
   getAll: protectedProcedure.query(({ ctx }) => {
     const isAdmin = ctx.session.user.role === "ADMIN";
+    const where = { ...(!isAdmin && { revealed: true }) };
+
     return ctx.db.nonPlayerCharacter.findMany({
-      where: { ...(!isAdmin && { revealed: true }) },
+      where,
+      include: {
+        clues: { where, orderBy: { title: "asc" } },
+        crimeScenes: { where, orderBy: { name: "asc" } },
+      },
       orderBy: { name: "asc" },
     });
   }),
@@ -45,8 +51,15 @@ export const npcsRouter = createTRPCRouter({
     .input(z.enum(["AUTHORITY", "SUSPECT"]))
     .query(({ ctx, input }) => {
       const isAdmin = ctx.session.user.role === "ADMIN";
+      const where = { ...(!isAdmin && { revealed: true }) };
+
       return ctx.db.nonPlayerCharacter.findMany({
-        where: { type: input, ...(!isAdmin && { revealed: true }) },
+        where: { type: input, ...where },
+        include: {
+          clues: { where, orderBy: { title: "asc" } },
+          crimeScenes: { where, orderBy: { name: "asc" } },
+        },
+        orderBy: { name: "asc" },
       });
     }),
 

@@ -1,4 +1,3 @@
-import type { NonPlayerCharacter } from "@prisma/client";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -7,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { api } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import { useState } from "react";
 import NonPlayerCharacterCard from "./NonPlayerCharacterCard";
 import NonPlayerCharacterForm, {
@@ -15,7 +14,7 @@ import NonPlayerCharacterForm, {
 } from "./NonPlayerCharacterForm";
 
 type Props = {
-  npc: NonPlayerCharacter;
+  npc: RouterOutputs["npcs"]["getAll"][0];
   editable: boolean;
   deletable: boolean;
 };

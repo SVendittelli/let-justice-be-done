@@ -1,4 +1,5 @@
-import type { NonPlayerCharacter } from "@prisma/client";
+import ClueAvatar from "~/components/ClueAvatar";
+import SceneAvatar from "~/components/SceneAvatar";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -10,6 +11,7 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
+import type { RouterOutputs } from "~/trpc/react";
 import {
   Eye,
   EyeOff,
@@ -21,7 +23,7 @@ import {
 import Image from "next/image";
 
 type Props = {
-  npc: NonPlayerCharacter;
+  npc: RouterOutputs["npcs"]["getAll"][0];
   editable: boolean;
   onEdit: () => void;
   deletable: boolean;
@@ -70,7 +72,7 @@ export default function NonPlayerCharacterCard({
         </CardAction>
       </CardHeader>
       <CardContent>{npc.description}</CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col items-start">
         <Image
           src={npc.imageUrl}
           blurDataURL={npc.imageBlurData}
@@ -79,6 +81,13 @@ export default function NonPlayerCharacterCard({
           height={1536}
           className="aspect-square w-full rounded-xl object-none object-top"
         />
+        <div className="mb-2 font-semibold">Related Crime Scenes & Clues</div>
+        {npc.crimeScenes.map((scene) => (
+          <SceneAvatar key={scene.id} crimeScene={scene} />
+        ))}
+        {npc.clues.map((clue) => (
+          <ClueAvatar key={clue.id} clue={clue} />
+        ))}
       </CardFooter>
     </Card>
   );
