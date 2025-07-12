@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
 import { LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -90,7 +91,7 @@ export default function CharacterForm({
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
                       placeholder="An elderly woman with a kind face, sensible glasses, and unassuming clothing."
                       {...field}
                     />

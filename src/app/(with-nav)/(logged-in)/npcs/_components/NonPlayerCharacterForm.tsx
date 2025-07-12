@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { Switch } from "~/components/ui/switch";
+import { Textarea } from "~/components/ui/textarea";
 import { LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -97,7 +98,7 @@ export default function NonPlayerCharacterForm({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input placeholder="Faded and indeterminate..." {...field} />
+                <Textarea placeholder="Faded and indeterminate..." {...field} />
               </FormControl>
               <FormDescription>The description of the NPC.</FormDescription>
               <FormMessage />
