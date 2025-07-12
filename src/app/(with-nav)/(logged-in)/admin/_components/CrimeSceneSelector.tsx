@@ -54,6 +54,9 @@ export default function SceneSelector() {
                 {scene.revealed && (
                   <Button size="icon" onClick={() => onShow(scene)}>
                     <Presentation />
+                    <span className="sr-only">
+                      Show {scene.name} on billboard
+                    </span>
                   </Button>
                 )}
                 <Toggle

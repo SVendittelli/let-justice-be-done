@@ -36,10 +36,12 @@ export default function CrimeSceneCard({
             {deletable && (
               <Button variant="destructive" size="icon" onClick={onDelete}>
                 <Trash />
+                <span className="sr-only">Delete</span>
               </Button>
             )}
             <Button size="icon" onClick={onEdit}>
               <Pencil />
+              <span className="sr-only">Edit</span>
             </Button>
             <Toggle
               variant="outline"

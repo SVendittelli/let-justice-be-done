@@ -40,6 +40,7 @@ export default function Suspicion() {
     <div className="flex items-center justify-evenly">
       <Button onClick={() => onSuccess()}>
         <MessageSquareShare />
+        <span className="sr-only">Send suspicion to users</span>
       </Button>
       <Button onClick={() => remove.mutate()} disabled={suspicion === 0}>
         {remove.isPending ? (
@@ -47,12 +48,14 @@ export default function Suspicion() {
         ) : (
           <Minus />
         )}
+        <span className="sr-only">Decrease suspicion</span>
       </Button>
       <span className="prose">
         <b>{suspicion}</b>
       </span>
       <Button onClick={() => add.mutate()} disabled={suspicion === 7}>
         {add.isPending ? <LoaderCircle className="animate-spin" /> : <Plus />}
+        <span className="sr-only">Increase suspicion</span>
       </Button>
       <Button
         onClick={() =>
@@ -60,6 +63,7 @@ export default function Suspicion() {
         }
       >
         <Presentation />
+        <span className="sr-only">Show suspicion on billboard</span>
       </Button>
     </div>
   );

@@ -45,6 +45,7 @@ export default function CharacterCard({ character, editable, onEdit }: Props) {
           <CardAction>
             <Button variant="outline" onClick={onEdit}>
               <Pencil />
+              <span className="sr-only">Edit</span>
             </Button>
           </CardAction>
         )}

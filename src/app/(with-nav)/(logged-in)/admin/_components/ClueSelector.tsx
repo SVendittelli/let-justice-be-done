@@ -54,6 +54,9 @@ export default function ClueSelector() {
                 {clue.revealed && (
                   <Button size="icon" onClick={() => onShow(clue)}>
                     <Presentation />
+                    <span className="sr-only">
+                      Show {clue.title} on billboard
+                    </span>
                   </Button>
                 )}
                 <Toggle

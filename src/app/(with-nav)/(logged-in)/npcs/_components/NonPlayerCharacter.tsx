@@ -1,72 +1,55 @@
-import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
-import { Toggle } from "~/components/ui/toggle";
-import { api, type RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff, Gavel, Trash, UserRoundSearch } from "lucide-react";
-import Image from "next/image";
+import type { NonPlayerCharacter } from "@prisma/client";
+import { Card, CardContent } from "~/components/ui/card";
+import { api } from "~/trpc/react";
+import { useState } from "react";
+import NonPlayerCharacterCard from "./NonPlayerCharacterCard";
+import NonPlayerCharacterForm, {
+  type NpcChange,
+} from "./NonPlayerCharacterForm";
 
 type Props = {
-  npc: RouterOutputs["npcs"]["getAll"][0];
+  npc: NonPlayerCharacter;
   editable: boolean;
   deletable: boolean;
 };
 
-export default function NonPlayerCharacter({ npc, deletable = false }: Props) {
+export default function NonPlayerCharacter({
+  npc,
+  editable = false,
+  deletable = false,
+}: Props) {
+  const [editing, setEditing] = useState(false);
+
   const utils = api.useUtils();
-  const invalidate = () => utils.npcs.invalidate();
+  const onSuccess = () => utils.npcs.invalidate().then(() => setEditing(false));
 
-  const updateNpc = api.npcs.update.useMutation({ onSuccess: invalidate });
-  const deleteNpc = api.npcs.delete.useMutation({ onSuccess: invalidate });
+  const updateNpc = api.npcs.update.useMutation({ onSuccess });
+  const deleteNpc = api.npcs.delete.useMutation({ onSuccess });
 
-  const onUpdate = (revealed: boolean) =>
+  const handleUpdate = (data: NpcChange) => {
+    updateNpc.mutate({ ...npc, ...data });
+  };
+  const handleChangeVisibility = (revealed: boolean) =>
     updateNpc.mutate({ ...npc, revealed });
 
-  return (
+  return editing ? (
     <Card className="w-full sm:w-sm">
-      <CardHeader>
-        <CardTitle>{npc.name}</CardTitle>
-        <CardDescription>{npc.moniker}</CardDescription>
-        <CardAction className="flex gap-2">
-          {npc.type === "SUSPECT" ? <UserRoundSearch /> : <Gavel />}
-          {deletable && (
-            <Button
-              variant="destructive"
-              size="icon"
-              onClick={() => deleteNpc.mutate(npc.id)}
-            >
-              <Trash />
-            </Button>
-          )}
-          <Toggle
-            variant="outline"
-            size="icon"
-            defaultPressed={npc.revealed}
-            onPressedChange={onUpdate}
-            aria-label="Toggle visibility"
-          >
-            {npc.revealed ? <Eye /> : <EyeOff />}
-          </Toggle>
-        </CardAction>
-      </CardHeader>
-      <CardContent>{npc.description}</CardContent>
-      <CardFooter>
-        <Image
-          src={npc.imageUrl}
-          blurDataURL={npc.imageBlurData}
-          alt={`Portrait of ${npc.name}`}
-          width={1024}
-          height={1536}
-          className="aspect-square w-full rounded-xl object-none object-top"
+      <CardContent>
+        <NonPlayerCharacterForm
+          defaultValues={npc}
+          onSubmit={handleUpdate}
+          isPending={updateNpc.isPending}
         />
-      </CardFooter>
+      </CardContent>
     </Card>
+  ) : (
+    <NonPlayerCharacterCard
+      npc={npc}
+      editable={editable}
+      onEdit={() => setEditing(true)}
+      deletable={deletable}
+      onDelete={() => deleteNpc.mutate(npc.id)}
+      onChangeVisibility={handleChangeVisibility}
+    />
   );
 }

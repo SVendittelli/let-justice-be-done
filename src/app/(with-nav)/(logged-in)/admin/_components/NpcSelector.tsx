@@ -64,6 +64,9 @@ export default function NpcSelector() {
                 {npc.revealed && (
                   <Button size="icon" onClick={() => onShow(npc)}>
                     <Presentation />
+                    <span className="sr-only">
+                      Show {npc.name} on billboard
+                    </span>
                   </Button>
                 )}
                 <Toggle
