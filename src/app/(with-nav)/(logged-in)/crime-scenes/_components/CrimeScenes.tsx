@@ -4,7 +4,7 @@ import { Card, CardContent } from "~/components/ui/card";
 import { api } from "~/trpc/react";
 import { useEffect, useState } from "react";
 import CrimeScene from "./CrimeScene";
-import CrimeSceneForm from "./CrimeSceneForm";
+import CrimeSceneAdmin from "./CrimeSceneAdmin";
 
 type Props = { editable: boolean };
 
@@ -23,7 +23,7 @@ export default function CrimeScenes({ editable = false }: Props) {
   return (
     <>
       {editable && (
-        <CrimeSceneForm
+        <CrimeSceneAdmin
           deleteEnabled={showDelete}
           onDeleteEnabledChange={setShowDelete}
         />

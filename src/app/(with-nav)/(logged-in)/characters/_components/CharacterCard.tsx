@@ -14,9 +14,9 @@ import type { RouterOutputs } from "~/trpc/react";
 import { Pencil } from "lucide-react";
 
 type Character = RouterOutputs["pcs"]["getAll"][0];
-type Props = { character: Character; showEdit: boolean; onEdit: () => void };
+type Props = { character: Character; editable: boolean; onEdit: () => void };
 
-export default function CharacterCard({ character, showEdit, onEdit }: Props) {
+export default function CharacterCard({ character, editable, onEdit }: Props) {
   const name = (
     character.user.name ??
     character.user.email ??
@@ -41,10 +41,11 @@ export default function CharacterCard({ character, showEdit, onEdit }: Props) {
             </Badge>
           ))}
         </CardDescription>
-        {showEdit && (
+        {editable && (
           <CardAction>
             <Button variant="outline" onClick={onEdit}>
               <Pencil />
+              <span className="sr-only">Edit</span>
             </Button>
           </CardAction>
         )}

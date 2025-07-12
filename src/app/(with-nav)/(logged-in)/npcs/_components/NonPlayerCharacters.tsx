@@ -5,7 +5,7 @@ import { api } from "~/trpc/react";
 import { Gavel, UserRoundSearch } from "lucide-react";
 import { useEffect, useState } from "react";
 import NonPlayerCharacter from "./NonPlayerCharacter";
-import NonPlayerCharacterForm from "./NonPlayerCharacterForm";
+import NonPlayerCharacterAdmin from "./NonPlayerCharacterAdmin";
 
 type Props = { editable: boolean };
 
@@ -27,7 +27,7 @@ export default function NonPlayerCharacters({ editable = false }: Props) {
   return (
     <>
       {editable && (
-        <NonPlayerCharacterForm
+        <NonPlayerCharacterAdmin
           deleteEnabled={showDelete}
           onDeleteEnabledChange={setShowDelete}
         />

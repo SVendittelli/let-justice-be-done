@@ -4,10 +4,10 @@ import CharacterCard from "./CharacterCard";
 import CharacterForm, { type CharacterChange } from "./CharacterForm";
 
 type Character = RouterOutputs["pcs"]["getAll"][0];
-type Props = { character: Character; showEdit: boolean };
+type Props = { character: Character; editable: boolean };
 
-export default function PlayerCharacter({ character, showEdit }: Props) {
-  const [edit, setEdit] = useState(false);
+export default function PlayerCharacter({ character, editable }: Props) {
+  const [editing, setEditing] = useState(false);
 
   const utils = api.useUtils();
   const update = api.pcs.update.useMutation();
@@ -19,27 +19,27 @@ export default function PlayerCharacter({ character, showEdit }: Props) {
         onSuccess: () => {
           utils.pcs
             .invalidate()
-            .then(() => setEdit(false))
+            .then(() => setEditing(false))
             .catch(console.error);
         },
       },
     );
   };
 
-  return edit ? (
+  return editing ? (
     <CharacterForm
       defaultValues={{
         ...character,
         traits: [character.traits[0] ?? "", character.traits[1] ?? ""],
       }}
       onSubmit={handleUpdate}
-      saving={update.isPending}
+      isPending={update.isPending}
     />
   ) : (
     <CharacterCard
       character={character}
-      showEdit={showEdit}
-      onEdit={() => setEdit(true)}
+      editable={editable}
+      onEdit={() => setEditing(true)}
     />
   );
 }

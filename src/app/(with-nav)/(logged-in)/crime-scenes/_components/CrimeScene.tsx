@@ -1,14 +1,8 @@
-import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
-import { Toggle } from "~/components/ui/toggle";
+import { Card, CardContent } from "~/components/ui/card";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+import CrimeSceneCard from "./CrimeSceneCard";
+import CrimeSceneForm, { type CrimeSceneChange } from "./CrimeSceneForm";
 
 type Props = {
   crimeScene: RouterOutputs["scenes"]["getAll"][0];
@@ -21,47 +15,39 @@ export default function CrimeScene({
   editable = false,
   deletable = false,
 }: Props) {
+  const [editing, setEditing] = useState(false);
+
   const utils = api.useUtils();
-  const invalidate = () => utils.scenes.getAll.invalidate();
+  const invalidate = () =>
+    utils.scenes.getAll.invalidate().then(() => setEditing(false));
 
   const updateScene = api.scenes.update.useMutation({ onSuccess: invalidate });
   const deleteScene = api.scenes.delete.useMutation({ onSuccess: invalidate });
 
-  const onUpdate = (revealed: boolean) =>
+  const handleUpdate = (data: CrimeSceneChange) => {
+    updateScene.mutate({ ...crimeScene, ...data });
+  };
+  const handleChangeVisibility = (revealed: boolean) =>
     updateScene.mutate({ ...crimeScene, revealed });
 
-  return (
+  return editing ? (
     <Card className="w-full sm:w-sm">
-      <CardHeader>
-        <CardTitle>{crimeScene.name}</CardTitle>
-        {editable && (
-          <CardAction className="flex gap-2">
-            {deletable && (
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => deleteScene.mutate(crimeScene.id)}
-              >
-                Delete
-              </Button>
-            )}
-            <Toggle
-              variant="outline"
-              size="sm"
-              defaultPressed={crimeScene.revealed}
-              onPressedChange={onUpdate}
-              aria-label="Toggle visibility"
-            >
-              {crimeScene.revealed ? (
-                <Eye className="size-4" />
-              ) : (
-                <EyeOff className="size-4" />
-              )}
-            </Toggle>
-          </CardAction>
-        )}
-      </CardHeader>
-      <CardContent>{crimeScene.description}</CardContent>
+      <CardContent>
+        <CrimeSceneForm
+          defaultValues={crimeScene}
+          onSubmit={handleUpdate}
+          isPending={updateScene.isPending}
+        />
+      </CardContent>
     </Card>
+  ) : (
+    <CrimeSceneCard
+      crimeScene={crimeScene}
+      editable={editable}
+      onEdit={() => setEditing(true)}
+      deletable={deletable}
+      onDelete={() => deleteScene.mutate(crimeScene.id)}
+      onChangeVisibility={handleChangeVisibility}
+    />
   );
 }

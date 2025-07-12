@@ -62,22 +62,21 @@ export default function NpcSelector() {
               </span>
               <span className="flex gap-2">
                 {npc.revealed && (
-                  <Button size="sm" onClick={() => onShow(npc)}>
+                  <Button size="icon" onClick={() => onShow(npc)}>
                     <Presentation />
+                    <span className="sr-only">
+                      Show {npc.name} on billboard
+                    </span>
                   </Button>
                 )}
                 <Toggle
                   variant="outline"
-                  size="sm"
+                  size="icon"
                   defaultPressed={npc.revealed}
                   onPressedChange={(revealed) => onUpdate(npc, revealed)}
                   aria-label="Toggle visibility"
                 >
-                  {npc.revealed ? (
-                    <Eye className="size-4" />
-                  ) : (
-                    <EyeOff className="size-4" />
-                  )}
+                  {npc.revealed ? <Eye /> : <EyeOff />}
                 </Toggle>
               </span>
             </HoverCardTrigger>

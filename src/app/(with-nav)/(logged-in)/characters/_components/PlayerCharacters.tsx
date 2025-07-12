@@ -30,19 +30,21 @@ export default function PlayerCharacters({ isAdmin }: Props) {
       });
     };
 
-    return <CharacterForm onSubmit={handleCreate} saving={create.isPending} />;
+    return (
+      <CharacterForm onSubmit={handleCreate} isPending={create.isPending} />
+    );
   }
 
   return (
     <div className="flex flex-wrap justify-center gap-4">
-      {pc.data && <PlayerCharacter character={pc.data} showEdit={true} />}
+      {pc.data && <PlayerCharacter character={pc.data} editable={true} />}
       {pcs?.data
         ?.filter(({ id }) => id !== pc.data?.id)
         ?.map((character) => (
           <PlayerCharacter
             key={character.id}
             character={character}
-            showEdit={isAdmin}
+            editable={isAdmin}
           />
         ))}
     </div>

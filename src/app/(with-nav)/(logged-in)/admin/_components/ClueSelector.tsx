@@ -52,22 +52,21 @@ export default function ClueSelector() {
               </span>
               <span className="flex gap-2">
                 {clue.revealed && (
-                  <Button size="sm" onClick={() => onShow(clue)}>
+                  <Button size="icon" onClick={() => onShow(clue)}>
                     <Presentation />
+                    <span className="sr-only">
+                      Show {clue.title} on billboard
+                    </span>
                   </Button>
                 )}
                 <Toggle
                   variant="outline"
-                  size="sm"
+                  size="icon"
                   defaultPressed={clue.revealed}
                   onPressedChange={(revealed) => onUpdate(clue, revealed)}
                   aria-label="Toggle visibility"
                 >
-                  {clue.revealed ? (
-                    <Eye className="size-4" />
-                  ) : (
-                    <EyeOff className="size-4" />
-                  )}
+                  {clue.revealed ? <Eye /> : <EyeOff />}
                 </Toggle>
               </span>
             </HoverCardTrigger>
