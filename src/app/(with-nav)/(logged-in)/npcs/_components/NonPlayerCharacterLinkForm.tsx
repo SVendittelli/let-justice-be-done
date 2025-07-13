@@ -20,7 +20,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import { cn } from "~/lib/utils";
+import { addOrRemove, cn } from "~/lib/utils";
 import type { RouterOutputs } from "~/trpc/react";
 import { api } from "~/trpc/react";
 import { CheckIcon, ChevronsUpDown, LoaderCircle } from "lucide-react";
@@ -186,11 +186,4 @@ export default function NonPlayerCharacterLinkForm({ npc }: Props) {
       </form>
     </Form>
   );
-}
-
-function addOrRemove(array: string[], value: string) {
-  if (array.includes(value)) {
-    return array.filter((item) => item !== value);
-  }
-  return array.concat(value);
 }
