@@ -1,21 +1,27 @@
 import type { NonPlayerCharacter } from "@prisma/client";
+import { Unlink } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
-type Props = { npc: NonPlayerCharacter };
-export default function NpcAvatar({ npc }: Props) {
+type Props = { npc: NonPlayerCharacter; onUnlink: (id: string) => void };
+
+export default function NpcAvatar({ npc, onUnlink }: Props) {
   return (
-    <div className="flex items-center">
+    <div className="flex w-full items-center">
       <Avatar>
         <AvatarImage src={npc.imageUrl} className="object-cover object-top" />
         <AvatarFallback>
           {npc.name.charAt(0).toLocaleUpperCase()}
         </AvatarFallback>
       </Avatar>
-      <Link href="/npcs">
+      <Link href="/npcs" className="flex-grow">
         <Button variant="link">{npc.name}</Button>
       </Link>
+      <Button variant="ghost" size="icon" onClick={() => onUnlink(npc.id)}>
+        <Unlink />
+        <span className="sr-only">Unlink</span>
+      </Button>
     </div>
   );
 }

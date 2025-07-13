@@ -1,22 +1,26 @@
 import type { Clue } from "@prisma/client";
-import { Search } from "lucide-react";
+import { Search, Unlink } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 
-type Props = { clue: Clue };
+type Props = { clue: Clue; onUnlink: (id: string) => void };
 
-export default function ClueAvatar({ clue }: Props) {
+export default function ClueAvatar({ clue, onUnlink }: Props) {
   return (
-    <div className="flex items-center">
+    <div className="flex w-full items-center">
       <Avatar>
         <AvatarFallback>
           <Search size={20} />
         </AvatarFallback>
       </Avatar>
-      <Link href="/clues">
+      <Link href="/clues" className="flex-grow">
         <Button variant="link">{clue.title}</Button>
       </Link>
+      <Button variant="ghost" size="icon" onClick={() => onUnlink(clue.id)}>
+        <Unlink />
+        <span className="sr-only">Unlink</span>
+      </Button>
     </div>
   );
 }

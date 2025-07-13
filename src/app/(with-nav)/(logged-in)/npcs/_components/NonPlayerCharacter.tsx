@@ -27,10 +27,11 @@ export default function NonPlayerCharacter({
   const [editing, setEditing] = useState(false);
 
   const utils = api.useUtils();
-  const onSuccess = () => utils.npcs.invalidate().then(() => setEditing(false));
+  const onSuccess = () => utils.invalidate().then(() => setEditing(false));
 
   const updateNpc = api.npcs.update.useMutation({ onSuccess });
   const deleteNpc = api.npcs.delete.useMutation({ onSuccess });
+  const unlinkNpc = api.npcs.unlink.useMutation({ onSuccess });
 
   const handleUpdate = (data: NpcChange) => {
     updateNpc.mutate({ ...npc, ...data });
@@ -62,6 +63,9 @@ export default function NonPlayerCharacter({
       deletable={deletable}
       onDelete={() => deleteNpc.mutate(npc.id)}
       onChangeVisibility={handleChangeVisibility}
+      onUnlink={({ clues, crimeScenes }) =>
+        unlinkNpc.mutate({ id: npc.id, clues, crimeScenes })
+      }
     />
   );
 }

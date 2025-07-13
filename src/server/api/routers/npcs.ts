@@ -101,6 +101,46 @@ export const npcsRouter = createTRPCRouter({
       });
     }),
 
+  link: adminProcedure
+    .input(
+      z.object({
+        id: z.string().cuid2(),
+        clues: z.array(z.string().cuid2()).optional(),
+        crimeScenes: z.array(z.string().cuid2()).optional(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const crimeScenes = input.crimeScenes ?? [];
+      const clues = input.clues ?? [];
+      return ctx.db.nonPlayerCharacter.update({
+        where: { id: input.id },
+        data: {
+          clues: { set: clues.map((id) => ({ id })) },
+          crimeScenes: { set: crimeScenes.map((id) => ({ id })) },
+        },
+      });
+    }),
+
+  unlink: adminProcedure
+    .input(
+      z.object({
+        id: z.string().cuid2(),
+        clues: z.array(z.string().cuid2()).optional(),
+        crimeScenes: z.array(z.string().cuid2()).optional(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const crimeScenes = input.crimeScenes ?? [];
+      const clues = input.clues ?? [];
+      return ctx.db.nonPlayerCharacter.update({
+        where: { id: input.id },
+        data: {
+          clues: { disconnect: clues.map((id) => ({ id })) },
+          crimeScenes: { disconnect: crimeScenes.map((id) => ({ id })) },
+        },
+      });
+    }),
+
   delete: adminProcedure
     .input(z.string().cuid2())
     .mutation(({ ctx, input }) => {

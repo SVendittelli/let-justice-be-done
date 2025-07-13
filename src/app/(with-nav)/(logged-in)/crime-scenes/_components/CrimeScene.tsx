@@ -25,11 +25,11 @@ export default function CrimeScene({
   const [editing, setEditing] = useState(false);
 
   const utils = api.useUtils();
-  const invalidate = () =>
-    utils.scenes.getAll.invalidate().then(() => setEditing(false));
+  const onSuccess = () => utils.invalidate().then(() => setEditing(false));
 
-  const updateScene = api.scenes.update.useMutation({ onSuccess: invalidate });
-  const deleteScene = api.scenes.delete.useMutation({ onSuccess: invalidate });
+  const updateScene = api.scenes.update.useMutation({ onSuccess });
+  const deleteScene = api.scenes.delete.useMutation({ onSuccess });
+  const unlinkScene = api.scenes.unlink.useMutation({ onSuccess });
 
   const handleUpdate = (data: CrimeSceneChange) => {
     updateScene.mutate({ ...crimeScene, ...data });
@@ -61,6 +61,9 @@ export default function CrimeScene({
       deletable={deletable}
       onDelete={() => deleteScene.mutate(crimeScene.id)}
       onChangeVisibility={handleChangeVisibility}
+      onUnlink={({ clues, npcs }) =>
+        unlinkScene.mutate({ id: crimeScene.id, clues, npcs })
+      }
     />
   );
 }

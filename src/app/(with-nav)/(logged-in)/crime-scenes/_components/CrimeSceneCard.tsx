@@ -11,7 +11,9 @@ import {
 } from "~/components/ui/card";
 import { Toggle } from "~/components/ui/toggle";
 import type { RouterOutputs } from "~/trpc/react";
-import { Eye, EyeOff, Pencil, Trash } from "lucide-react";
+import { Eye, EyeOff, Link, Pencil, Trash } from "lucide-react";
+import { useState } from "react";
+import CrimeSceneLinkForm from "./CrimeSceneLinkForm";
 
 type Props = {
   crimeScene: RouterOutputs["scenes"]["getAll"][0];
@@ -20,6 +22,7 @@ type Props = {
   deletable: boolean;
   onDelete: () => void;
   onChangeVisibility: (visible: boolean) => void;
+  onUnlink: (data: { clues?: string[]; npcs?: string[] }) => void;
 };
 
 export default function CrimeSceneCard({
@@ -29,7 +32,10 @@ export default function CrimeSceneCard({
   deletable,
   onDelete,
   onChangeVisibility,
+  onUnlink,
 }: Props) {
+  const [showLinkForm, setShowLinkForm] = useState(false);
+
   return (
     <Card className="w-full sm:w-sm">
       <CardHeader>
@@ -49,6 +55,15 @@ export default function CrimeSceneCard({
             <Toggle
               variant="outline"
               size="icon"
+              defaultPressed={showLinkForm}
+              onPressedChange={setShowLinkForm}
+              aria-label="Toggle link form"
+            >
+              <Link />
+            </Toggle>
+            <Toggle
+              variant="outline"
+              size="icon"
               defaultPressed={crimeScene.revealed}
               onPressedChange={onChangeVisibility}
               aria-label="Toggle visibility"
@@ -60,13 +75,24 @@ export default function CrimeSceneCard({
       </CardHeader>
       <CardContent>{crimeScene.description}</CardContent>
       <CardFooter className="flex flex-col items-start">
-        <div className="mb-2 font-semibold">Related NPCs & Clues</div>
+        {(!!crimeScene.npcs.length || !!crimeScene.clues.length) && (
+          <div className="mb-2 font-semibold">Related NPCs & Clues</div>
+        )}
         {crimeScene.npcs.map((npc) => (
-          <NpcAvatar key={npc.id} npc={npc} />
+          <NpcAvatar
+            key={npc.id}
+            npc={npc}
+            onUnlink={(id) => onUnlink({ npcs: [id] })}
+          />
         ))}
         {crimeScene.clues.map((clue) => (
-          <ClueAvatar key={clue.id} clue={clue} />
+          <ClueAvatar
+            key={clue.id}
+            clue={clue}
+            onUnlink={(id) => onUnlink({ clues: [id] })}
+          />
         ))}
+        {showLinkForm && <CrimeSceneLinkForm crimeScene={crimeScene} />}
       </CardFooter>
     </Card>
   );
