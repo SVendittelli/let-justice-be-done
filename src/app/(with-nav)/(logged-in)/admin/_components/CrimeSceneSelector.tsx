@@ -1,6 +1,7 @@
 "use client";
 
 import type { CrimeScene } from "@prisma/client";
+import CrimeSceneHover from "~/components/CrimeSceneHover";
 import { Button } from "~/components/ui/button";
 import {
   HoverCard,
@@ -71,8 +72,7 @@ export default function SceneSelector() {
               </span>
             </HoverCardTrigger>
             <HoverCardContent className="prose">
-              <h2 className="mb-2">{scene.name}</h2>
-              <p>{scene.description}</p>
+              <CrimeSceneHover crimeScene={scene} />
             </HoverCardContent>
           </HoverCard>
         </div>
