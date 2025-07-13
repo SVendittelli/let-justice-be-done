@@ -95,7 +95,7 @@ export default function NonPlayerCharacterCard({
           alt={`Portrait of ${npc.name}`}
           width={1024}
           height={1536}
-          className="aspect-square w-full rounded-xl object-none object-top"
+          className="aspect-square w-full rounded-xl object-none object-[center_5%]"
         />
         {(!!npc.crimeScenes.length || !!npc.clues.length) && (
           <div className="mb-2 font-semibold">Related Crime Scenes & Clues</div>
