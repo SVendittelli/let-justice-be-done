@@ -21,6 +21,7 @@ export default function NpcAvatar({ npc, editable, onUnlink }: Props) {
             <Avatar>
               <AvatarImage
                 src={npc.imageUrl}
+                alt={`${npc.name} avatar`}
                 className="object-cover object-top"
               />
               <AvatarFallback>
