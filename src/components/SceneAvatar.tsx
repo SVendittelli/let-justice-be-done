@@ -18,7 +18,7 @@ export default function SceneAvatar({ crimeScene, editable, onUnlink }: Props) {
           <DoorOpen size={20} />
         </AvatarFallback>
       </Avatar>
-      <Link href="/crime-scenes" className="flex-grow">
+      <Link href={`/crime-scenes#${crimeScene.id}`} className="flex-grow">
         <Button variant="link">{crimeScene.name}</Button>
       </Link>
       {editable && (

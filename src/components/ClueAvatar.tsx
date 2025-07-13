@@ -14,7 +14,7 @@ export default function ClueAvatar({ clue, editable, onUnlink }: Props) {
           <Search size={20} />
         </AvatarFallback>
       </Avatar>
-      <Link href="/clues" className="flex-grow">
+      <Link href={`/clues#${clue.id}`} className="flex-grow">
         <Button variant="link">{clue.title}</Button>
       </Link>
       {editable && (

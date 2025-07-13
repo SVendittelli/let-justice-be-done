@@ -47,7 +47,7 @@ export default function NonPlayerCharacterCard({
   const [showLinkForm, setShowLinkForm] = useState(false);
 
   return (
-    <Card className="w-full sm:w-sm">
+    <Card id={npc.id} className="w-full sm:w-sm">
       <CardHeader>
         <CardTitle>{npc.name}</CardTitle>
         <CardDescription>{npc.moniker}</CardDescription>

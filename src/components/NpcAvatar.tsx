@@ -19,7 +19,7 @@ export default function NpcAvatar({ npc, editable, onUnlink }: Props) {
           {npc.name.charAt(0).toLocaleUpperCase()}
         </AvatarFallback>
       </Avatar>
-      <Link href="/npcs" className="flex-grow">
+      <Link href={`/npcs#${npc.id}`} className="flex-grow">
         <Button variant="link">{npc.name}</Button>
       </Link>
       {editable && (
