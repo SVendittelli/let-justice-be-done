@@ -86,8 +86,8 @@ export const cluesRouter = createTRPCRouter({
       return ctx.db.clue.update({
         where: { id: input.id },
         data: {
-          crimeScenes: { connect: crimeScenes.map((id) => ({ id })) },
-          npcs: { connect: npcs.map((id) => ({ id })) },
+          crimeScenes: { set: crimeScenes.map((id) => ({ id })) },
+          npcs: { set: npcs.map((id) => ({ id })) },
         },
       });
     }),

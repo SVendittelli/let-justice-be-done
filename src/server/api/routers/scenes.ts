@@ -69,6 +69,46 @@ export const scenesRouter = createTRPCRouter({
       });
     }),
 
+  link: adminProcedure
+    .input(
+      z.object({
+        id: z.string().cuid2(),
+        clues: z.array(z.string().cuid2()).optional(),
+        npcs: z.array(z.string().cuid2()).optional(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const clues = input.clues ?? [];
+      const npcs = input.npcs ?? [];
+      return ctx.db.crimeScene.update({
+        where: { id: input.id },
+        data: {
+          clues: { set: clues.map((id) => ({ id })) },
+          npcs: { set: npcs.map((id) => ({ id })) },
+        },
+      });
+    }),
+
+  unlink: adminProcedure
+    .input(
+      z.object({
+        id: z.string().cuid2(),
+        clues: z.array(z.string().cuid2()).optional(),
+        npcs: z.array(z.string().cuid2()).optional(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      const clues = input.clues ?? [];
+      const npcs = input.npcs ?? [];
+      return ctx.db.crimeScene.update({
+        where: { id: input.id },
+        data: {
+          clues: { disconnect: clues.map((id) => ({ id })) },
+          npcs: { disconnect: npcs.map((id) => ({ id })) },
+        },
+      });
+    }),
+
   delete: adminProcedure
     .input(z.string().cuid2())
     .mutation(({ ctx, input }) => {

@@ -11,6 +11,8 @@ export default async function CluesPage() {
   const session = await auth();
 
   void api.clues.getAll.prefetch();
+  void api.npcs.getAll.prefetch();
+  void api.scenes.getAll.prefetch();
 
   return (
     <HydrateClient>

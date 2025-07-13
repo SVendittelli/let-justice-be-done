@@ -27,11 +27,11 @@ export default function Clue({
   const [editing, setEditing] = useState(false);
 
   const utils = api.useUtils();
-  const invalidate = () =>
-    utils.clues.getAll.invalidate().then(() => setEditing(false));
+  const onSuccess = () => utils.invalidate().then(() => setEditing(false));
 
-  const updateClue = api.clues.update.useMutation({ onSuccess: invalidate });
-  const deleteClue = api.clues.delete.useMutation({ onSuccess: invalidate });
+  const updateClue = api.clues.update.useMutation({ onSuccess });
+  const deleteClue = api.clues.delete.useMutation({ onSuccess });
+  const unlinkClue = api.clues.unlink.useMutation({ onSuccess });
 
   const handleUpdate = (data: ClueChange) => {
     updateClue.mutate({ ...clue, ...data });
@@ -63,6 +63,9 @@ export default function Clue({
       deletable={deletable}
       onDelete={() => deleteClue.mutate(clue.id)}
       onChangeVisibility={handleChangeVisibility}
+      onUnlink={({ crimeScenes, npcs }) =>
+        unlinkClue.mutate({ id: clue.id, crimeScenes, npcs })
+      }
     />
   );
 }
