@@ -37,7 +37,7 @@ export default function ClueCard({
   const [showLinkForm, setShowLinkForm] = useState(false);
 
   return (
-    <Card className="w-full sm:w-sm">
+    <Card id={clue.id} className="w-full sm:w-sm">
       <CardHeader>
         <CardTitle>{clue.title}</CardTitle>
         {editable && (

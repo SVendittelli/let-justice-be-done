@@ -1,6 +1,7 @@
 "use client";
 
 import type { Clue } from "@prisma/client";
+import ClueHover from "~/components/ClueHover";
 import { Button } from "~/components/ui/button";
 import {
   HoverCard,
@@ -71,8 +72,7 @@ export default function ClueSelector() {
               </span>
             </HoverCardTrigger>
             <HoverCardContent className="prose">
-              <h2 className="mb-2">{clue.title}</h2>
-              <p>{clue.text}</p>
+              <ClueHover clue={clue} />
             </HoverCardContent>
           </HoverCard>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import type { NonPlayerCharacter } from "@prisma/client";
+import NpcHover from "~/components/NpcHover";
 import { Button } from "~/components/ui/button";
 import {
   HoverCard,
@@ -81,11 +82,7 @@ export default function NpcSelector() {
               </span>
             </HoverCardTrigger>
             <HoverCardContent className="prose">
-              <h2 className="mb-2">{npc.name}</h2>
-              <p>
-                <i>{npc.moniker}</i>
-              </p>
-              <p>{npc.description}</p>
+              <NpcHover npc={npc} />
             </HoverCardContent>
           </HoverCard>
         </div>

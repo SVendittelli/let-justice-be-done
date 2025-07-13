@@ -37,7 +37,7 @@ export default function CrimeSceneCard({
   const [showLinkForm, setShowLinkForm] = useState(false);
 
   return (
-    <Card className="w-full sm:w-sm">
+    <Card id={crimeScene.id} className="w-full sm:w-sm">
       <CardHeader>
         <CardTitle>{crimeScene.name}</CardTitle>
         {editable && (
