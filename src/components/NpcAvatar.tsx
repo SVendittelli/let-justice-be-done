@@ -4,9 +4,13 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
-type Props = { npc: NonPlayerCharacter; onUnlink: (id: string) => void };
+type Props = {
+  npc: NonPlayerCharacter;
+  editable: boolean;
+  onUnlink: (id: string) => void;
+};
 
-export default function NpcAvatar({ npc, onUnlink }: Props) {
+export default function NpcAvatar({ npc, editable, onUnlink }: Props) {
   return (
     <div className="flex w-full items-center">
       <Avatar>
@@ -18,10 +22,12 @@ export default function NpcAvatar({ npc, onUnlink }: Props) {
       <Link href="/npcs" className="flex-grow">
         <Button variant="link">{npc.name}</Button>
       </Link>
-      <Button variant="ghost" size="icon" onClick={() => onUnlink(npc.id)}>
-        <Unlink />
-        <span className="sr-only">Unlink</span>
-      </Button>
+      {editable && (
+        <Button variant="ghost" size="icon" onClick={() => onUnlink(npc.id)}>
+          <Unlink />
+          <span className="sr-only">Unlink</span>
+        </Button>
+      )}
     </div>
   );
 }

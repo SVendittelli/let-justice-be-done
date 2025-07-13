@@ -82,6 +82,7 @@ export default function ClueCard({
           <NpcAvatar
             key={npc.id}
             npc={npc}
+            editable={editable}
             onUnlink={(id) => onUnlink({ npcs: [id] })}
           />
         ))}
@@ -89,6 +90,7 @@ export default function ClueCard({
           <SceneAvatar
             key={scene.id}
             crimeScene={scene}
+            editable={editable}
             onUnlink={(id) => onUnlink({ crimeScenes: [id] })}
           />
         ))}

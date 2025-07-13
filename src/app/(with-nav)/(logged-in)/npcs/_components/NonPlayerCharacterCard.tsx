@@ -104,6 +104,7 @@ export default function NonPlayerCharacterCard({
           <SceneAvatar
             key={scene.id}
             crimeScene={scene}
+            editable={editable}
             onUnlink={(id) => onUnlink({ crimeScenes: [id] })}
           />
         ))}
@@ -111,6 +112,7 @@ export default function NonPlayerCharacterCard({
           <ClueAvatar
             key={clue.id}
             clue={clue}
+            editable={editable}
             onUnlink={(id) => onUnlink({ clues: [id] })}
           />
         ))}

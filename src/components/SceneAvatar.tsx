@@ -4,9 +4,13 @@ import Link from "next/link";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 
-type Props = { crimeScene: CrimeScene; onUnlink: (id: string) => void };
+type Props = {
+  crimeScene: CrimeScene;
+  editable: boolean;
+  onUnlink: (id: string) => void;
+};
 
-export default function SceneAvatar({ crimeScene, onUnlink }: Props) {
+export default function SceneAvatar({ crimeScene, editable, onUnlink }: Props) {
   return (
     <div className="flex w-full items-center">
       <Avatar>
@@ -17,14 +21,16 @@ export default function SceneAvatar({ crimeScene, onUnlink }: Props) {
       <Link href="/crime-scenes" className="flex-grow">
         <Button variant="link">{crimeScene.name}</Button>
       </Link>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => onUnlink(crimeScene.id)}
-      >
-        <Unlink />
-        <span className="sr-only">Unlink</span>
-      </Button>
+      {editable && (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onUnlink(crimeScene.id)}
+        >
+          <Unlink />
+          <span className="sr-only">Unlink</span>
+        </Button>
+      )}
     </div>
   );
 }
