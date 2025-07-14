@@ -12,7 +12,8 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { LoaderCircle } from "lucide-react";
+import { ExternalLink, LoaderCircle } from "lucide-react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import TraitSelect from "./TraitSelect";
@@ -117,7 +118,18 @@ export default function CharacterForm({
                     <Input placeholder="Jessica Fletcher" {...field} />
                   </FormControl>
                   <FormDescription>
-                    What people call your character.
+                    What people call your character. If you&apos;re struggling,
+                    try this{" "}
+                    <Link
+                      href="https://www.fantasynamegenerators.com/detective-names.php"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-red-dark"
+                    >
+                      name generator{" "}
+                      <ExternalLink className="inline" size={14} />
+                    </Link>
+                    .
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
