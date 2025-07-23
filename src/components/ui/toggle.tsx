@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium hover:bg-gold-bright hover:text-red-dark disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-red data-[state=on]:text-gold [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 focus-visible:border-red focus-visible:ring-red-light/40 focus-visible:ring-[3px] outline-none transition-[color,box-shadow] aria-invalid:ring-red-light/20 aria-invalid:border-red-light whitespace-nowrap",
+  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-gold-bright hover:text-red-dark focus-visible:border-red focus-visible:ring-[3px] focus-visible:ring-red-light/40 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-red-light aria-invalid:ring-red-light/20 data-[state=on]:bg-red data-[state=on]:text-gold [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -15,9 +15,9 @@ const toggleVariants = cva(
           "border border-red bg-transparent shadow-xs hover:bg-gold-bright hover:text-red-dark",
       },
       size: {
-        default: "h-9 px-2 min-w-9",
-        sm: "h-8 px-1.5 min-w-8",
-        lg: "h-10 px-2.5 min-w-10",
+        default: "h-9 min-w-9 px-2",
+        sm: "h-8 min-w-8 px-1.5",
+        lg: "h-10 min-w-10 px-2.5",
         icon: "size-9",
       },
     },
