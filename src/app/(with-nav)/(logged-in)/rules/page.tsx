@@ -277,7 +277,7 @@ export default function Page() {
           <p>
             If you charm, bully, or otherwise manipulate a <SuspectTooltip />{" "}
             into giving a statement, roll your <TraitsTooltip /> and any{" "}
-            <ClueTooltip /> that help.
+            <ClueTooltip linkText="Clues" /> that help.
           </p>
           <p>
             On a <RollResultTooltip result="SUCCESS" />, gain a <ClueTooltip />.
@@ -319,7 +319,8 @@ export default function Page() {
           <h3 id="move-undertake">Undertake</h3>
           <p>
             If you do anything that isn&apos;t covered by the other moves, roll
-            your <TraitsTooltip /> and any <ClueTooltip /> that help.
+            your <TraitsTooltip /> and any <ClueTooltip linkText="Clues" /> that
+            help.
           </p>
           <p>
             On a <RollResultTooltip result="SUCCESS" />, you do it.
