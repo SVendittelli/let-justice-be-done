@@ -7,7 +7,7 @@ export default function Page() {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
-    setUrl(window.location.origin);
+    setUrl(`${window.location.origin}/invite`);
   }, [setUrl]);
 
   return (
