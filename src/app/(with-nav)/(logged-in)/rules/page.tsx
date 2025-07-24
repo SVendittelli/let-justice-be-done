@@ -162,15 +162,15 @@ export default function Page() {
             <TraitsTooltip linkText="Spirit Medium" /> to irritate their
             rational mind by making a show of contacting the victim and{" "}
             <TraitsTooltip linkText='"Incompetent"' /> to get something clearly
-            wrong so the <SuspicionTooltip /> corrects you to show how much
+            wrong so the <SuspectTooltip /> corrects you to show how much
             smarter than you they are.
           </p>
           <h3>Add Dice for Clues</h3>
           <p>
-            Then, you can look over the <ClueTooltip /> that have been
-            discovered so far and weave them into the action, adding a <i>d6</i>{" "}
-            for any relevant clues. In this case, you may deliberately get a
-            number of facts wrong to increase the <SuspectTooltip />
+            Then, you can look over the <ClueTooltip linkText="Clues" /> that
+            have been discovered so far and weave them into the action, adding a{" "}
+            <i>d6</i> for any relevant clues. In this case, you may deliberately
+            get a number of facts wrong to increase the <SuspectTooltip />
             &apos;s sense of superiority more and more.
           </p>
           <h3>Add Dice for Collaboration</h3>
@@ -289,7 +289,7 @@ export default function Page() {
             equal to sixes rolled.
           </p>
           <p>
-            On a <RollResultTooltip result="MIXED_SUCCESS" />, you still gain a
+            On a <RollResultTooltip result="MIXED_SUCCESS" />, you still gain a{" "}
             <ClueTooltip />, but the GM introduces a <ComplicationTooltip />.
           </p>
           <p>
@@ -319,8 +319,7 @@ export default function Page() {
           <h3 id="move-undertake">Undertake</h3>
           <p>
             If you do anything that isn&apos;t covered by the other moves, roll
-            your
-            <TraitsTooltip /> and any <ClueTooltip /> that help.
+            your <TraitsTooltip /> and any <ClueTooltip /> that help.
           </p>
           <p>
             On a <RollResultTooltip result="SUCCESS" />, you do it.
@@ -380,9 +379,9 @@ export default function Page() {
           <h3>You &quot;Solve&quot; the Mystery</h3>
           <p>
             This is the most likely outcome. At a certain point, you will have
-            enough <ClueTooltip /> to support any investigation or interrogation
-            your group wishes to make and it will become natural to gather{" "}
-            <TheAuthorityTooltip /> and all the{" "}
+            enough <ClueTooltip linkText="Clues" /> to support any investigation
+            or interrogation your group wishes to make and it will become
+            natural to gather <TheAuthorityTooltip /> and all the{" "}
             <SuspectTooltip linkText="Suspects" /> together to collectively
             deliver the final denouement.
           </p>
